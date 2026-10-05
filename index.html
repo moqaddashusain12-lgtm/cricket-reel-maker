@@ -2,10 +2,9 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#07152f">
-
-<title>Cricket Reel Maker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cricket Reel Maker - Hindi Cricket Reel Script, Scenes, Image Prompts, Video Prompts, Title and Hashtags">
+<title>🏏 Cricket Reel Maker</title>
 
 <style>
 *{
@@ -14,232 +13,162 @@
   padding:0;
 }
 
-html,body{
-  width:100%;
-  min-height:100%;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#061229;
-  color:#fff;
-}
-
 body{
-  padding-bottom:30px;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#06152f,#0b2d5c,#06152f);
+  color:#fff;
+  min-height:100vh;
+  padding:15px;
 }
 
 .container{
   width:100%;
   max-width:900px;
   margin:auto;
-  padding:14px;
 }
 
 .header{
-  background:linear-gradient(135deg,#0b2b68,#102f80);
-  border-radius:20px;
-  padding:20px 16px;
   text-align:center;
-  margin-bottom:14px;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
+  padding:20px 10px;
 }
 
 .header h1{
-  font-size:27px;
-  margin-bottom:7px;
+  font-size:30px;
+  margin-bottom:8px;
 }
 
 .header p{
-  color:#cbd8ff;
-  font-size:14px;
+  color:#bcd4f5;
+  font-size:15px;
 }
 
 .card{
-  background:#0c1c3c;
-  border:1px solid #1b376c;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
   border-radius:18px;
-  padding:17px;
-  margin-bottom:14px;
-  box-shadow:0 7px 22px rgba(0,0,0,.22);
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-.card h2{
-  font-size:19px;
-  margin-bottom:14px;
+.notice{
+  background:rgba(0,150,255,.12);
+  border-left:4px solid #19a7ff;
+  padding:15px;
+  border-radius:10px;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+h2{
+  font-size:20px;
+  margin-bottom:15px;
 }
 
 label{
   display:block;
-  font-size:13px;
-  color:#c9d5f3;
-  margin:12px 0 6px;
+  margin:13px 0 7px;
+  font-weight:bold;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
   width:100%;
-  border:1px solid #2a477b;
-  background:#07152f;
+  padding:13px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.2);
+  background:#071b38;
   color:#fff;
-  border-radius:11px;
-  padding:12px;
   font-size:15px;
   outline:none;
 }
 
-input:focus,select:focus,textarea:focus{
-  border-color:#4d8dff;
-}
-
 textarea{
-  min-height:110px;
+  min-height:150px;
   resize:vertical;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-@media(max-width:600px){
-  .grid{
-    grid-template-columns:1fr;
-  }
+  line-height:1.6;
 }
 
 button{
-  border:0;
-  border-radius:11px;
-  padding:12px 15px;
-  font-size:15px;
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:15px;
+  margin-top:15px;
+  font-size:17px;
   font-weight:bold;
   cursor:pointer;
+  background:linear-gradient(90deg,#00a8ff,#006eff);
   color:#fff;
-  background:#1769e0;
-  margin-top:12px;
 }
 
 button:active{
   transform:scale(.98);
 }
 
-.btn-main{
-  width:100%;
-  background:linear-gradient(135deg,#087cff,#174fe8);
-  font-size:17px;
-  padding:14px;
-}
-
-.btn-copy{
-  background:#155d4c;
-  margin-right:7px;
-}
-
-.btn-clear{
-  background:#70313a;
-}
-
-.result{
-  display:none;
-}
-
-.output-box{
-  background:#07152f;
-  border:1px solid #24457f;
-  border-radius:13px;
-  padding:14px;
+.copy-btn{
+  width:auto;
+  padding:9px 14px;
+  font-size:13px;
   margin-top:10px;
-  line-height:1.65;
+  background:#163d6c;
+}
+
+.output{
   white-space:pre-wrap;
-  word-break:break-word;
+  line-height:1.7;
+  color:#eaf4ff;
+  margin-top:10px;
 }
 
 .scene{
-  background:#091936;
-  border:1px solid #28477e;
-  border-radius:15px;
-  padding:14px;
-  margin-top:12px;
+  background:rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:15px;
+  margin-top:15px;
 }
 
 .scene h3{
-  color:#63a4ff;
-  font-size:17px;
+  color:#4fc3ff;
   margin-bottom:8px;
 }
 
 .scene-title{
-  color:#ffd166;
   font-weight:bold;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
-.small{
-  color:#aebdde;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.tag{
-  display:inline-block;
-  background:#15376f;
-  color:#dce8ff;
-  border-radius:20px;
-  padding:5px 9px;
-  margin:3px;
-  font-size:12px;
-}
-
-.footer{
-  text-align:center;
-  color:#7f93bc;
-  font-size:12px;
-  padding:10px;
+.small-title{
+  color:#9fc9ef;
+  font-weight:bold;
+  margin-top:12px;
 }
 
 .hidden{
   display:none;
 }
 
-.status{
-  margin-top:10px;
+.footer{
   text-align:center;
-  color:#79d8ff;
+  color:#8eacd0;
   font-size:13px;
+  padding:20px 5px;
 }
 
-.two-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
+@media(max-width:600px){
+  body{
+    padding:10px;
+  }
 
-.two-buttons button{
-  flex:1;
-  min-width:130px;
-}
+  .header h1{
+    font-size:26px;
+  }
 
-.section-title{
-  margin-top:18px;
-  color:#ffffff;
-  font-size:17px;
-}
-
-.music-box{
-  border-left:4px solid #ffc857;
-  padding:10px 12px;
-  background:#101f3c;
-  border-radius:8px;
-  margin-top:10px;
-}
-
-.notice{
-  background:#10284e;
-  border:1px solid #28538e;
-  padding:11px;
-  border-radius:11px;
-  color:#cfe0ff;
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:12px;
+  .card{
+    padding:14px;
+  }
 }
 </style>
 </head>
@@ -253,49 +182,49 @@ button:active{
     <p>Hindi Cricket Reel • Script • Scenes • Image Prompt • Video Prompt</p>
   </div>
 
-  <div class="card">
+  <div class="notice">
+    ⚡ <b>क्रिकेट न्यूज़ या मैच की जानकारी नीचे लिखें।</b><br>
+    यह टूल उसी जानकारी से Reel के लिए Script, Scenes, Image Prompts,
+    Video Prompts, Title और Hashtags तैयार करेगा।
+  </div>
 
-    <div class="notice">
-      ⚡ क्रिकेट न्यूज़ या मैच की जानकारी नीचे लिखें। यह टूल उसी जानकारी से Reel के लिए Script, Scenes, Prompts, Title और Hashtags तैयार करेगा।
-    </div>
+  <div class="card">
 
     <h2>🎬 Reel Settings</h2>
 
-    <div class="grid">
+    <label for="player">Player / Team</label>
+    <input
+      id="player"
+      type="text"
+      value="Virat Kohli"
+      placeholder="जैसे Virat Kohli"
+    >
 
-      <div>
-        <label>Player / Team</label>
-        <input id="player" value="Virat Kohli" placeholder="जैसे Virat Kohli">
-      </div>
+    <label for="opponent">Opponent / Team</label>
+    <input
+      id="opponent"
+      type="text"
+      value="West Indies"
+      placeholder="जैसे West Indies"
+    >
 
-      <div>
-        <label>Opponent / Team</label>
-        <input id="opponent" value="West Indies" placeholder="जैसे Australia">
-      </div>
+    <label for="duration">Reel Duration</label>
+    <select id="duration">
+      <option value="30">30 Seconds</option>
+      <option value="45">45 Seconds</option>
+      <option value="60">60 Seconds</option>
+    </select>
 
-      <div>
-        <label>Reel Duration</label>
-        <select id="duration">
-          <option value="30">30 Seconds</option>
-          <option value="45">45 Seconds</option>
-          <option value="60">60 Seconds</option>
-        </select>
-      </div>
+    <label for="style">Reel Style</label>
+    <select id="style">
+      <option value="exciting">🔥 रोमांचक</option>
+      <option value="news">📰 न्यूज़ स्टाइल</option>
+      <option value="dramatic">🎭 ड्रामेटिक</option>
+      <option value="emotional">❤️ इमोशनल</option>
+      <option value="breaking">🚨 Breaking News</option>
+    </select>
 
-      <div>
-        <label>Reel Style</label>
-        <select id="style">
-          <option value="exciting">🔥 रोमांचक</option>
-          <option value="news">📰 न्यूज़ स्टाइल</option>
-          <option value="dramatic">🎭 ड्रामेटिक</option>
-          <option value="emotional">❤️ इमोशनल</option>
-          <option value="breaking">🚨 Breaking News</option>
-        </select>
-      </div>
-
-    </div>
-
-    <label>📰 Cricket News / Match Information</label>
+    <label for="news">📰 Cricket News / Match Information</label>
 
     <textarea id="news" placeholder="उदाहरण:
 भारत वेस्टइंडीज के खिलाफ रोमांचक मुकाबला हार गया।
@@ -303,81 +232,57 @@ button:active{
 वेस्टइंडीज ने शानदार बल्लेबाजी करके लक्ष्य हासिल कर लिया।
 राहुल ने शानदार शतक लगाया लेकिन टीम इंडिया को जीत नहीं दिला सके।"></textarea>
 
-    <button class="btn-main" onclick="generateReel()">
+    <button onclick="generateReel()">
       🚀 Generate Cricket Reel
     </button>
 
-    <div id="status" class="status"></div>
-
   </div>
 
-  <div id="result" class="result">
+  <div id="result" class="hidden">
 
     <div class="card">
-
-      <h2>📝 Reel Script</h2>
-
-      <div id="scriptOutput" class="output-box"></div>
-
-      <div class="two-buttons">
-        <button class="btn-copy" onclick="copyText('scriptOutput')">📋 Copy Script</button>
-      </div>
-
+      <h2>🎙️ Hindi Reel Script</h2>
+      <div id="scriptOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('scriptOutput')">
+        📋 Copy Script
+      </button>
     </div>
 
-
     <div class="card">
-
       <h2>🎬 Scene-by-Scene Prompts</h2>
-
-      <div id="scenes"></div>
-
-      <div class="two-buttons">
-        <button class="btn-copy" onclick="copyAllScenes()">📋 Copy All Scenes</button>
-      </div>
-
+      <div id="scenesOutput"></div>
     </div>
 
-
     <div class="card">
-
-      <h2>🎵 Music Suggestion</h2>
-
-      <div id="musicOutput" class="music-box"></div>
-
+      <h2>🎵 Background Music</h2>
+      <div id="musicOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('musicOutput')">
+        📋 Copy Music
+      </button>
     </div>
 
-
     <div class="card">
-
-      <h2>🏷️ Reel Title</h2>
-
-      <div id="titleOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('titleOutput')">📋 Copy Title</button>
-
+      <h2>🔥 Reel Title</h2>
+      <div id="titleOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('titleOutput')">
+        📋 Copy Title
+      </button>
     </div>
 
-
     <div class="card">
-
       <h2>#️⃣ Hashtags</h2>
-
-      <div id="hashtagsOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('hashtagsOutput')">📋 Copy Hashtags</button>
-
+      <div id="hashtagsOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('hashtagsOutput')">
+        📋 Copy Hashtags
+      </button>
     </div>
 
-
     <div class="card">
-
       <h2>📱 Facebook / YouTube Caption</h2>
-
-      <div id="captionOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('captionOutput')">📋 Copy Caption</button>
-
+      <div id="captionOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('captionOutput')">
+        📋 Copy Caption
+      </button>
     </div>
 
   </div>
@@ -388,805 +293,769 @@ button:active{
 
 </div>
 
-
 <script>
-
-function cleanText(text){
-  return text.trim();
-}
-
 
 function generateReel(){
 
-  const player = cleanText(document.getElementById("player").value) || "Virat Kohli";
-  const opponent = cleanText(document.getElementById("opponent").value) || "West Indies";
-  const duration = document.getElementById("duration").value;
-  const style = document.getElementById("style").value;
-  const news = cleanText(document.getElementById("news").value);
+  const player =
+    document.getElementById("player").value.trim() || "Virat Kohli";
+
+  const opponent =
+    document.getElementById("opponent").value.trim() || "West Indies";
+
+  const duration =
+    document.getElementById("duration").value;
+
+  const style =
+    document.getElementById("style").value;
+
+  const news =
+    document.getElementById("news").value.trim();
 
   if(!news){
-
-    alert("पहले Cricket News / Match Information लिखें।");
-    document.getElementById("news").focus();
+    alert("⚠️ पहले Cricket News / Match Information लिखें।");
     return;
-
   }
 
-  document.getElementById("status").innerText = "⏳ आपकी Cricket Reel तैयार हो रही है...";
+  createScript(player, opponent, news, duration, style);
 
-  setTimeout(function(){
+  createScenes(player, opponent, news, duration);
 
-    createReel(player,opponent,duration,style,news);
+  createMusic(style);
 
-    document.getElementById("result").style.display = "block";
+  createTitle(player, opponent, style);
 
-    document.getElementById("status").innerText = "✅ Cricket Reel तैयार है!";
+  createHashtags(player, opponent);
 
-    document.getElementById("result").scrollIntoView({
-      behavior:"smooth"
-    });
+  createCaption(news, player, opponent);
 
-  },500);
+  document.getElementById("result").classList.remove("hidden");
 
+  window.scrollTo({
+    top:document.getElementById("result").offsetTop - 10,
+    behavior:"smooth"
+  });
 }
 
 
-function createReel(player,opponent,duration,style,news){
+/* =========================
+   SCRIPT
+========================= */
 
-  let opening = "";
-  let ending = "";
+function createScript(player, opponent, news, duration, style){
+
+  let hook = "";
 
   if(style === "breaking"){
-
-    opening = "🚨 बड़ी क्रिकेट खबर सामने आई है!";
-    ending = "अब इस मुकाबले के बाद क्रिकेट फैंस की नजरें अगले मैच पर रहेंगी।";
-
-  }else if(style === "emotional"){
-
-    opening = "💔 क्रिकेट में कभी खुशी तो कभी गम... आज का मुकाबला कुछ ऐसा ही रहा!";
-    ending = "मैच का नतीजा भले ही निराशाजनक रहा हो, लेकिन क्रिकेट का रोमांच हमेशा जारी रहेगा।";
-
-  }else if(style === "dramatic"){
-
-    opening = "🔥 मैदान पर ऐसा ड्रामा हुआ कि हर क्रिकेट फैन की धड़कनें बढ़ गईं!";
-    ending = "और यहीं खत्म होती है आज की इस रोमांचक क्रिकेट कहानी!";
-
-  }else if(style === "news"){
-
-    opening = "📰 क्रिकेट जगत से इस वक्त की बड़ी खबर!";
-    ending = "यह थी आज की बड़ी क्रिकेट अपडेट।";
-
-  }else{
-
-    opening = "🔥 क्रिकेट फैंस, तैयार हो जाइए एक जबरदस्त क्रिकेट अपडेट के लिए!";
-    ending = "अगर आप भी क्रिकेट के दीवाने हैं, तो इस खबर को जरूर शेयर करें!";
-
+    hook = "🚨 बड़ी खबर! क्रिकेट की दुनिया से इस वक्त की सबसे बड़ी अपडेट सामने आई है!";
+  }
+  else if(style === "dramatic"){
+    hook = "🔥 ऐसा क्रिकेट ड्रामा शायद ही आपने पहले देखा होगा!";
+  }
+  else if(style === "emotional"){
+    hook = "❤️ क्रिकेट फैंस के लिए यह पल बेहद भावुक कर देने वाला है!";
+  }
+  else if(style === "news"){
+    hook = "📰 क्रिकेट से जुड़ी एक बड़ी खबर सामने आई है!";
+  }
+  else{
+    hook = "🔥 क्रिकेट के मैदान से आई है एक जबरदस्त और रोमांचक खबर!";
   }
 
+  let script =
+    hook + "\n\n" +
 
-  let script = "";
+    "🏏 " + player + " और " + opponent +
+    " के बीच मुकाबले ने क्रिकेट फैंस की धड़कनें बढ़ा दीं।\n\n" +
 
-  if(duration === "30"){
+    news + "\n\n" +
 
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "⭐ " + player + " और " + opponent + " से जुड़ी इस खबर ने क्रिकेट फैंस का ध्यान अपनी तरफ खींच लिया है।\n\n" +
-      "😱 मुकाबले में रोमांच अपने चरम पर रहा और आखिरी पल तक नतीजे को लेकर उत्सुकता बनी रही।\n\n" +
-      "📢 " + ending + "\n\n" +
-      "❤️ क्रिकेट पसंद है तो Reel को Like और Share जरूर करें!";
+    "😱 मुकाबले के दौरान कई ऐसे पल आए जिन्होंने मैच का रुख बदल दिया।\n\n" +
 
-  }else if(duration === "45"){
+    "🔥 अब सवाल है कि इस मुकाबले का सबसे बड़ा टर्निंग पॉइंट क्या रहा?\n\n" +
 
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "🔥 इस मुकाबले में " + player + " से सभी को बड़ी उम्मीदें थीं, लेकिन मैदान पर कहानी लगातार बदलती रही।\n\n" +
-      "😱 " + opponent + " ने भी शानदार प्रदर्शन करते हुए मुकाबले को बेहद रोमांचक बना दिया।\n\n" +
-      "👀 आखिरी ओवरों तक क्रिकेट फैंस की नजरें स्कोरबोर्ड पर टिकी रहीं।\n\n" +
-      "📢 " + ending + "\n\n" +
-      "👍 ऐसी ही क्रिकेट खबरों के लिए Follow करें और Reel Share करें!";
+    "❤️ अगर आप भी क्रिकेट के जबरदस्त फैन हैं तो Reel को Like करें और Share जरूर करें!\n\n" +
 
-  }else{
+    "🏏 ऐसी ही क्रिकेट खबरों के लिए Cricket Reel Maker के साथ जुड़े रहें।";
 
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "⭐ " + player + " इस मुकाबले में चर्चा का सबसे बड़ा नाम रहे।\n\n" +
-      "🔥 शुरुआत से ही मुकाबले में जबरदस्त टक्कर देखने को मिली।\n\n" +
-      "😱 एक समय लगा कि मुकाबला एकतरफा हो जाएगा, लेकिन " + opponent + " ने शानदार वापसी की।\n\n" +
-      "🏟️ स्टेडियम में मौजूद क्रिकेट फैंस हर गेंद के साथ रोमांच महसूस करते रहे।\n\n" +
-      "⚡ आखिरी पलों में मुकाबला पूरी तरह पलट गया और नतीजे ने सभी को हैरान कर दिया।\n\n" +
-      "📢 " + ending + "\n\n" +
-"❤️ अगर आप " + player + " के फैन हैं तो Like जरूर करें!\n\n" +
-      "🔔 ऐसी ही क्रिकेट खबरों के लिए Follow और Subscribe करें!";
-
+  if(duration === "45"){
+    script += "\n\n🎯 पूरी कहानी जानने के लिए इस Reel को आखिर तक जरूर देखें!";
   }
 
+  if(duration === "60"){
+    script += "\n\n🎯 इस मैच की पूरी कहानी और सबसे बड़ा टर्निंग पॉइंट जानने के लिए Reel को अंत तक देखें!";
+  }
 
   document.getElementById("scriptOutput").innerText = script;
-
-
-  createScenes(player,opponent,news,duration);
-
-
-  let music = "";
-
-  if(style === "emotional"){
-    music = "🎵 Emotional cinematic sports music — शुरुआत धीमी, फिर धीरे-धीरे powerful build-up.";
-  }else if(style === "news"){
-    music = "🎵 Breaking News / Sports News beat — तेज और energetic background.";
-  }else if(style<!DOCTYPE html>
-<html lang="hi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#07152f">
-
-<title>Cricket Reel Maker</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,body{
-  width:100%;
-  min-height:100%;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#061229;
-  color:#fff;
-}
-
-body{
-  padding-bottom:30px;
-}
-
-.container{
-  width:100%;
-  max-width:900px;
-  margin:auto;
-  padding:14px;
-}
-
-.header{
-  background:linear-gradient(135deg,#0b2b68,#102f80);
-  border-radius:20px;
-  padding:20px 16px;
-  text-align:center;
-  margin-bottom:14px;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
-}
-
-.header h1{
-  font-size:27px;
-  margin-bottom:7px;
-}
-
-.header p{
-  color:#cbd8ff;
-  font-size:14px;
-}
-
-.card{
-  background:#0c1c3c;
-  border:1px solid #1b376c;
-  border-radius:18px;
-  padding:17px;
-  margin-bottom:14px;
-  box-shadow:0 7px 22px rgba(0,0,0,.22);
-}
-
-.card h2{
-  font-size:19px;
-  margin-bottom:14px;
-}
-
-label{
-  display:block;
-  font-size:13px;
-  color:#c9d5f3;
-  margin:12px 0 6px;
-}
-
-input,select,textarea{
-  width:100%;
-  border:1px solid #2a477b;
-  background:#07152f;
-  color:#fff;
-  border-radius:11px;
-  padding:12px;
-  font-size:15px;
-  outline:none;
-}
-
-input:focus,select:focus,textarea:focus{
-  border-color:#4d8dff;
-}
-
-textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-@media(max-width:600px){
-  .grid{
-    grid-template-columns:1fr;
-  }
-}
-
-button{
-  border:0;
-  border-radius:11px;
-  padding:12px 15px;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
-  color:#fff;
-  background:#1769e0;
-  margin-top:12px;
-}
-
-button:active{
-  transform:scale(.98);
-}
-
-.btn-main{
-  width:100%;
-  background:linear-gradient(135deg,#087cff,#174fe8);
-  font-size:17px;
-  padding:14px;
-}
-
-.btn-copy{
-  background:#155d4c;
-  margin-right:7px;
-}
-
-.btn-clear{
-  background:#70313a;
-}
-
-.result{
-  display:none;
-}
-
-.output-box{
-  background:#07152f;
-  border:1px solid #24457f;
-  border-radius:13px;
-  padding:14px;
-  margin-top:10px;
-  line-height:1.65;
-  white-space:pre-wrap;
-  word-break:break-word;
-}
-
-.scene{
-  background:#091936;
-  border:1px solid #28477e;
-  border-radius:15px;
-  padding:14px;
-  margin-top:12px;
-}
-
-.scene h3{
-  color:#63a4ff;
-  font-size:17px;
-  margin-bottom:8px;
-}
-
-.scene-title{
-  color:#ffd166;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.small{
-  color:#aebdde;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.tag{
-  display:inline-block;
-  background:#15376f;
-  color:#dce8ff;
-  border-radius:20px;
-  padding:5px 9px;
-  margin:3px;
-  font-size:12px;
-}
-
-.footer{
-  text-align:center;
-  color:#7f93bc;
-  font-size:12px;
-  padding:10px;
-}
-
-.hidden{
-  display:none;
-}
-
-.status{
-  margin-top:10px;
-  text-align:center;
-  color:#79d8ff;
-  font-size:13px;
-}
-
-.two-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-
-.two-buttons button{
-  flex:1;
-  min-width:130px;
-}
-
-.section-title{
-  margin-top:18px;
-  color:#ffffff;
-  font-size:17px;
-}
-
-.music-box{
-  border-left:4px solid #ffc857;
-  padding:10px 12px;
-  background:#101f3c;
-  border-radius:8px;
-  margin-top:10px;
-}
-
-.notice{
-  background:#10284e;
-  border:1px solid #28538e;
-  padding:11px;
-  border-radius:11px;
-  color:#cfe0ff;
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:12px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="header">
-    <h1>🏏 Cricket Reel Maker</h1>
-    <p>Hindi Cricket Reel • Script • Scenes • Image Prompt • Video Prompt</p>
-  </div>
-
-  <div class="card">
-
-    <div class="notice">
-      ⚡ क्रिकेट न्यूज़ या मैच की जानकारी नीचे लिखें। यह टूल उसी जानकारी से Reel के लिए Script, Scenes, Prompts, Title और Hashtags तैयार करेगा।
-    </div>
-
-    <h2>🎬 Reel Settings</h2>
-
-    <div class="grid">
-
-      <div>
-        <label>Player / Team</label>
-        <input id="player" value="Virat Kohli" placeholder="जैसे Virat Kohli">
-      </div>
-
-      <div>
-        <label>Opponent / Team</label>
-        <input id="opponent" value="West Indies" placeholder="जैसे Australia">
-      </div>
-
-      <div>
-        <label>Reel Duration</label>
-        <select id="duration">
-          <option value="30">30 Seconds</option>
-          <option value="45">45 Seconds</option>
-          <option value="60">60 Seconds</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Reel Style</label>
-        <select id="style">
-          <option value="exciting">🔥 रोमांचक</option>
-          <option value="news">📰 न्यूज़ स्टाइल</option>
-          <option value="dramatic">🎭 ड्रामेटिक</option>
-          <option value="emotional">❤️ इमोशनल</option>
-          <option value="breaking">🚨 Breaking News</option>
-        </select>
-      </div>
-
-    </div>
-
-    <label>📰 Cricket News / Match Information</label>
-
-    <textarea id="news" placeholder="उदाहरण:
-भारत वेस्टइंडीज के खिलाफ रोमांचक मुकाबला हार गया।
-भारत ने पहले बल्लेबाजी करते हुए 351 रन बनाए।
-वेस्टइंडीज ने शानदार बल्लेबाजी करके लक्ष्य हासिल कर लिया।
-राहुल ने शानदार शतक लगाया लेकिन टीम इंडिया को जीत नहीं दिला सके।"></textarea>
-
-    <button class="btn-main" onclick="generateReel()">
-      🚀 Generate Cricket Reel
-    </button>
-
-    <div id="status" class="status"></div>
-
-  </div>
-
-  <div id="result" class="result">
-
-    <div class="card">
-
-      <h2>📝 Reel Script</h2>
-
-      <div id="scriptOutput" class="output-box"></div>
-
-      <div class="two-buttons">
-        <button class="btn-copy" onclick="copyText('scriptOutput')">📋 Copy Script</button>
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🎬 Scene-by-Scene Prompts</h2>
-
-      <div id="scenes"></div>
-
-      <div class="two-buttons">
-        <button class="btn-copy" onclick="copyAllScenes()">📋 Copy All Scenes</button>
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🎵 Music Suggestion</h2>
-
-      <div id="musicOutput" class="music-box"></div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🏷️ Reel Title</h2>
-
-      <div id="titleOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('titleOutput')">📋 Copy Title</button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>#️⃣ Hashtags</h2>
-
-      <div id="hashtagsOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('hashtagsOutput')">📋 Copy Hashtags</button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>📱 Facebook / YouTube Caption</h2>
-
-      <div id="captionOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('captionOutput')">📋 Copy Caption</button>
-
-    </div>
-
-  </div>
-
-  <div class="footer">
-    🏏 Cricket Reel Maker • Made for Cricket Content Creators
-  </div>
-
-</div>
-
-
-<script>
-
-function cleanText(text){
-  return text.trim();
 }
 
 
-function generateReel(){
+/* =========================
+   SCENES
+========================= */
 
-  const player = cleanText(document.getElementById("player").value) || "Virat Kohli";
-  const opponent = cleanText(document.getElementById("opponent").value) || "West Indies";
-  const duration = document.getElementById("duration").value;
-  const style = document.getElementById("style").value;
-  const news = cleanText(document.getElementById("news").value);
+function createScenes(player, opponent, news, duration){
 
-  if(!news){
-
-    alert("पहले Cricket News / Match Information लिखें।");
-    document.getElementById("news").focus();
-    return;
-
-  }
-
-  document.getElementById("status").innerText = "⏳ आपकी Cricket Reel तैयार हो रही है...";
-
-  setTimeout(function(){
-
-    createReel(player,opponent,duration,style,news);
-
-    document.getElementById("result").style.display = "block";
-
-    document.getElementById("status").innerText = "✅ Cricket Reel तैयार है!";
-
-    document.getElementById("result").scrollIntoView({
-      behavior:"smooth"
-    });
-
-  },500);
-
-}
-
-
-function createReel(player,opponent,duration,style,news){
-
-  let opening = "";
-  let ending = "";
-
-  if(style === "breaking"){
-
-    opening = "🚨 बड़ी क्रिकेट खबर सामने आई है!";
-    ending = "अब इस मुकाबले के बाद क्रिकेट फैंस की नजरें अगले मैच पर रहेंगी।";
-
-  }else if(style === "emotional"){
-
-    opening = "💔 क्रिकेट में कभी खुशी तो कभी गम... आज का मुकाबला कुछ ऐसा ही रहा!";
-    ending = "मैच का नतीजा भले ही निराशाजनक रहा हो, लेकिन क्रिकेट का रोमांच हमेशा जारी रहेगा।";
-
-  }else if(style === "dramatic"){
-
-    opening = "🔥 मैदान पर ऐसा ड्रामा हुआ कि हर क्रिकेट फैन की धड़कनें बढ़ गईं!";
-    ending = "और यहीं खत्म होती है आज की इस रोमांचक क्रिकेट कहानी!";
-
-  }else if(style === "news"){
-
-    opening = "📰 क्रिकेट जगत से इस वक्त की बड़ी खबर!";
-    ending = "यह थी आज की बड़ी क्रिकेट अपडेट।";
-
-  }else{
-
-    opening = "🔥 क्रिकेट फैंस, तैयार हो जाइए एक जबरदस्त क्रिकेट अपडेट के लिए!";
-    ending = "अगर आप भी क्रिकेट के दीवाने हैं, तो इस खबर को जरूर शेयर करें!";
-
-  }
-
-
-  let script = "";
-
-  if(duration === "30"){
-
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "⭐ " + player + " और " + opponent + " से जुड़ी इस खबर ने क्रिकेट फैंस का ध्यान अपनी तरफ खींच लिया है।\n\n" +
-      "😱 मुकाबले में रोमांच अपने चरम पर रहा और आखिरी पल तक नतीजे को लेकर उत्सुकता बनी रही।\n\n" +
-      "📢 " + ending + "\n\n" +
-      "❤️ क्रिकेट पसंद है तो Reel को Like और Share जरूर करें!";
-
-  }else if(duration === "45"){
-
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "🔥 इस मुकाबले में " + player + " से सभी को बड़ी उम्मीदें थीं, लेकिन मैदान पर कहानी लगातार बदलती रही।\n\n" +
-      "😱 " + opponent + " ने भी शानदार प्रदर्शन करते हुए मुकाबले को बेहद रोमांचक बना दिया।\n\n" +
-      "👀 आखिरी ओवरों तक क्रिकेट फैंस की नजरें स्कोरबोर्ड पर टिकी रहीं।\n\n" +
-      "📢 " + ending + "\n\n" +
-      "👍 ऐसी ही क्रिकेट खबरों के लिए Follow करें और Reel Share करें!";
-
-  }else{
-
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "⭐ " + player + " इस मुकाबले में चर्चा का सबसे बड़ा नाम रहे।\n\n" +
-      "🔥 शुरुआत से ही मुकाबले में जबरदस्त टक्कर देखने को मिली।\n\n" +
-      "😱 एक समय लगा कि मुकाबला एकतरफा हो जाएगा, लेकिन " + opponent + " ने शानदार वापसी की।\n\n" +
-      "🏟️ स्टेडियम में मौजूद क्रिकेट फैंस हर गेंद के साथ रोमांच महसूस करते रहे।\n\n" +
-      "⚡ आखिरी पलों में मुकाबला पूरी तरह पलट गया और नतीजे ने सभी को हैरान कर दिया।\n\n" +
-      "📢 " + ending + "\n\n" +
-      "❤️ अगर आप " + player + " के फैन हैं तो Like जरूर करें!\n\n" +
-      "🔔 ऐसी ही क्रिकेट खबरों के लिए Follow और Subscribe करें!";
-
-  }
-
-
-  document.getElementById("scriptOutput").innerText = script;
-
-
-  createScenes(player,opponent,news,duration);
-
-
-  let music = "";
-
-  if(style === "emotional"){
-    music = "🎵 Emotional cinematic sports music — शुरुआत धीमी, फिर धीरे-धीरे powerful build-up.";
-  }else if(style === "news"){
-    music = "🎵 Breaking News / Sports News beat — तेज और energetic background.";
-  }else if(style === "dramatic"){
-    music = "🎵 Epic cinematic sports trailer music — dramatic drums + stadium atmosphere.";
-  }else if(style === "breaking"){
-    music = "🎵 Breaking News suspense beat — fast drums + tension build-up.";
-  }else{
-    music = "🎵 High-energy cricket stadium beat — powerful drums, crowd ambience और exciting build-up.";
-  }
-
-  document.getElementById("musicOutput").innerText = music;
-
-
-  const title =
-    "🔥 " + player + " और " + opponent + " के बीच हुआ बड़ा क्रिकेट ड्रामा! | पूरी खबर";
-
-  document.getElementById("titleOutput").innerText = title;
-
-
-  const hashtags =
-    "#Cricket #CricketNews #" +
-    player.replace(/\s+/g,"") +
-    " #IndiaCricket #CricketReels #CricketShorts #ViratKohli #TeamIndia #SportsNews #CricketFans #Reels #Shorts";
-
-  document.getElementById("hashtagsOutput").innerText = hashtags;
-
-
-  const caption =
-    "🏏 क्रिकेट की बड़ी खबर!\n\n" +
-    news +
-    "\n\n🔥 पूरी कहानी जानने के लिए Reel देखें।\n" +
-    "❤️ क्रिकेट पसंद है तो Like करें और अपने दोस्तों के साथ Share करें।\n\n" +
-    hashtags;
-
-  document.getElementById("captionOutput").innerText = caption;
-
-}
-
-
-function createScenes(player,opponent,news,duration){
-
-  const sceneData = [
+  const scenes = [
 
     {
       title:"Scene 1 — Hook",
-      voice:"🚨 बड़ी खबर / शुरुआत का Hook",
+      voice:"🚨 बड़ी खबर! क्रिकेट के मैदान से आई है जबरदस्त खबर!",
       image:
-      "Photorealistic cinematic cricket stadium scene, " +
-      player + " in realistic cricket uniform, dramatic stadium floodlights, " +
-      "huge cheering crowd, intense sports-news atmosphere, powerful facial expression, " +
-      "ultra realistic sports photography, cinematic lighting, vertical 9:16, " +
-      "subjects and stadium completely contained in upper 68% of frame, " +
-      "lower 32% pure solid black empty space, no text, no logo, no watermark."
+        "Photorealistic cinematic cricket stadium scene featuring " +
+        player +
+        ", realistic cricket uniform, dramatic stadium floodlights, huge cheering crowd, intense sports-news atmosphere, powerful facial expression, ultra realistic sports photography, cinematic lighting, vertical 9:16, subjects and stadium completely contained in upper 68% of frame, lower 32% pure solid black empty space, no text, no logo, no watermark.",
+      video:
+        "Cinematic vertical 9:16 cricket news opening, " +
+        player +
+        " walking confidently in a packed stadium, dramatic camera push-in, stadium floodlights, cheering crowd, realistic sports broadcast style, intense atmosphere, upper 68% action area and lower 32% pure black empty space, no text, no watermark."
     },
 
     {
       title:"Scene 2 — Main News",
-      voice:"🏏 मुख्य खबर",
+      voice:"🏏 अब जानते हैं इस मुकाबले में आखिर हुआ क्या!",
       image:
-      "Photorealistic high-detail cricket match scene featuring " +
-      player + " playing an intense international cricket match against " +
-      opponent + ", realistic cricket stadium, packed crowd, powerful floodlights, " +
-      "dynamic action, realistic players, cinematic sports photography, " +
-      "vertical 9:16, upper 68% action area, lower 32% pure black empty space, " +
-      "no text, no logo, no watermark."
+        "Photorealistic high-detail international cricket match featuring " +
+        player +
+        " against " +
+        opponent +
+        ", realistic cricket stadium, packed crowd, powerful floodlights, dynamic cricket action, realistic players, cinematic sports phot<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cricket Reel Maker - Hindi Cricket Reel Script, Scenes, Image Prompts, Video Prompts, Title and Hashtags">
+<title>🏏 Cricket Reel Maker</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#06152f,#0b2d5c,#06152f);
+  color:#fff;
+  min-height:100vh;
+  padding:15px;
+}
+
+.container{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  padding:20px 10px;
+}
+
+.header h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.header p{
+  color:#bcd4f5;
+  font-size:15px;
+}
+
+.card{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.notice{
+  background:rgba(0,150,255,.12);
+  border-left:4px solid #19a7ff;
+  padding:15px;
+  border-radius:10px;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+h2{
+  font-size:20px;
+  margin-bottom:15px;
+}
+
+label{
+  display:block;
+  margin:13px 0 7px;
+  font-weight:bold;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.2);
+  background:#071b38;
+  color:#fff;
+  font-size:15px;
+  outline:none;
+}
+
+textarea{
+  min-height:150px;
+  resize:vertical;
+  line-height:1.6;
+}
+
+button{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:15px;
+  margin-top:15px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(90deg,#00a8ff,#006eff);
+  color:#fff;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+.copy-btn{
+  width:auto;
+  padding:9px 14px;
+  font-size:13px;
+  margin-top:10px;
+  background:#163d6c;
+}
+
+.output{
+  white-space:pre-wrap;
+  line-height:1.7;
+  color:#eaf4ff;
+  margin-top:10px;
+}
+
+.scene{
+  background:rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:15px;
+  margin-top:15px;
+}
+
+.scene h3{
+  color:#4fc3ff;
+  margin-bottom:8px;
+}
+
+.scene-title{
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.small-title{
+  color:#9fc9ef;
+  font-weight:bold;
+  margin-top:12px;
+}
+
+.hidden{
+  display:none;
+}
+
+.footer{
+  text-align:center;
+  color:#8eacd0;
+  font-size:13px;
+  padding:20px 5px;
+}
+
+@media(max-width:600px){
+  body{
+    padding:10px;
+  }
+
+  .header h1{
+    font-size:26px;
+  }
+
+  .card{
+    padding:14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>🏏 Cricket Reel Maker</h1>
+    <p>Hindi Cricket Reel • Script • Scenes • Image Prompt • Video Prompt</p>
+  </div>
+
+  <div class="notice">
+    ⚡ <b>क्रिकेट न्यूज़ या मैच की जानकारी नीचे लिखें।</b><br>
+    यह टूल उसी जानकारी से Reel के लिए Script, Scenes, Image Prompts,
+    Video Prompts, Title और Hashtags तैयार करेगा।
+  </div>
+
+  <div class="card">
+
+    <h2>🎬 Reel Settings</h2>
+
+    <label for="player">Player / Team</label>
+    <input
+      id="player"
+      type="text"
+      value="Virat Kohli"
+      placeholder="जैसे Virat Kohli"
+    >
+
+    <label for="opponent">Opponent / Team</label>
+    <input
+      id="opponent"
+      type="text"
+      value="West Indies"
+      placeholder="जैसे West Indies"
+    >
+
+    <label for="duration">Reel Duration</label>
+    <select id="duration">
+      <option value="30">30 Seconds</option>
+      <option value="45">45 Seconds</option>
+      <option value="60">60 Seconds</option>
+    </select>
+
+    <label for="style">Reel Style</label>
+    <select id="style">
+      <option value="exciting">🔥 रोमांचक</option>
+      <option value="news">📰 न्यूज़ स्टाइल</option>
+      <option value="dramatic">🎭 ड्रामेटिक</option>
+      <option value="emotional">❤️ इमोशनल</option>
+      <option value="breaking">🚨 Breaking News</option>
+    </select>
+
+    <label for="news">📰 Cricket News / Match Information</label>
+
+    <textarea id="news" placeholder="उदाहरण:
+भारत वेस्टइंडीज के खिलाफ रोमांचक मुकाबला हार गया।
+भारत ने पहले बल्लेबाजी करते हुए 351 रन बनाए।
+वेस्टइंडीज ने शानदार बल्लेबाजी करके लक्ष्य हासिल कर लिया।
+राहुल ने शानदार शतक लगाया लेकिन टीम इंडिया को जीत नहीं दिला सके।"></textarea>
+
+    <button onclick="generateReel()">
+      🚀 Generate Cricket Reel
+    </button>
+
+  </div>
+
+  <div id="result" class="hidden">
+
+    <div class="card">
+      <h2>🎙️ Hindi Reel Script</h2>
+      <div id="scriptOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('scriptOutput')">
+        📋 Copy Script
+      </button>
+    </div>
+
+    <div class="card">
+      <h2>🎬 Scene-by-Scene Prompts</h2>
+      <div id="scenesOutput"></div>
+    </div>
+
+    <div class="card">
+      <h2>🎵 Background Music</h2>
+      <div id="musicOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('musicOutput')">
+        📋 Copy Music
+      </button>
+    </div>
+
+    <div class="card">
+      <h2>🔥 Reel Title</h2>
+      <div id="titleOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('titleOutput')">
+        📋 Copy Title
+      </button>
+    </div>
+
+    <div class="card">
+      <h2>#️⃣ Hashtags</h2>
+      <div id="hashtagsOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('hashtagsOutput')">
+        📋 Copy Hashtags
+      </button>
+    </div>
+
+    <div class="card">
+      <h2>📱 Facebook / YouTube Caption</h2>
+      <div id="captionOutput" class="output"></div>
+      <button class="copy-btn" onclick="copyElement('captionOutput')">
+        📋 Copy Caption
+      </button>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    🏏 Cricket Reel Maker • Made for Cricket Content Creators
+  </div>
+
+</div>
+
+<script>
+
+function generateReel(){
+
+  const player =
+    document.getElementById("player").value.trim() || "Virat Kohli";
+
+  const opponent =
+    document.getElementById("opponent").value.trim() || "West Indies";
+
+  const duration =
+    document.getElementById("duration").value;
+
+  const style =
+    document.getElementById("style").value;
+
+  const news =
+    document.getElementById("news").value.trim();
+
+  if(!news){
+    alert("⚠️ पहले Cricket News / Match Information लिखें।");
+    return;
+  }
+
+  createScript(player, opponent, news, duration, style);
+
+  createScenes(player, opponent, news, duration);
+
+  createMusic(style);
+
+  createTitle(player, opponent, style);
+
+  createHashtags(player, opponent);
+
+  createCaption(news, player, opponent);
+
+  document.getElementById("result").classList.remove("hidden");
+
+  window.scrollTo({
+    top:document.getElementById("result").offsetTop - 10,
+    behavior:"smooth"
+  });
+}
+
+
+/* =========================
+   SCRIPT
+========================= */
+
+function createScript(player, opponent, news, duration, style){
+
+  let hook = "";
+
+  if(style === "breaking"){
+    hook = "🚨 बड़ी खबर! क्रिकेट की दुनिया से इस वक्त की सबसे बड़ी अपडेट सामने आई है!";
+  }
+  else if(style === "dramatic"){
+    hook = "🔥 ऐसा क्रिकेट ड्रामा शायद ही आपने पहले देखा होगा!";
+  }
+  else if(style === "emotional"){
+    hook = "❤️ क्रिकेट फैंस के लिए यह पल बेहद भावुक कर देने वाला है!";
+  }
+  else if(style === "news"){
+    hook = "📰 क्रिकेट से जुड़ी एक बड़ी खबर सामने आई है!";
+  }
+  else{
+    hook = "🔥 क्रिकेट के मैदान से आई है एक जबरदस्त और रोमांचक खबर!";
+  }
+
+  let script =
+    hook + "\n\n" +
+
+    "🏏 " + player + " और " + opponent +
+    " के बीच मुकाबले ने क्रिकेट फैंस की धड़कनें बढ़ा दीं।\n\n" +
+
+    news + "\n\n" +
+
+    "😱 मुकाबले के दौरान कई ऐसे पल आए जिन्होंने मैच का रुख बदल दिया।\n\n" +
+
+    "🔥 अब सवाल है कि इस मुकाबले का सबसे बड़ा टर्निंग पॉइंट क्या रहा?\n\n" +
+
+    "❤️ अगर आप भी क्रिकेट के जबरदस्त फैन हैं तो Reel को Like करें और Share जरूर करें!\n\n" +
+
+    "🏏 ऐसी ही क्रिकेट खबरों के लिए Cricket Reel Maker के साथ जुड़े रहें।";
+
+  if(duration === "45"){
+    script += "\n\n🎯 पूरी कहानी जानने के लिए इस Reel को आखिर तक जरूर देखें!";
+  }
+
+  if(duration === "60"){
+    script += "\n\n🎯 इस मैच की पूरी कहानी और सबसे बड़ा टर्निंग पॉइंट जानने के लिए Reel को अंत तक देखें!";
+  }
+
+  document.getElementById("scriptOutput").innerText = script;
+}
+
+
+/* =========================
+   SCENES
+========================= */
+
+function createScenes(player, opponent, news, duration){
+
+  const scenes = [
+
+    {
+      title:"Scene 1 — Hook",
+      voice:"🚨 बड़ी खबर! क्रिकेट के मैदान से आई है जबरदस्त खबर!",
+      image:
+        "Photorealistic cinematic cricket stadium scene featuring " +
+        player +
+        ", realistic cricket uniform, dramatic stadium floodlights, huge cheering crowd, intense sports-news atmosphere, powerful facial expression, ultra realistic sports photography, cinematic lighting, vertical 9:16, subjects and stadium completely contained in upper 68% of frame, lower 32% pure solid black empty space, no text, no logo, no watermark.",
+      video:
+        "Cinematic vertical 9:16 cricket news opening, " +
+        player +
+        " walking confidently in a packed stadium, dramatic camera push-in, stadium floodlights, cheering crowd, realistic sports broadcast style, intense atmosphere, upper 68% action area and lower 32% pure black empty space, no text, no watermark."
+    },
+
+    {
+      title:"Scene 2 — Main News",
+      voice:"🏏 अब जानते हैं इस मुकाबले में आखिर हुआ क्या!",
+      image:
+        "Photorealistic high-detail international cricket match featuring " +
+        player +
+        " against " +
+        opponent +
+        ", realistic cricket stadium, packed crowd, powerful floodlights, dynamic cricket action, realistic players, cinematic sports photography, vertical 9:16, upper 68% action area, lower 32% pure black empty space, no text, no logo, no watermark.",
+      video:
+        "Dynamic vertical 9:16 cricket match sequence, " +
+        player +
+        " playing an intense cricket shot against " +
+        opponent +
+        ", fast camera movement, realistic stadium crowd, dramatic floodlights, cinematic sports broadcast look, upper 68% action area, lower 32% black empty space, no text."
     },
 
     {
       title:"Scene 3 — Turning Point",
-      voice:"🔥 मुकाबले का सबसे बड़ा मोड़",
+      voice:"🔥 और यहीं से मुकाबले का पूरा रुख बदल गया!",
       image:
-      "Epic photorealistic cricket stadium moment showing a dramatic turning point, " +
-      player + " looking intensely focused while opposition players celebrate or react, " +
-      "dramatic floodlights, emotional crowd, realistic cricket uniforms, " +
-      "cinematic sports-news photography, ultra detailed, vertical 9:16, " +
-      "subjects fully contained in upper 68%, lower 32% pure solid black empty space, " +
-      "no text, no logo, no watermark."
+        "Epic photorealistic cricket stadium moment showing a dramatic turning point, " +
+        player +
+        " looking intensely focused while opposition players react, dramatic floodlights, emotional crowd, realistic cricket uniforms, cinematic sports-news photography, ultra detailed, vertical 9:16, subjects fully contained in upper 68%, lower 32% pure solid black empty space, no text, no logo, no watermark.",
+      video:
+        "Dramatic slow-motion cricket turning point, players reacting intensely after a crucial moment, emotional crowd, stadium floodlights, cinematic zoom, realistic sports broadcast style, vertical 9:16, upper 68% action area, lower 32% pure black empty space, no text or watermark."
     },
 
     {
       title:"Scene 4 — Emotional Reaction",
-      voice:"😱 फैंस और खिलाड़ियों का रिएक्शन",
+      voice:"😱 खिलाड़ियों और फैंस का रिएक्शन देखने लायक था!",
       image:
-      "Photorealistic emotional cricket stadium scene, disappointed and shocked cricket players, " +
-      "passionate fans reacting in the background, dramatic stadium lights, " +
-      "realistic facial expressions, cinematic sports photography, powerful emotional atmosphere, " +
-      "vertical 9:16, upper 68% image area, lower 32% pure solid black empty space, " +
-      "no text, no logo, no watermark."
+        "Photorealistic emotional cricket stadium scene, disappointed and shocked cricket players, passionate fans reacting in the background, dramatic stadium lights, realistic facial expressions, cinematic sports photography, powerful emotional atmosphere, vertical 9:16, upper 68% image area, lower 32% pure solid black empty space, no text, no logo, no watermark.",
+      video:
+        "Emotional cricket reaction scene, players showing disappointment and fans reacting dramatically, realistic facial expressions, cinematic stadium lighting, slow camera movement, vertical 9:16, upper 68% visual area, lower 32% pure black empty space, no text, no watermark."
     },
 
     {
-      title:"Scene 5 — Ending / CTA",
-      voice:"📢 Like • Share • Follow",
+      title:"Scene 5 — Final CTA",
+      voice:"❤️ ऐसी ही क्रिकेट खबरों के लिए Follow और Subscribe जरूर करें!",
       image:
-      "Epic cinematic cricket stadium wide shot after a dramatic match, " +
-      player + " standing confidently on the field, massive crowd under bright floodlights, " +
-      "powerful inspirational sports atmosphere, photorealistic, ultra detailed, " +
-      "vertical 9:16, all important subjects in upper 68% of frame, " +
-      "lower 32% pure solid black empty space for Hindi caption, " +
-      "no text, no logo, no watermark."
+        "Epic photorealistic cricket stadium ending scene featuring " +
+        player +
+        " standing confidently under powerful stadium floodlights, packed cheering crowd, inspirational sports-news atmosphere, ultra realistic cinematic photography, vertical 9:16, subject completely contained in upper 68% of frame, lower 32% pure solid black empty space, no text, no logo, no watermark.",
+      video:
+        "Cinematic cricket ending shot, " +
+        player +
+        " standing confidently in the stadium while crowd cheers, slow camera pull-back, powerful floodlights, inspirational sports atmosphere, vertical 9:16, upper 68% visual area and lower 32% pure black empty space, no text, no watermark."
     }
 
   ];
 
-
   let html = "";
 
-  sceneData.forEach(function(scene,index){
+  scenes.forEach(function(scene, index){
 
-    html +=
-      '<div class="scene">' +
-        '<h3>' + scene.title + '</h3>' +
-        '<div class="scene-title">🎙️ Voice / Text:</div>' +
-        '<div class="output-box">' + scene.voice + '</div>' +
-        '<div class="scene-title" style="margin-top:12px;">🖼️ Image / Video Prompt:</div>' +
-        '<div class="output-box" id="scene' + index + '">' +
-          scene.image +
-        '</div>' +
-        '<button class="btn-copy" onclick="copyText(\'scene' + index + '\')">📋 Copy Prompt</button>' +
-      '</div>';
+    html += `
+      <div class="scene">
 
+        <h3>${scene.title}</h3>
+
+        <div class="small-title">🎙️ Voice / Narration</div>
+        <div class="output">${escapeHtml(scene.voice)}</div>
+
+        <div class="small-title">🖼️ Image Prompt</div>
+        <div class="output">${escapeHtml(scene.image)}</div>
+
+        <button class="copy-btn" onclick="copyText(${JSON.stringify(scene.image)})">
+          📋 Copy Image Prompt
+        </button>
+
+        <div class="small-title">🎥 Video Prompt</div>
+        <div class="output">${escapeHtml(scene.video)}</div>
+
+        <button class="copy-btn" onclick="copyText(${JSON.stringify(scene.video)})">
+          📋 Copy Video Prompt
+        </button>
+
+      </div>
+    `;
   });
 
-
-  document.getElementById("scenes").innerHTML = html;
-
+  document.getElementById("scenesOutput").innerHTML = html;
 }
 
 
-function copyText(id){
+/* =========================
+   MUSIC
+========================= */
 
-  const element = document.getElementById(id);
+function createMusic(style){
 
-  if(!element){
-    return;
+  let music = "";
+
+  if(style === "dramatic"){
+    music =
+      "🎵 Epic cinematic sports trailer music — dramatic drums + stadium atmosphere.";
+  }
+  else if(style === "breaking"){
+    music =
+      "🎵 Breaking News suspense beat — fast drums + tension build-up.";
+  }
+  else if(style === "emotional"){
+    music =
+      "🎵 Emotional cinematic sports music — soft piano + powerful rise.";
+  }
+  else if(style === "news"){
+    music =
+      "🎵 Fast sports news background beat — energetic drums + newsroom tension.";
+  }
+  else{
+    music =
+      "🎵 High-energy cricket stadium beat — powerful drums, crowd ambience और exciting build-up.";
   }
 
-  const text = element.innerText;
+  document.getElementById("musicOutput").innerText = music;
+}
 
-  navigator.clipboard.writeText(text).then(function(){
 
-    alert("✅ Copy हो गया!");
+/* =========================
+   TITLE
+========================= */
 
-  }).catch(function(){
+function createTitle(player, opponent, style){
 
+  let title = "";
+
+  if(style === "breaking"){
+    title =
+      "🚨 बड़ी खबर! " + player + " vs " + opponent + " का बड़ा क्रिकेट ड्रामा!";
+  }
+  else{
+    title =
+      "🔥 " + player + " और " + opponent +
+      " के बीच हुआ बड़ा क्रिकेट ड्रामा! | पूरी खबर";
+  }
+
+  document.getElementById("titleOutput").innerText = title;
+}
+
+
+/* =========================
+   HASHTAGS
+========================= */
+
+function createHashtags(player, opponent){
+
+  const cleanPlayer =
+    player.replace(/\s+/g,"");
+
+  const cleanOpponent =
+    opponent.replace(/\s+/g,"");
+
+  const hashtags =
+    "#Cricket #CricketNews #" +
+    cleanPlayer +
+    " #" +
+    cleanOpponent +
+    " #IndiaCricket #CricketReels #CricketShorts #ViratKohli #TeamIndia #SportsNews #CricketFans #Reels #Shorts";
+
+  document.getElementById("hashtagsOutput").innerText = hashtags;
+}
+
+
+/* =========================
+   CAPTION
+========================= */
+
+function createCaption(news, player, opponent){
+
+  const hashtags =
+    document.getElementById("hashtagsOutput").innerText;
+
+  const caption =
+    "🏏 क्रिकेट की बड़ी खबर!\n\n" +
+    news +
+    "\n\n" +
+    "🔥 " +
+    player +
+    " और " +
+    opponent +
+    " से जुड़ी पूरी कहानी जानने के लिए Reel देखें।\n\n" +
+    "❤️ क्रिकेट पसंद है तो Like करें और अपने दोस्तों के साथ Share करें।\n\n" +
+    hashtags;
+
+  document.getElementById("captionOutput").innerText = caption;
+}
+
+
+/* =========================
+   COPY
+========================= */
+
+function copyElement(id){
+
+  const element =
+    document.getElementById(id);
+
+  copyText(element.innerText);
+}
+
+
+function copyText(text){
+
+  if(navigator.clipboard){
+
+    navigator.clipboard.writeText(text)
+      .then(function(){
+        alert("✅ Copy हो गया!");
+      })
+      .catch(function(){
+        fallbackCopy(text);
+      });
+
+  }else{
     fallbackCopy(text);
-
-  });
-
+  }
 }
 
 
 function fallbackCopy(text){
 
-  const textarea = document.createElement("textarea");
+  const textarea =
+    document.createElement("textarea");
 
   textarea.value = text;
 
@@ -1194,832 +1063,177 @@ function fallbackCopy(text){
 
   textarea.select();
 
-  document.execCommand("copy");
+  try{
+    document.execCommand("copy");
+    alert("✅ Copy हो गया!");
+  }
+  catch(error){
+    alert("❌ Copy नहीं हो पाया।");
+  }
 
-  textarea.remove();
-
-  alert("✅ Copy हो गया!");
-
+  document.body.removeChild(textarea);
 }
 
 
-function copyAllScenes(){
+/* =========================
+   HTML ESCAPE
+========================= */
 
-  const scenes = document.querySelectorAll(".scene .output-box");
+function escapeHtml(text){
 
-  let all = "";
-
-  scenes.forEach(function(box,index){
-
-    all +=
-      "SCENE " + (index + 1) + "\n" +
-      box.innerText +
-      "\n\n";
-
-  });
-
-  fallbackCopy(all);
-
+  return text
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
-
 
 </script>
 
 </body>
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#07152f">
-
-<title>Cricket Reel Maker</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,body{
-  width:100%;
-  min-height:100%;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#061229;
-  color:#fff;
-}
-
-body{
-  padding-bottom:30px;
-}
-
-.container{
-  width:100%;
-  max-width:900px;
-  margin:auto;
-  padding:14px;
-}
-
-.header{
-  background:linear-gradient(135deg,#0b2b68,#102f80);
-  border-radius:20px;
-  padding:20px 16px;
-  text-align:center;
-  margin-bottom:14px;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
-}
-
-.header h1{
-  font-size:27px;
-  margin-bottom:7px;
-}
-
-.header p{
-  color:#cbd8ff;
-  font-size:14px;
-}
-
-.card{
-  background:#0c1c3c;
-  border:1px solid #1b376c;
-  border-radius:18px;
-  padding:17px;
-  margin-bottom:14px;
-  box-shadow:0 7px 22px rgba(0,0,0,.22);
-}
-
-.card h2{
-  font-size:19px;
-  margin-bottom:14px;
-}
-
-label{
-  display:block;
-  font-size:13px;
-  color:#c9d5f3;
-  margin:12px 0 6px;
-}
-
-input,select,textarea{
-  width:100%;
-  border:1px solid #2a477b;
-  background:#07152f;
-  color:#fff;
-  border-radius:11px;
-  padding:12px;
-  font-size:15px;
-  outline:none;
-}
-
-input:focus,select:focus,textarea:focus{
-  border-color:#4d8dff;
-}
-
-textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-@media(max-width:600px){
-  .grid{
-    grid-template-columns:1fr;
-  }
-}
-
-button{
-  border:0;
-  border-radius:11px;
-  padding:12px 15px;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
-  color:#fff;
-  background:#1769e0;
-  margin-top:12px;
-}
-
-button:active{
-  transform:scale(.98);
-}
-
-.btn-main{
-  width:100%;
-  background:linear-gradient(135deg,#087cff,#174fe8);
-  font-size:17px;
-  padding:14px;
-}
-
-.btn-copy{
-  background:#155d4c;
-  margin-right:7px;
-}
-
-.btn-clear{
-  background:#70313a;
-}
-
-.result{
-  display:none;
-}
-
-.output-box{
-  background:#07152f;
-  border:1px solid #24457f;
-  border-radius:13px;
-  padding:14px;
-  margin-top:10px;
-  line-height:1.65;
-  white-space:pre-wrap;
-  word-break:break-word;
-}
-
-.scene{
-  background:#091936;
-  border:1px solid #28477e;
-  border-radius:15px;
-  padding:14px;
-  margin-top:12px;
-}
-
-.scene h3{
-  color:#63a4ff;
-  font-size:17px;
-  margin-bottom:8px;
-}
-
-.scene-title{
-  color:#ffd166;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.small{
-  color:#aebdde;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.tag{
-  display:inline-block;
-  background:#15376f;
-  color:#dce8ff;
-  border-radius:20px;
-  padding:5px 9px;
-  margin:3px;
-  font-size:12px;
-}
-
-.footer{
-  text-align:center;
-  color:#7f93bc;
-  font-size:12px;
-  padding:10px;
-}
-
-.hidden{
-  display:none;
-}
-
-.status{
-  margin-top:10px;
-  text-align:center;
-  color:#79d8ff;
-  font-size:13px;
-}
-
-.two-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-
-.two-buttons button{
-  flex:1;
-  min-width:130px;
-}
-
-.section-title{
-  margin-top:18px;
-  color:#ffffff;
-  font-size:17px;
-}
-
-.music-box{
-  border-left:4px solid #ffc857;
-  padding:10px 12px;
-  background:#101f3c;
-  border-radius:8px;
-  margin-top:10px;
-}
-
-.notice{
-  background:#10284e;
-  border:1px solid #28538e;
-  padding:11px;
-  border-radius:11px;
-  color:#cfe0ff;
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:12px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="header">
-    <h1>🏏 Cricket Reel Maker</h1>
-    <p>Hindi Cricket Reel • Script • Scenes • Image Prompt • Video Prompt</p>
-  </div>
-
-  <div class="card">
-
-    <div class="notice">
-      ⚡ क्रिकेट न्यूज़ या मैच की जानकारी नीचे लिखें। यह टूल उसी जानकारी से Reel के लिए Script, Scenes, Prompts, Title और Hashtags तैयार करेगा।
-    </div>
-
-    <h2>🎬 Reel Settings</h2>
-
-    <div class="grid">
-
-      <div>
-        <label>Player / Team</label>
-        <input id="player" value="Virat Kohli" placeholder="जैसे Virat Kohli">
-      </div>
-
-      <div>
-        <label>Opponent / Team</label>
-        <input id="opponent" value="West Indies" placeholder="जैसे Australia">
-      </div>
-
-      <div>
-        <label>Reel Duration</label>
-        <select id="duration">
-          <option value="30">30 Seconds</option>
-          <option value="45">45 Seconds</option>
-          <option value="60">60 Seconds</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Reel Style</label>
-        <select id="style">
-          <option value="exciting">🔥 रोमांचक</option>
-          <option value="news">📰 न्यूज़ स्टाइल</option>
-          <option value="dramatic">🎭 ड्रामेटिक</option>
-          <option value="emotional">❤️ इमोशनल</option>
-          <option value="breaking">🚨 Breaking News</option>
-        </select>
-      </div>
-
-    </div>
-
-    <label>📰 Cricket News / Match Information</label>
-
-    <textarea id="news" placeholder="उदाहरण:
-भारत वेस्टइंडीज के खिलाफ रोमांचक मुकाबला हार गया।
-भारत ने पहले बल्लेबाजी करते हुए 351 रन बनाए।
-वेस्टइंडीज ने शानदार बल्लेबाजी करके लक्ष्य हासिल कर लिया।
-राहुल ने शानदार शतक लगाया लेकिन टीम इंडिया को जीत नहीं दिला सके।"></textarea>
-
-    <button class="btn-main" onclick="generateReel()">
-      🚀 Generate Cricket Reel
-    </button>
-
-    <div id="status" class="status"></div>
-
-  </div>
-
-  <div id="result" class="result">
-
-    <div class="card">
-
-      <h2>📝 Reel Script</h2>
-
-      <div id="scriptOutput" class="output-box"></div>
-
-      <div class="two-buttons">
-        <button class="btn-copy" onclick="copyText('scriptOutput')">📋 Copy Script</button>
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🎬 Scene-by-Scene Prompts</h2>
-
-      <div id="scenes"></div>
-
-      <div class="two-buttons">
-        <button class="btn-copy" onclick="copyAllScenes()">📋 Copy All Scenes</button>
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🎵 Music Suggestion</h2>
-
-      <div id="musicOutput" class="music-box"></div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🏷️ Reel Title</h2>
-
-      <div id="titleOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('titleOutput')">📋 Copy Title</button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>#️⃣ Hashtags</h2>
-
-      <div id="hashtagsOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('hashtagsOutput')">📋 Copy Hashtags</button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>📱 Facebook / YouTube Caption</h2>
-
-      <div id="captionOutput" class="output-box"></div>
-
-      <button class="btn-copy" onclick="copyText('captionOutput')">📋 Copy Caption</button>
-
-    </div>
-
-  </div>
-
-  <div class="footer">
-    🏏 Cricket Reel Maker • Made for Cricket Content Creators
-  </div>
-
-</div>
-
-
-<script>
-
-function cleanText(text){
-  return text.trim();
-}
-
-
-function generateReel(){
-
-  const player = cleanText(document.getElementById("player").value) || "Virat Kohli";
-  const opponent = cleanText(document.getElementById("opponent").value) || "West Indies";
-  const duration = document.getElementById("duration").value;
-  const style = document.getElementById("style").value;
-  const news = cleanText(document.getElementById("news").value);
-
-  if(!news){
-
-    alert("पहले Cricket News / Match Information लिखें।");
-    document.getElementById("news").focus();
-    return;
-
-  }
-
-  document.getElementById("status").innerText = "⏳ आपकी Cricket Reel तैयार हो रही है...";
-
-  setTimeout(function(){
-
-    createReel(player,opponent,duration,style,news);
-
-    document.getElementById("result").style.display = "block";
-
-    document.getElementById("status").innerText = "✅ Cricket Reel तैयार है!";
-
-    document.getElementById("result").scrollIntoView({
-      behavior:"smooth"
-    });
-
-  },500);
-
-}
-
-
-function createReel(player,opponent,duration,style,news){
-
-  let opening = "";
-  let ending = "";
-
-  if(style === "breaking"){
-
-    opening = "🚨 बड़ी क्रिकेट खबर सामने आई है!";
-    ending = "अब इस मुकाबले के बाद क्रिकेट फैंस की नजरें अगले मैच पर रहेंगी।";
-
-  }else if(style === "emotional"){
-
-    opening = "💔 क्रिकेट में कभी खुशी तो कभी गम... आज का मुकाबला कुछ ऐसा ही रहा!";
-    ending = "मैच का नतीजा भले ही निराशाजनक रहा हो, लेकिन क्रिकेट का रोमांच हमेशा जारी रहेगा।";
-
-  }else if(style === "dramatic"){
-
-    opening = "🔥 मैदान पर ऐसा ड्रामा हुआ कि हर क्रिकेट फैन की धड़कनें बढ़ गईं!";
-    ending = "और यहीं खत्म होती है आज की इस रोमांचक क्रिकेट कहानी!";
-
-  }else if(style === "news"){
-
-    opening = "📰 क्रिकेट जगत से इस वक्त की बड़ी खबर!";
-    ending = "यह थी आज की बड़ी क्रिकेट अपडेट।";
-
-  }else{
-
-    opening = "🔥 क्रिकेट फैंस, तैयार हो जाइए एक जबरदस्त क्रिकेट अपडेट के लिए!";
-    ending = "अगर आप भी क्रिकेट के दीवाने हैं, तो इस खबर को जरूर शेयर करें!";
-
-  }
-
-
-  let script = "";
-
-  if(duration === "30"){
-
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "⭐ " + player + " और " + opponent + " से जुड़ी इस खबर ने क्रिकेट फैंस का ध्यान अपनी तरफ खींच लिया है।\n\n" +
-      "😱 मुकाबले में रोमांच अपने चरम पर रहा और आखिरी पल तक नतीजे को लेकर उत्सुकता बनी रही।\n\n" +
-      "📢 " + ending + "\n\n" +
-      "❤️ क्रिकेट पसंद है तो Reel को Like और Share जरूर करें!";
-
-  }else if(duration === "45"){
-
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "🔥 इस मुकाबले में " + player + " से सभी को बड़ी उम्मीदें थीं, लेकिन मैदान पर कहानी लगातार बदलती रही।\n\n" +
-      "😱 " + opponent + " ने भी शानदार प्रदर्शन करते हुए मुकाबले को बेहद रोमांचक बना दिया।\n\n" +
-      "👀 आखिरी ओवरों तक क्रिकेट फैंस की नजरें स्कोरबोर्ड पर टिकी रहीं।\n\n" +
-      "📢 " + ending + "\n\n" +
-      "👍 ऐसी ही क्रिकेट खबरों के लिए Follow करें और Reel Share करें!";
-
-  }else{
-
-    script =
-      "🎙️ " + opening + "\n\n" +
-      "🏏 " + news + "\n\n" +
-      "⭐ " + player + " इस मुकाबले में चर्चा का सबसे बड़ा नाम रहे।\n\n" +
-      "🔥 शुरुआत से ही मुकाबले में जबरदस्त टक्कर देखने को मिली।\n\n" +
-      "😱 एक समय लगा कि मुकाबला एकतरफा हो जाएगा, लेकिन " + opponent + " ने शानदार वापसी की।\n\n" +
-      "🏟️ स्टेडियम में मौजूद क्रिकेट फैंस हर गेंद के साथ रोमांच महसूस करते रहे।\n\n" +
-      "⚡ आखिरी पलों में मुकाबला पूरी तरह पलट गया और नतीजे ने सभी को हैरान कर दिया।\n\n" +
-      "📢 " + ending + "\n\n" +
-      "❤️ अगर आप " + player + " के फैन हैं तो Like जरूर करें!\n\n" +
-      "🔔 ऐसी ही क्रिकेट खबरों के लिए Follow और Subscribe करें!";
-
-  }
-
-
-  document.getElementById("scriptOutput").innerText = script;
-
-
-  createScenes(player,opponent,news,duration);
-
-
-  let music = "";
-
-  if(style === "emotional"){
-    music = "🎵 Emotional cinematic sports music — शुरुआत धीमी, फिर धीरे-धीरे powerful build-up.";
-  }else if(style === "news"){
-    music = "🎵 Breaking News / Sports News beat — तेज और energetic background.";
-  }else if(style === "dramatic"){
-    music = "🎵 Epic cinematic sports trailer music — dramatic drums + stadium atmosphere.";
-  }else if(style === "breaking"){
-    music = "🎵 Breaking News suspense beat — fast drums + tension build-up.";
-  }else{
-    music = "🎵 High-energy cricket stadium beat — powerful drums, crowd ambience और exciting build-up.";
-  }
-
-  document.getElementById("musicOutput").innerText = music;
-
-
-  const title =
-    "🔥 " + player + " और " + opponent + " के बीच हुआ बड़ा क्रिकेट ड्रामा! | पूरी खबर";
-
-  document.getElementById("titleOutput").innerText = title;
-
-
-  const hashtags =
-    "#Cricket #CricketNews #" +
-    player.replace(/\s+/g,"") +
-    " #IndiaCricket #CricketReels #CricketShorts #ViratKohli #TeamIndia #SportsNews #CricketFans #Reels #Shorts";
-
-  document.getElementById("hashtagsOutput").innerText = hashtags;
-
-
-  const caption =
-    "🏏 क्रिकेट की बड़ी खबर!\n\n" +
-    news +
-    "\n\n🔥 पूरी कहानी जानने के लिए Reel देखें।\n" +
-    "❤️ क्रिकेट पसंद है तो Like करें और अपने दोस्तों के साथ Share करें।\n\n" +
-    hashtags;
-
-  document.getElementById("captionOutput").innerText = caption;
-
-}
-
-
-function createScenes(player,opponent,news,duration){
-
-  const sceneData = [
-
-    {
-      title:"Scene 1 — Hook",
-      voice:"🚨 बड़ी खबर / शुरुआत का Hook",
-      image:
-      "Photorealistic cinematic cricket stadium scene, " +
-      player + " in realistic cricket uniform, dramatic stadium floodlights, " +
-      "huge cheering crowd, intense sports-news atmosphere, powerful facial expression, " +
-      "ultra realistic sports photography, cinematic lighting, vertical 9:16, " +
-      "subjects and stadium completely contained in upper 68% of frame, " +
-      "lower 32% pure solid black empty space, no text, no logo, no watermark."
-    },
-
-    {
-      title:"Scene 2 — Main News",
-      voice:"🏏 मुख्य खबर",
-      image:
-      "Photorealistic high-detail cricket match scene featuring " +
-      player + " playing an intense international cricket match against " +
-      opponent + ", realistic cricket stadium, packed crowd, powerful floodlights, " +
-      "dynamic action, realistic players, cinematic sports photography, " +
-      "vertical 9:16, upper 68% action area, lower 32% pure black empty space, " +
-      "no text, no logo, no watermark."
+</html>￼Enterography, vertical 9:16, upper 68% action area, lower 32% pure black empty space, no text, no logo, no watermark.",
+      video:
+        "Dynamic vertical 9:16 cricket match sequence, " +
+        player +
+        " playing an intense cricket shot against " +
+        opponent +
+        ", fast camera movement, realistic stadium crowd, dramatic floodlights, cinematic sports broadcast look, upper 68% action area, lower 32% black empty space, no text."
     },
 
     {
       title:"Scene 3 — Turning Point",
-      voice:"🔥 मुकाबले का सबसे बड़ा मोड़",
+      voice:"🔥 और यहीं से मुकाबले का पूरा रुख बदल गया!",
       image:
-      "Epic photorealistic cricket stadium moment showing a dramatic turning point, " +
-      player + " looking intensely focused while opposition players celebrate or react, " +
-      "dramatic floodlights, emotional crowd, realistic cricket uniforms, " +
-      "cinematic sports-news photography, ultra detailed, vertical 9:16, " +
-      "subjects fully contained in upper 68%, lower 32% pure solid black empty space, " +
-      "no text, no logo, no watermark."
+        "Epic photorealistic cricket stadium moment showing a dramatic turning point, " +
+        player +
+        " looking intensely focused while opposition players react, dramatic floodlights, emotional crowd, realistic cricket uniforms, cinematic sports-news photography, ultra detailed, vertical 9:16, subjects fully contained in upper 68%, lower 32% pure solid black empty space, no text, no logo, no watermark.",
+      video:
+        "Dramatic slow-motion cricket turning point, players reacting intensely after a crucial moment, emotional crowd, stadium floodlights, cinematic zoom, realistic sports broadcast style, vertical 9:16, upper 68% action area, lower 32% pure black empty space, no text or watermark."
     },
 
     {
       title:"Scene 4 — Emotional Reaction",
-      voice:"😱 फैंस और खिलाड़ियों का रिएक्शन",
+      voice:"😱 खिलाड़ियों और फैंस का रिएक्शन देखने लायक था!",
       image:
-      "Photorealistic emotional cricket stadium scene, disappointed and shocked cricket players, " +
-      "passionate fans reacting in the background, dramatic stadium lights, " +
-      "realistic facial expressions, cinematic sports photography, powerful emotional atmosphere, " +
-      "vertical 9:16, upper 68% image area, lower 32% pure solid black empty space, " +
-      "no text, no logo, no watermark."
+        "Photorealistic emotional cricket stadium scene, disappointed and shocked cricket players, passionate fans reacting in the background, dramatic stadium lights, realistic facial expressions, cinematic sports photography, powerful emotional atmosphere, vertical 9:16, upper 68% image area, lower 32% pure solid black empty space, no text, no logo, no watermark.",
+      video:
+        "Emotional cricket reaction scene, players showing disappointment and fans reacting dramatically, realistic facial expressions, cinematic stadium lighting, slow camera movement, vertical 9:16, upper 68% visual area, lower 32% pure black empty space, no text, no watermark."
     },
 
     {
-      title:"Scene 5 — Ending / CTA",
-      voice:"📢 Like • Share • Follow",
+      title:"Scene 5 — Final CTA",
+      voice:"❤️ ऐसी ही क्रिकेट खबरों के लिए Follow और Subscribe जरूर करें!",
       image:
-      "Epic cinematic cricket stadium wide shot after a dramatic match, " +
-      player + " standing confidently on the field, massive crowd under bright floodlights, " +
-      "powerful inspirational sports atmosphere, photorealistic, ultra detailed, " +
-      "vertical 9:16, all important subjects in upper 68% of frame, " +
-      "lower 32% pure solid black empty space for Hindi caption, " +
-      "no text, no logo, no watermark."
+        "Epic photorealistic cricket stadium ending scene featuring " +
+        player +
+        " standing confidently under powerful stadium floodlights, packed cheering crowd, inspirational sports-news atmosphere, ultra realistic cinematic photography, vertical 9:16, subject completely contained in upper 68% of frame, lower 32% pure solid black empty space, no text, no logo, no watermark.",
+      video:
+        "Cinematic cricket ending shot, " +
+        player +
+        " standing confidently in the stadium while crowd cheers, slow camera pull-back, powerful floodlights, inspirational sports atmosphere, vertical 9:16, upper 68% visual area and lower 32% pure black empty space, no text, no watermark."
     }
-
-  ];
-
 
   let html = "";
 
-  sceneData.forEach(function(scene,index){
+  scenes.forEach(function(scene, index){
 
-    html +=
-      '<div class="scene">' +
-        '<h3>' + scene.title + '</h3>' +
-        '<div class="scene-title">🎙️ Voice / Text:</div>' +
-        '<div class="output-box">' + scene.voice + '</div>' +
-        '<div class="scene-title" style="margin-top:12px;">🖼️ Image / Video Prompt:</div>' +
-        '<div class="output-box" id="scene' + index + '">' +
-          scene.image +
-        '</div>' +
-        '<button class="btn-copy" onclick="copyText(\'scene' + index + '\')">📋 Copy Prompt</button>' +
-      '</div>';
+    html += `
+      <div class="scene">
 
+        <h3>${scene.title}</h3>
+
+        <div class="small-title">🎙️ Voice / Narration</div>
+        <div class="output">${escapeHtml(scene.voice)}</div>
+
+        <div class="small-title">🖼️ Image Prompt</div>
+        <div class="output">${escapeHtml(scene.image)}</div>
+
+        <button class="copy-btn" onclick="copyText(${JSON.stringify(scene.image)})">
+          📋 Copy Image Prompt
+        </button>
+
+        <div class="small-title">🎥 Video Prompt</div>
+        <div class="output">${escapeHtml(scene.video)}</div>
+
+        <button class="copy-btn" onclick="copyText(${JSON.stringify(scene.video)})">
+          📋 Copy Video Prompt
+        </button>
+
+      </div>
+    `;
   });
 
-
-  document.getElementById("scenes").innerHTML = html;
-
+  document.getElementById("scenesOutput").innerHTML = html;
 }
 
 
-function copyText(id){
+/* =========================
+   MUSIC
+========================= */
 
-  const element = document.getElementById(id);
+function createMusic(style){
 
-  if(!element){
-    return;
+  let music = "";
+
+  if(style === "dramatic"){
+    music =
+      "🎵 Epic cinematic sports trailer music — dramatic drums + stadium atmosphere.";
   }
-
-  const text = element.innerText;
-
-  navigator.clipboard.writeText(text).then(function(){
-
-    alert("✅ Copy हो गया!");
-
-  }).catch(function(){
-
-    fallbackCopy(text);
-
-  });
-
-}
-
-
-function fallbackCopy(text){
-
-  const textarea = document.createElement("textarea");
-
-  textarea.value = text;
-
-  document.body.appendChild(textarea);
-
-  textarea.select();
-
-  document.execCommand("copy");
-
-  textarea.remove();
-
-  alert("✅ Copy हो गया!");
-
-}
-
-
-function copyAllScenes(){
-
-  const scenes = document.querySelectorAll(".scene .output-box");
-
-  let all = "";
-
-  scenes.forEach(function(box,index){
-
-    all +=
-      "SCENE " + (index + 1) + "\n" +
-      box.innerText +
-      "\n\n";
-
-  });
-
-  fallbackCopy(all);
-
-}
-
-
-</script>
-
-</body>
-</html>￼Enter === "dramatic"){
-    music = "🎵 Epic cinematic sports trailer music — dramatic drums + stadium atmosphere.";
-  }else if(style === "breaking"){
-    music = "🎵 Breaking News suspense beat — fast drums + tension build-up.";
-  }else{
-    music = "🎵 High-energy cricket stadium beat — powerful drums, crowd ambience और exciting build-up.";
+  else if(style === "breaking"){
+    music =
+      "🎵 Breaking News suspense beat — fast drums + tension build-up.";
+  }
+  else if(style === "emotional"){
+    music =
+      "🎵 Emotional cinematic sports music — soft piano + powerful rise.";
+  }
+  else if(style === "news"){
+    music =
+      "🎵 Fast sports news background beat — energetic drums + newsroom tension.";
+  }
+  else{
+    music =
+      "🎵 High-energy cricket stadium beat — powerful drums, crowd ambience और exciting build-up.";
   }
 
   document.getElementById("musicOutput").innerText = music;
-
-
-  const title =
-    "🔥 " + player + " और " + opponent + " के बीच हुआ बड़ा क्रिकेट ड्रामा! | पूरी खबर";
-
-  document.getElementById("titleOutput").innerText = title;
-
-
-  const hashtags =
-    "#Cricket #CricketNews #" +
-    player.replace(/\s+/g,"") +
-    " #IndiaCricket #CricketReels #CricketShorts #ViratKohli #TeamIndia #SportsNews #CricketFans #Reels #Shorts";
-
-  document.getElementById("hashtagsOutput").innerText = hashtags;
-
-
-  const caption =
-    "🏏 क्रिकेट की बड़ी खबर!\n\n" +
-    news +
-    "\n\n🔥 पूरी कहानी जानने के लिए Reel देखें।\n" +
-    "❤️ क्रिकेट पसंद है तो Like करें और अपने दोस्तों के साथ Share करें।\n\n" +
-    hashtags;
-
-  document.getElementById("captionOutput").innerText = caption;
-
 }
 
 
-function createScenes(player,opponent,news,duration){
+/* =========================
+   TITLE
+========================= */
 
-  const sceneData = [
+function createTitle(player, opponent, style){
 
-    {
-      title:"Scene 1 — Hook",
-      voice:"🚨 बड़ी खबर / शुरुआत का Hook",
-      image:
-      "Photorealistic cinematic cricket stadium scene, " +
-      player + " in realistic cricket uniform, dramatic stadium floodlights, " +
-      "huge cheering crowd, intense sports-news atmosphere, powerful facial expression, " +
-      "ultra realistic sports photography, cinematic lighting, vertical 9:16, " +
-      "subjects and stadium completely contained in upper 68% of frame, " +
-      "lower 32% pure solid black empty space, no text, no logo, no watermark."
-    },
+  let title = "";
 
-    {
-      title:"Scene 2 — Main News",
-      voice:"🏏 मुख्य खबर",
-      image:
-      "Photorealistic high-detail cricket match scene featuring " +
-      player + " playing an intense international cricket match against " +
-      opponent + ", realistic cricket stadium, packed crowd, powerful floodlights, " +
-      "dynamic action, realistic players, cinematic sports photography, " +
-      "vertical 9:16, upper 68% action area, lower 32% pure black empty space, " +
-      "no text, no logo, no watermark."
-    },
+  if(style === "breaking"){
+    title =
+      "🚨 बड़ी खबर! " + player + " vs " + opponent + " का बड़ा क्रिकेट ड्रामा!";
+  }
+  else{
+    title =
+      "🔥 " + player + " और " + opponent +
+      " के बीच हुआ बड़ा क्रिकेट ड्रामा! | पूरी खबर";
+  }
 
-    {
-      title:"Scene 3 — Turning Point",
-      voice:"🔥 मुकाबले का सबसे बड़ा मोड़",
-      image:
-      "Epic photorealistic cricket stadium moment showing a dramatic turning point, " +
-      player + " looking intensely focused while opposition players celebrate or react, " +
-      "dramatic floodlights, emotional crowd, realistic cricket uniforms, " +
-      "cinematic sports-news photography, ultra detailed, vertical 9:16, " +
-      "subjects fully contained in upper 68%, lower 32% pure solid black empty space, " +
-      "no text, no logo, no watermark."
-    },
+  document.getElementById("titleOutput").innerText = title;
+}
 
-    {
-      title:"Scene 4 — Emotional Reaction",
-      voice:"😱 फैंस और खिलाड़ियों का रिएक्शन",
-      image:
-      "Photorealistic emotional cricket stadium scene, disappointed and shocked cricket players, " +
-      "passionate fans reacting in the background, dramatic stadium lights, " +
-      "realistic facial expressions, cinematic sports photography, powerful emotional atmosphere, " +
-      "vertical 9:16, upper 68% image area, lower 32% pure solid black empty space, " +
-      "no text, no logo, no watermark."
-    },
+
+/* =========================
+   HASHTAGS
+========================= */
+
+function createHashtags(player, opponent){
+
+  const cleanPlayer =
+    player.replace(/\s+/g,"");
+
+  const cleanOpponent =
+    opponent.replace(/\s+/g,"");
+
+  const hashtags =
+    "#Cricket #CricketNews #" +
