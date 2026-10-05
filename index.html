@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="hi">
+<!DOCTYPE html><html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Cricket Reel Maker">
-<title>🏏 Cricket Reel Maker</title>
-
-<style>
+<title>🏏 Cricket Reel Maker</title><style>
 *{
   box-sizing:border-box;
   margin:0;
@@ -150,28 +147,13 @@ button{
   font-size:12px;
   padding:20px 5px;
 }
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="header">
+</style></head><body><div class="container"><div class="header">
 <h1>🏏 Cricket Reel Maker</h1>
 <p>Hindi Cricket Reel • Script • Scenes • Image Prompt • Video Prompt</p>
-</div>
-
-<div class="notice">
+</div><div class="notice">
 ⚡ <b>क्रिकेट न्यूज़ या मैच की जानकारी नीचे लिखें।</b><br>
 यह टूल आपके लिए Script, Scenes, Image Prompts, Video Prompts, Title और Hashtags तैयार करेगा।
-</div>
-
-<div class="card">
-
-<h2>🎬 Reel Settings</h2>
-
-<label>Player / Team</label>
+</div><div class="card"><h2>🎬 Reel Settings</h2><label>Player / Team</label>
 <input id="player" value="Virat Kohli">
 
 <label>Opponent / Team</label>
@@ -179,76 +161,48 @@ button{
 
 <label>Reel Duration</label>
 <select id="duration">
+
 <option value="30">30 Seconds</option>
 <option value="45">45 Seconds</option>
 <option value="60">60 Seconds</option>
-</select>
-
-<label>Reel Style</label>
+</select><label>Reel Style</label>
 <select id="style">
+
 <option value="exciting">🔥 रोमांचक</option>
 <option value="news">📰 न्यूज़ स्टाइल</option>
 <option value="dramatic">🎭 ड्रामेटिक</option>
 <option value="emotional">❤️ इमोशनल</option>
 <option value="breaking">🚨 Breaking News</option>
-</select>
+</select><label>📰 Cricket News / Match Information</label>
 
-<label>📰 Cricket News / Match Information</label>
-
-<textarea id="news" placeholder="यहाँ क्रिकेट की खबर लिखें..."></textarea>
-
-<button class="generate" id="generate">
+<textarea id="news" placeholder="यहाँ क्रिकेट की खबर लिखें..."></textarea><button class="generate" id="generate">
 🚀 Generate Cricket Reel
-</button>
-
-</div>
-
-<div id="result" class="hidden">
-
-<div class="card">
+</button></div><div id="result" class="hidden"><div class="card">
 <h2>🎙️ Hindi Reel Script</h2>
 <div id="script" class="output"></div>
 <button class="copy" data-copy="script">📋 Copy Script</button>
-</div>
-
-<div class="card">
+</div><div class="card">
 <h2>🎬 Scene-by-Scene Prompts</h2>
 <div id="scenes"></div>
-</div>
-
-<div class="card">
+</div><div class="card">
 <h2>🎵 Background Music</h2>
 <div id="music" class="output"></div>
 <button class="copy" data-copy="music">📋 Copy Music</button>
-</div>
-
-<div class="card">
+</div><div class="card">
 <h2>🔥 Reel Title</h2>
 <div id="title" class="output"></div>
 <button class="copy" data-copy="title">📋 Copy Title</button>
-</div>
-
-<div class="card">
+</div><div class="card">
 <h2>#️⃣ Hashtags</h2>
 <div id="hashtags" class="output"></div>
 <button class="copy" data-copy="hashtags">📋 Copy Hashtags</button>
-</div>
-
-<div class="card">
+</div><div class="card">
 <h2>📱 Facebook / YouTube Caption</h2>
 <div id="caption" class="output"></div>
 <button class="copy" data-copy="caption">📋 Copy Caption</button>
-</div>
-
-</div>
-
-<div class="footer">
+</div></div><div class="footer">
 🏏 Cricket Reel Maker • Cricket Content Creator Tool
-</div>
-
-</div>
-
-<script>
+</div></div><script>
 
 function byId(id){
 return document.getElementById(id);
@@ -587,7 +541,5 @@ copyText(byId(id).textContent);
 
 });
 
-</script>
-
-</body>
+</script></body>
   </html>
