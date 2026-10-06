@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="hi">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Cricket Reel Maker - Hindi Cricket Reel Creator">
-<title>🏏 Cricket Reel Maker</title>
-
-<style>
+<meta name="description" content="Cricket Reel Maker - Hindi English Hinglish Script, Scenes, Image Prompts, Video Prompts and Free Reel Editor">
+<title>🏏 Cricket Reel Maker</title><style>
 *{
   box-sizing:border-box;
   margin:0;
@@ -83,11 +80,6 @@ textarea{
   outline:none;
 }
 
-input[type="file"]{
-  padding:9px;
-  background:#071b38;
-}
-
 textarea{
   min-height:140px;
   resize:vertical;
@@ -103,10 +95,6 @@ button{
   cursor:pointer;
   background:#087ff5;
   color:#fff;
-}
-
-button:active{
-  transform:scale(.98);
 }
 
 .generate{
@@ -160,121 +148,76 @@ button:active{
   padding:20px 5px;
 }
 
-/* =========================
+/* ================================
    FREE REEL EDITOR
-========================= */
+================================ */
 
 .editor-intro{
   color:#bcd4f5;
-  line-height:1.5;
-  margin-bottom:14px;
+  line-height:1.6;
+  margin-bottom:15px;
 }
 
 .editor-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
   margin-top:12px;
 }
 
 .editor-buttons button{
-  width:100%;
-}
-
-.save-btn{
-  background:#087ff5;
-}
-
-.load-btn{
-  background:#6d4aff;
-}
-
-.clear-btn{
-  background:#b52b38;
-}
-
-.restart-btn{
-  background:#d97900;
+  flex:1;
+  min-width:130px;
 }
 
 .timeline{
   display:flex;
   flex-direction:column;
   gap:12px;
-  margin-top:15px;
 }
 
 .timeline-item{
-  background:rgba(0,0,0,.25);
+  background:rgba(0,0,0,.24);
   border:1px solid rgba(255,255,255,.12);
-  border-radius:13px;
+  border-radius:14px;
   padding:13px;
 }
 
-.timeline-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  margin-bottom:10px;
-}
-
-.timeline-title{
+.timeline-item h3{
   color:#4fc3ff;
-  font-size:16px;
-  font-weight:bold;
-}
-
-.scene-number{
-  background:#087ff5;
-  padding:5px 9px;
-  border-radius:8px;
-  font-size:12px;
+  margin-bottom:10px;
 }
 
 .image-preview{
   width:100%;
-  max-width:180px;
+  max-width:220px;
   aspect-ratio:9/16;
-  object-fit:cover;
-  display:block;
-  margin:10px auto;
-  border-radius:10px;
   background:#020914;
-  border:1px solid rgba(255,255,255,.15);
-}
-
-.no-image{
-  width:100%;
-  max-width:180px;
-  aspect-ratio:9/16;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:12px;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin:10px auto;
-  border-radius:10px;
-  background:#020914;
-  color:#6e89aa;
+}
+
+.image-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.no-image{
+  color:#7d9abd;
   text-align:center;
-  padding:20px;
-  border:1px dashed rgba(255,255,255,.2);
+  padding:15px;
+  font-size:13px;
 }
 
 .editor-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:9px;
-}
-
-.editor-control label{
-  margin-top:7px;
-  font-size:13px;
-}
-
-.editor-control select,
-.editor-control input{
-  padding:10px;
-  font-size:14px;
+  gap:10px;
 }
 
 .upload-label{
@@ -284,7 +227,7 @@ button:active{
   border-radius:9px;
   text-align:center;
   cursor:pointer;
-  margin-top:8px;
+  margin-top:10px;
 }
 
 .upload-label input{
@@ -292,27 +235,26 @@ button:active{
 }
 
 .remove-image{
+  background:#7b1d2a;
+  margin-top:8px;
   width:100%;
-  margin-top:7px;
-  background:#512735;
-  font-size:13px;
 }
 
 .preview-wrap{
   display:flex;
   justify-content:center;
-  margin-top:15px;
+  align-items:center;
+  width:100%;
 }
 
 .reel-stage{
-  width:min(88vw,360px);
+  width:min(100%,540px);
   aspect-ratio:9/16;
   background:#000;
-  border-radius:16px;
+  border-radius:14px;
   overflow:hidden;
   position:relative;
-  border:2px solid rgba(255,255,255,.2);
-  box-shadow:0 15px 45px rgba(0,0,0,.45);
+  border:1px solid rgba(255,255,255,.15);
 }
 
 #reelCanvas{
@@ -322,2091 +264,1767 @@ button:active{
   background:#000;
 }
 
-.preview-info{
-  text-align:center;
-  margin-top:10px;
-  color:#9fc9ef;
-  font-size:13px;
-}
-
-.progress-box{
-  width:100%;
-  height:7px;
-  background:#18304e;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:12px;
-}
-
-.progress-bar{
-  width:0%;
-  height:100%;
-  background:#19a7ff;
-  transition:width .05s linear;
-}
-
 .preview-controls{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+  display:flex;
+  flex-wrap:wrap;
   gap:8px;
   margin-top:12px;
 }
 
 .preview-controls button{
-  padding:11px 7px;
-  font-size:13px;
+  flex:1;
+  min-width:100px;
 }
 
-.play-btn{
-  background:#10a85a;
+.progress-bar{
+  width:100%;
+  height:7px;
+  background:#132946;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:10px;
 }
 
-.pause-btn{
-  background:#d97900;
-}
-
-.restart-preview{
-  background:#6d4aff;
-}
-
-.tip{
-  background:rgba(16,168,90,.10);
-  border-left:4px solid #10a85a;
-  border-radius:8px;
-  padding:11px;
-  margin-top:12px;
-  color:#d8f5e5;
-  line-height:1.5;
-  font-size:13px;
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:#19a7ff;
 }
 
 .status{
-  text-align:center;
-  color:#80cfff;
+  color:#9fc9ef;
   font-size:13px;
-  min-height:20px;
   margin-top:8px;
+  text-align:center;
 }
 
 @media(max-width:600px){
-  body{
-    padding:8px;
+
+  .editor-grid{
+    grid-template-columns:1fr;
   }
 
   .header h1{
     font-size:24px;
   }
 
-  .card{
-    padding:13px;
-  }
-
-  .editor-grid{
-    grid-template-columns:1fr;
-  }
-
-  .preview-controls{
-    grid-template-columns:1fr;
+  button{
+    font-size:14px;
   }
 }
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="header">
+</style></head><body><div class="container"><div class="header">
 <h1>🏏 Cricket Reel Maker</h1>
-<p>Hindi Cricket Reel • Script • Scenes • Image Prompt • Video Prompt</p>
-</div>
-
-<div class="notice">
-⚡ <b>क्रिकेट न्यूज़ या मैच की जानकारी नीचे लिखें।</b><br>
-यह टूल आपके लिए Script, Scenes, Image Prompts, Video Prompts, Title और Hashtags तैयार करेगा।
-</div>
-
-<div class="card">
-
-<h2>🎬 Reel Settings</h2>
-
-<label>Player / Team</label>
+<p>Cricket Reel • Script • Scenes • Image Prompt • Video Prompt • Free Reel Editor</p>
+</div><div class="notice">
+⚡ <b>Paste your cricket news or match information below.</b><br>
+The tool will create a Reel Script, Scenes, Image Prompts, Video Prompts, Title, Hashtags and Caption.
+<br><br>
+🌐 Select <b>Hindi, English or Hinglish</b> for the generated content.
+</div><!-- SETTINGS --><div class="card"><h2>🎬 Reel Settings</h2><label>Player / Team</label>
 <input id="player" value="Virat Kohli">
 
 <label>Opponent / Team</label>
 <input id="opponent" value="West Indies">
 
 <label>Reel Duration</label>
+
 <select id="duration">
 <option value="30">30 Seconds</option>
 <option value="45">45 Seconds</option>
 <option value="60">60 Seconds</option>
-</select>
+</select><label>Reel Style</label>
 
-<label>Reel Style</label>
-<select id="style">
-<option value="exciting">🔥 रोमांचक</option>
-<option value="news">📰 न्यूज़ स्टाइल</option>
-<option value="dramatic">🎭 ड्रामेटिक</option>
-<option value="emotional">❤️ इमोशनल</option>
-<option value="breaking">🚨 Breaking News</option>
-</select>
+<select id="style"><option value="exciting">🔥 Exciting</option>
+<option value="news">📰 News Style</option>
+<option value="dramatic">🎭 Dramatic</option>
+<option value="emotional">❤️ Emotional</option>
+<option value="breaking">🚨 Breaking News</option></select><label>🌐 Output Language</label>
 
-<label>📰 Cricket News / Match Information</label>
+<select id="language"><option value="hindi">🇮🇳 Hindi</option>
+<option value="english">🇬🇧 English</option>
+<option value="hinglish">🌐 Hinglish</option></select><label>📰 Cricket News / Match Information</label>
 
-<textarea id="news" placeholder="यहाँ क्रिकेट की खबर लिखें..."></textarea>
-
-<button class="generate" id="generate">
+<textarea
+id="news"
+placeholder="Paste cricket news here in Hindi or English..."
+></textarea><button class="generate" id="generate">
 🚀 Generate Cricket Reel
-</button>
-
-</div>
-
-
-<!-- =========================
-     OLD OUTPUT
-========================= -->
-
-<div id="result" class="hidden">
-
-<div class="card">
-<h2>🎙️ Hindi Reel Script</h2>
-
-<div id="script" class="output"></div>
-
-<button class="copy" data-copy="script">
+</button></div><!-- RESULT --><div id="result" class="hidden"><div class="card"><h2>🎙️ Reel Script</h2><div id="script" class="output"></div><button class="copy" data-copy="script">
 📋 Copy Script
-</button>
-</div>
-
-
-<div class="card">
-<h2>🎬 Scene-by-Scene Prompts</h2>
-
-<div id="scenes"></div>
-</div>
-
-
-<div class="card">
-<h2>🎵 Background Music</h2>
-
-<div id="music" class="output"></div>
-
-<button class="copy" data-copy="music">
+</button></div><div class="card"><h2>🎬 Scene-by-Scene Prompts</h2><div id="scenes"></div></div><div class="card"><h2>🎵 Background Music</h2><div id="music" class="output"></div><button class="copy" data-copy="music">
 📋 Copy Music
-</button>
-</div>
-
-
-<div class="card">
-<h2>🔥 Reel Title</h2>
-
-<div id="title" class="output"></div>
-
-<button class="copy" data-copy="title">
+</button></div><div class="card"><h2>🔥 Reel Title</h2><div id="title" class="output"></div><button class="copy" data-copy="title">
 📋 Copy Title
-</button>
-</div>
-
-
-<div class="card">
-<h2>#️⃣ Hashtags</h2>
-
-<div id="hashtags" class="output"></div>
-
-<button class="copy" data-copy="hashtags">
+</button></div><div class="card"><h2>#️⃣ Hashtags</h2><div id="hashtags" class="output"></div><button class="copy" data-copy="hashtags">
 📋 Copy Hashtags
-</button>
-</div>
-
-
-<div class="card">
-<h2>📱 Facebook / YouTube Caption</h2>
-
-<div id="caption" class="output"></div>
-
-<button class="copy" data-copy="caption">
+</button></div><div class="card"><h2>📱 Facebook / YouTube Caption</h2><div id="caption" class="output"></div><button class="copy" data-copy="caption">
 📋 Copy Caption
-</button>
-</div>
+</button></div><!-- FREE REEL EDITOR --><div class="card"><h2>🎞️ Free Reel Editor</h2><div class="editor-intro">Upload one image for each scene and create a simple animated 9:16 Reel preview directly in your browser.
 
+<br><br>
 
-<!-- =========================
-     FREE REEL EDITOR
-========================= -->
+✅ Zoom In<br>
+✅ Zoom Out<br>
+✅ Pan Left / Right<br>
+✅ Ken Burns<br>
+✅ Scene Duration<br>
+✅ 9:16 Preview<br>
+✅ Save / Load Project
 
-<div class="card" id="editorCard">
+<br><br>
 
-<h2>🎬 Free Reel Editor</h2>
+⚠️ This is browser-based animation, not AI video generation.
 
-<div class="editor-intro">
-अपनी images लगाएँ और उन्हें Zoom, Pan और दूसरे motion effects के साथ 9:16 Reel Preview में देखें।
-</div>
-
-<div class="editor-buttons">
-
-<button class="save-btn" id="saveProject">
+</div><div class="editor-buttons"><button id="saveProject">
 💾 Save Project
-</button>
-
-<button class="load-btn" id="loadProject">
+</button><button id="loadProject">
 📂 Load Project
-</button>
-
-<button class="restart-btn" id="restartPreview">
-🔄 Restart Preview
-</button>
-
-<button class="clear-btn" id="clearImages">
+</button><button id="clearImages">
 🗑️ Clear Images
-</button>
+</button></div><div id="timeline" class="timeline"></div></div><!-- PREVIEW --><div class="card"><h2>📱 Animated Reel Preview</h2><div class="preview-wrap"><div class="reel-stage"><canvas id="reelCanvas" width="540" height="960"></canvas>
 
-</div>
-
-<div id="editorStatus" class="status"></div>
-
-<div id="timeline" class="timeline"></div>
-
-
-<h2 style="margin-top:20px;">
-📱 9:16 Reel Preview
-</h2>
-
-<div class="preview-wrap">
-
-<div class="reel-stage">
-
-<canvas id="reelCanvas" width="540" height="960"></canvas>
-
-</div>
-
-</div>
-
-<div class="preview-info" id="previewInfo">
-Scene 1 • 0.0s
-</div>
-
-<div class="progress-box">
-<div class="progress-bar" id="progressBar"></div>
-</div>
-
-<div class="preview-controls">
-
-<button class="play-btn" id="playPreview">
+</div></div><div class="preview-controls"><button id="playPreview">
 ▶️ Play
-</button>
-
-<button class="pause-btn" id="pausePreview">
+</button><button id="pausePreview">
 ⏸️ Pause
-</button>
-
-<button class="restart-preview" id="restartPreview2">
+</button><button id="restartPreview">
 🔄 Restart
-</button>
+</button></div><div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div><div id="previewStatus" class="status">
+Ready
+</div></div></div><div class="footer">🏏 Cricket Reel Maker • Free Cricket Content Creator Tool
 
-</div>
+</div></div><script>
 
-<div class="tip">
-💡 <b>Free Mode:</b> यह editor आपकी images को camera motion के साथ animate करता है। कोई paid AI video API जरूरी नहीं है।
-</div>
-
-</div>
-
-</div>
-
-
-<div class="footer">
-🏏 Cricket Reel Maker • Cricket Content Creator Tool
-</div>
-
-</div>
-
-
-<script>
-
-/* =========================================================
+/* ==========================================
    BASIC HELPERS
-========================================================= */
+========================================== */
 
 function byId(id){
-  return document.getElementById(id);
+return document.getElementById(id);
 }
 
 
 function copyText(text){
 
-  if(navigator.clipboard){
+if(navigator.clipboard){
 
-    navigator.clipboard.writeText(text)
-    .then(function(){
-      alert("✅ Copy हो गया!");
-    })
-    .catch(function(){
-      fallbackCopy(text);
-    });
+navigator.clipboard.writeText(text)
 
-  }else{
+.then(function(){
 
-    fallbackCopy(text);
+alert("✅ Copy हो गया!");
 
-  }
+})
+
+.catch(function(){
+
+fallbackCopy(text);
+
+});
+
+}else{
+
+fallbackCopy(text);
+
+}
 
 }
 
 
 function fallbackCopy(text){
 
-  var box=document.createElement("textarea");
+var box=document.createElement("textarea");
 
-  box.value=text;
+box.value=text;
 
-  document.body.appendChild(box);
+document.body.appendChild(box);
 
-  box.select();
+box.select();
 
-  document.execCommand("copy");
+document.execCommand("copy");
 
-  document.body.removeChild(box);
+document.body.removeChild(box);
 
-  alert("✅ Copy हो गया!");
+alert("✅ Copy हो गया!");
 
 }
 
 
-/* =========================================================
-   SCENE PROMPT DISPLAY
-========================================================= */
+/* ==========================================
+   LANGUAGE TEXT
+========================================== */
+
+function getLanguageTexts(language,style,player,opponent){
+
+var data={};
+
+if(language==="english"){
+
+data.hooks={
+
+exciting:
+"🔥 A thrilling and exciting cricket update has arrived from the cricket field!",
+
+breaking:
+"🚨 Breaking News! A major update has emerged from the world of cricket!",
+
+news:
+"📰 Here is a major update from the world of cricket!",
+
+dramatic:
+"🔥 What a dramatic cricket story this is!",
+
+emotional:
+"❤️ This is an emotional moment for cricket fans!"
+
+};
+
+data.scriptMiddle=
+"🏏 "+player+" and "+opponent+" have got cricket fans talking.";
+
+data.turning=
+"😱 There were several moments that could change the course of the match.";
+
+data.question=
+"🔥 The big question now is: what will be the biggest turning point?";
+
+data.cta=
+"❤️ If you are a cricket fan, make sure to Like and Share this Reel!";
+
+data.follow=
+"🏏 Follow for more exciting cricket news.";
+
+data.long45=
+"🎯 Stay until the end to know the complete story!";
+
+data.long60=
+"🎯 Watch the Reel till the end to find out the complete story and the biggest turning point!";
+
+data.scenes=[
+
+"🚨 Breaking news! A major cricket update has arrived!",
+
+"🏏 Now let's find out what happened in this match!",
+
+"🔥 And this is where the match could have changed completely!",
+
+"😱 The reaction from the players and fans was incredible!",
+
+"❤️ Follow and Subscribe for more cricket news!"
+
+];
+
+data.title=
+"🔥 Big Cricket Drama: "+player+" vs "+opponent+" | Full Update";
+
+data.breakingTitle=
+"🚨 Breaking News! "+player+" vs "+opponent+" — Big Cricket Update!";
+
+data.captionStart="🏏 Big cricket update!";
+
+data.captionMiddle=
+"🔥 Watch the Reel for the complete story.";
+
+}
+
+else if(language==="hinglish"){
+
+data.hooks={
+
+exciting:
+"🔥 Cricket field se ek bahut hi exciting update saamne aayi hai!",
+
+breaking:
+"🚨 Breaking News! Cricket world se ek badi update saamne aayi hai!",
+
+news:
+"📰 Cricket se judi ek badi news saamne aayi hai!",
+
+dramatic:
+"🔥 Yeh cricket story kaafi dramatic aur exciting hai!",
+
+emotional:
+"❤️ Cricket fans ke liye yeh moment kaafi emotional hai!"
+
+};
+
+data.scriptMiddle=
+"🏏 "+player+" aur "+opponent+" ne cricket fans ki excitement aur badha di hai.";
+
+data.turning=
+"😱 Match mein kai aise moments aaye jo poore game ka course badal sakte the.";
+
+data.question=
+"🔥 Ab sabse bada sawaal hai: match ka biggest turning point kya raha?";
+
+data.cta=
+"❤️ Agar aap bhi cricket fan hain, to Reel ko Like aur Share zaroor karein!";
+
+data.follow=
+"🏏 Aisi hi exciting cricket news ke liye Follow karein.";
+
+data.long45=
+"🎯 Puri story jaanne ke liye Reel ko end tak zaroor dekhein!";
+
+data.long60=
+"🎯 Puri story aur biggest turning point jaanne ke liye Reel ko end tak dekhein!";
+
+data.scenes=[
+
+"🚨 Breaking news! Cricket field se ek badi update saamne aayi hai!",
+
+"🏏 Ab jaante hain match mein exactly kya hua!",
+
+"🔥 Aur yahin se match ka poora rukh badal sakta tha!",
+
+"😱 Players aur fans ka reaction dekhne layak tha!",
+
+"❤️ Aisi hi cricket news ke liye Follow aur Subscribe karein!"
+
+];
+
+data.title=
+"🔥 "+player+" vs "+opponent+" ka bada cricket drama! | Full Update";
+
+data.breakingTitle=
+"🚨 Breaking News! "+player+" vs "+opponent+" ka bada cricket update!";
+
+data.captionStart=
+"🏏 Cricket ki badi update!";
+
+data.captionMiddle=
+"🔥 Full story ke liye Reel dekhein.";
+
+}
+
+else{
+
+data.hooks={
+
+exciting:
+"🔥 क्रिकेट के मैदान से आई है एक जबरदस्त और रोमांचक खबर!",
+
+breaking:
+"🚨 बड़ी खबर! क्रिकेट की दुनिया से इस वक्त की बड़ी अपडेट सामने आई है!",
+
+news:
+"📰 क्रिकेट से जुड़ी एक बड़ी खबर सामने आई है!",
+
+dramatic:
+"🔥 ऐसा क्रिकेट ड्रामा शायद ही आपने पहले देखा होगा!",
+
+emotional:
+"❤️ क्रिकेट फैंस के लिए यह पल बेहद भावुक कर देने वाला है!"
+
+};
+
+data.scriptMiddle=
+"🏏 "+player+" और "+opponent+" ने क्रिकेट फैंस की धड़कनें बढ़ा दी हैं।";
+
+data.turning=
+"😱 मुकाबले में कई ऐसे पल आए जिन्होंने मैच का रुख बदल दिया।";
+
+data.question=
+"🔥 अब सवाल है कि इस मुकाबले का सबसे बड़ा टर्निंग पॉइंट क्या रहा?";
+
+data.cta=
+"❤️ अगर आप भी क्रिकेट के फैन हैं तो Reel को Like और Share जरूर करें!";
+
+data.follow=
+"🏏 ऐसी ही क्रिकेट खबरों के लिए Follow करें।";
+
+data.long45=
+"🎯 पूरी कहानी जानने के लिए Reel को आखिर तक जरूर देखें!";
+
+data.long60=
+"🎯 इस मैच की पूरी कहानी और सबसे बड़ा टर्निंग पॉइंट जानने के लिए Reel को अंत तक देखें!";
+
+data.scenes=[
+
+"🚨 बड़ी खबर! क्रिकेट के मैदान से आई है जबरदस्त खबर!",
+
+"🏏 अब जानते हैं इस मुकाबले में आखिर हुआ क्या!",
+
+"🔥 और यहीं से मुकाबले का पूरा रुख बदल गया!",
+
+"😱 खिलाड़ियों और फैंस का रिएक्शन देखने लायक था!",
+
+"❤️ ऐसी ही क्रिकेट खबरों के लिए Follow और Subscribe जरूर करें!"
+
+];
+
+data.title=
+"🔥 "+player+" और "+opponent+" के बीच हुआ बड़ा क्रिकेट ड्रामा! | पूरी खबर";
+
+data.breakingTitle=
+"🚨 बड़ी खबर! "+player+" vs "+opponent+" का बड़ा क्रिकेट ड्रामा!";
+
+data.captionStart=
+"🏏 क्रिकेट की बड़ी खबर!";
+
+data.captionMiddle=
+"🔥 पूरी कहानी जानने के लिए Reel देखें।";
+
+}
+
+return data;
+
+}
+
+
+/* ==========================================
+   ADD SCENE
+========================================== */
 
 function addScene(number,title,voice,image,video){
 
-  var scene=document.createElement("div");
+var scene=document.createElement("div");
 
-  scene.className="scene";
-
-  var h=document.createElement("h3");
-
-  h.textContent="Scene "+number+" — "+title;
-
-  scene.appendChild(h);
+scene.className="scene";
 
 
-  var t1=document.createElement("div");
+var h=document.createElement("h3");
 
-  t1.className="small";
+h.textContent="Scene "+number+" — "+title;
 
-  t1.textContent="🎙️ Voice / Narration";
-
-  scene.appendChild(t1);
+scene.appendChild(h);
 
 
-  var v1=document.createElement("div");
+var t1=document.createElement("div");
 
-  v1.className="output";
+t1.className="small";
 
-  v1.textContent=voice;
+t1.textContent="🎙️ Voice / Narration";
 
-  scene.appendChild(v1);
-
-
-  var b1=document.createElement("button");
-
-  b1.className="copy";
-
-  b1.textContent="📋 Copy Voice";
-
-  b1.onclick=function(){
-
-    copyText(voice);
-
-  };
-
-  scene.appendChild(b1);
+scene.appendChild(t1);
 
 
-  var t2=document.createElement("div");
+var v1=document.createElement("div");
 
-  t2.className="small";
+v1.className="output";
 
-  t2.textContent="🖼️ Image Prompt";
+v1.textContent=voice;
 
-  scene.appendChild(t2);
-
-
-  var v2=document.createElement("div");
-
-  v2.className="output";
-
-  v2.textContent=image;
-
-  scene.appendChild(v2);
+scene.appendChild(v1);
 
 
-  var b2=document.createElement("button");
+var b1=document.createElement("button");
 
-  b2.className="copy";
+b1.className="copy";
 
-  b2.textContent="📋 Copy Image Prompt";
+b1.textContent="📋 Copy Voice";
 
-  b2.onclick=function(){
+b1.onclick=function(){
 
-    copyText(image);
+copyText(voice);
 
-  };
+};
 
-  scene.appendChild(b2);
-
-
-  var t3=document.createElement("div");
-
-  t3.className="small";
-
-  t3.textContent="🎥 Video Prompt";
-
-  scene.appendChild(t3);
+scene.appendChild(b1);
 
 
-  var v3=document.createElement("div");
+var t2=document.createElement("div");
 
-  v3.className="output";
+t2.className="small";
 
-  v3.textContent=video;
+t2.textContent="🖼️ Image Prompt";
 
-  scene.appendChild(v3);
-
-
-  var b3=document.createElement("button");
-
-  b3.className="copy";
-
-  b3.textContent="📋 Copy Video Prompt";
-
-  b3.onclick=function(){
-
-    copyText(video);
-
-  };
-
-  scene.appendChild(b3);
+scene.appendChild(t2);
 
 
-  byId("scenes").appendChild(scene);
+var v2=document.createElement("div");
+
+v2.className="output";
+
+v2.textContent=image;
+
+scene.appendChild(v2);
+
+
+var b2=document.createElement("button");
+
+b2.className="copy";
+
+b2.textContent="📋 Copy Image Prompt";
+
+b2.onclick=function(){
+
+copyText(image);
+
+};
+
+scene.appendChild(b2);
+
+
+var t3=document.createElement("div");
+
+t3.className="small";
+
+t3.textContent="🎥 Video Prompt";
+
+scene.appendChild(t3);
+
+
+var v3=document.createElement("div");
+
+v3.className="output";
+
+v3.textContent=video;
+
+scene.appendChild(v3);
+
+
+var b3=document.createElement("button");
+
+b3.className="copy";
+
+b3.textContent="📋 Copy Video Prompt";
+
+b3.onclick=function(){
+
+copyText(video);
+
+};
+
+scene.appendChild(b3);
+
+
+byId("scenes").appendChild(scene);
 
 }
 
 
-/* =========================================================
-   REEL GENERATOR
-========================================================= */
+/* ==========================================
+   FREE REEL EDITOR DATA
+========================================== */
+
+var editorScenes=[];
+
+var currentPreviewTime=0;
+
+var previewPlaying=false;
+
+var previewStartTimestamp=0;
+
+var previewAnimationFrame=null;
+
+
+/* ==========================================
+   CREATE EDITOR SCENES
+========================================== */
+
+function createEditorScenes(){
+
+editorScenes=[];
+
+var duration=parseInt(byId("duration").value,10);
+
+var sceneDuration=duration/5;
+
+for(var i=0;i<5;i++){
+
+editorScenes.push({
+
+id:i+1,
+
+image:"",
+
+duration:sceneDuration,
+
+animation:
+
+i===0 ? "zoomIn" :
+i===1 ? "zoomOut" :
+i===2 ? "panLeft" :
+i===3 ? "panRight" :
+"kenBurns",
+
+transition:"cut"
+
+});
+
+}
+
+renderTimeline();
+
+}
+
+
+/* ==========================================
+   RENDER TIMELINE
+========================================== */
+
+function renderTimeline(){
+
+var timeline=byId("timeline");
+
+timeline.innerHTML="";
+
+
+editorScenes.forEach(function(scene,index){
+
+var item=document.createElement("div");
+
+item.className="timeline-item";
+
+
+var heading=document.createElement("h3");
+
+heading.textContent="Scene "+scene.id;
+
+item.appendChild(heading);
+
+
+/* IMAGE PREVIEW */
+
+var preview=document.createElement("div");
+
+preview.className="image-preview";
+
+
+if(scene.image){
+
+var img=document.createElement("img");
+
+img.src=scene.image;
+
+preview.appendChild(img);
+
+}else{
+
+var noImage=document.createElement("div");
+
+noImage.className="no-image";
+
+noImage.textContent="🖼️ No image uploaded";
+
+preview.appendChild(noImage);
+
+}
+
+item.appendChild(preview);
+
+
+/* UPLOAD */
+
+var uploadLabel=document.createElement("label");
+
+uploadLabel.className="upload-label";
+
+uploadLabel.textContent="📷 Upload Scene Image";
+
+var fileInput=document.createElement("input");
+
+fileInput.type="file";
+
+fileInput.accept="image/*";
+
+fileInput.onchange=function(e){
+
+var file=e.target.files[0];
+
+if(!file){
+
+return;
+
+}
+
+var reader=new FileReader();
+
+reader.onload=function(ev){
+
+scene.image=ev.target.result;
+
+renderTimeline();
+
+};
+
+reader.readAsDataURL(file);
+
+};
+
+uploadLabel.appendChild(fileInput);
+
+item.appendChild(uploadLabel);
+
+
+/* REMOVE IMAGE */
+
+var remove=document.createElement("button");
+
+remove.className="remove-image";
+
+remove.textContent="🗑️ Remove Image";
+
+remove.onclick=function(){
+
+scene.image="";
+
+renderTimeline();
+
+};
+
+item.appendChild(remove);
+
+
+/* GRID */
+
+var grid=document.createElement("div");
+
+grid.className="editor-grid";
+
+
+/* DURATION */
+
+var durationWrap=document.createElement("div");
+
+var durationLabel=document.createElement("label");
+
+durationLabel.textContent="⏱️ Duration (sec)";
+
+durationWrap.appendChild(durationLabel);
+
+var durationInput=document.createElement("input");
+
+durationInput.type="number";
+
+durationInput.min="1";
+
+durationInput.max="60";
+
+durationInput.step="0.5";
+
+durationInput.value=scene.duration;
+
+durationInput.onchange=function(){
+
+scene.duration=parseFloat(this.value)||1;
+
+drawPreviewAtTime(currentPreviewTime);
+
+};
+
+durationWrap.appendChild(durationInput);
+
+grid.appendChild(durationWrap);
+
+
+/* ANIMATION */
+
+var animationWrap=document.createElement("div");
+
+var animationLabel=document.createElement("label");
+
+animationLabel.textContent="🎞️ Animation";
+
+animationWrap.appendChild(animationLabel);
+
+var animationSelect=document.createElement("select");
+
+animationSelect.innerHTML=
+
+'<option value="zoomIn">Zoom In</option>'+
+'<option value="zoomOut">Zoom Out</option>'+
+'<option value="panLeft">Pan Left</option>'+
+'<option value="panRight">Pan Right</option>'+
+'<option value="kenBurns">Ken Burns</option>'+
+'<option value="static">Static</option>';
+
+animationSelect.value=scene.animation;
+
+animationSelect.onchange=function(){
+
+scene.animation=this.value;
+
+drawPreviewAtTime(currentPreviewTime);
+
+};
+
+animationWrap.appendChild(animationSelect);
+
+grid.appendChild(animationWrap);
+
+
+/* TRANSITION */
+
+var transitionWrap=document.createElement("div");
+
+var transitionLabel=document.createElement("label");
+
+transitionLabel.textContent="🔄 Transition";
+
+transitionWrap.appendChild(transitionLabel);
+
+var transitionSelect=document.createElement("select");
+
+transitionSelect.innerHTML=
+
+'<option value="cut">Cut</option>'+
+'<option value="fade">Fade</option>'+
+'<option value="slide">Slide</option>';
+
+transitionSelect.value=scene.transition;
+
+transitionSelect.onchange=function(){
+
+scene.transition=this.value;
+
+};
+
+transitionWrap.appendChild(transitionSelect);
+
+grid.appendChild(transitionWrap);
+
+
+item.appendChild(grid);
+
+timeline.appendChild(item);
+
+});
+
+}
+
+
+/* ==========================================
+   CANVAS
+========================================== */
+
+var canvas=byId("reelCanvas");
+
+var ctx=canvas.getContext("2d");
+
+var canvasWidth=540;
+
+var canvasHeight=960;
+
+
+/* ==========================================
+   LOAD IMAGE
+========================================== */
+
+function loadImage(src){
+
+return new Promise(function(resolve,reject){
+
+var img=new Image();
+
+img.onload=function(){
+
+resolve(img);
+
+};
+
+img.onerror=function(){
+
+reject();
+
+};
+
+img.src=src;
+
+});
+
+}
+
+
+/* ==========================================
+   DRAW COVER IMAGE
+========================================== */
+
+function drawCoverImage(img,progress,animation){
+
+var iw=img.width;
+
+var ih=img.height;
+
+var scale=Math.max(canvasWidth/iw,canvasHeight/ih);
+
+var baseW=iw*scale;
+
+var baseH=ih*scale;
+
+var extraX=baseW-canvasWidth;
+
+var extraY=baseH-canvasHeight;
+
+var x=-extraX/2;
+
+var y=-extraY/2;
+
+var zoom=1;
+
+if(animation==="zoomIn"){
+
+zoom=1+0.10*progress;
+
+}
+
+else if(animation==="zoomOut"){
+
+zoom=1.10-0.10*progress;
+
+}
+
+else if(animation==="kenBurns"){
+
+zoom=1+0.08*progress;
+
+}
+
+
+var drawW=baseW*zoom;
+
+var drawH=baseH*zoom;
+
+var maxX=Math.max(0,drawW-canvasWidth);
+
+var maxY=Math.max(0,drawH-canvasHeight);
+
+
+if(animation==="panLeft"){
+
+x=-maxX*progress;
+
+y=-maxY/2;
+
+}
+
+else if(animation==="panRight"){
+
+x=-maxX*(1-progress);
+
+y=-maxY/2;
+
+}
+
+else{
+
+x=-(drawW-canvasWidth)/2;
+
+y=-(drawH-canvasHeight)/2;
+
+}
+
+
+ctx.drawImage(img,x,y,drawW,drawH);
+
+}
+
+
+/* ==========================================
+   GET SCENE AT TIME
+========================================== */
+
+function getSceneAtTime(time){
+
+var total=0;
+
+for(var i=0;i<editorScenes.length;i++){
+
+var s=editorScenes[i];
+
+if(time<=total+s.duration){
+
+return {
+
+scene:s,
+
+index:i,
+
+localTime=Math.max(0,time-total)
+
+};
+
+}
+
+total+=s.duration;
+
+}
+
+return {
+
+scene:editorScenes[editorScenes.length-1],
+
+index:editorScenes.length-1,
+
+localTime:editorScenes[editorScenes.length-1].duration
+
+};
+
+}
+
+
+/* ==========================================
+   TOTAL DURATION
+========================================== */
+
+function getTotalDuration(){
+
+return editorScenes.reduce(function(sum,s){
+
+return sum+Number(s.duration||0);
+
+},0);
+
+}
+
+
+/* ==========================================
+   DRAW PREVIEW
+========================================== */
+
+async function drawPreviewAtTime(time){
+
+if(!editorScenes.length){
+
+return;
+
+}
+
+var info=getSceneAtTime(time);
+
+var scene=info.scene;
+
+var progress=scene.duration
+?Math.min(1,info.localTime/scene.duration)
+:0;
+
+
+ctx.fillStyle="#000";
+
+ctx.fillRect(0,0,canvasWidth,canvasHeight);
+
+
+if(scene.image){
+
+try{
+
+var img=await loadImage(scene.image);
+
+drawCoverImage(
+img,
+progress,
+scene.animation
+);
+
+}catch(e){
+
+drawPlaceholder(scene.id);
+
+}
+
+}else{
+
+drawPlaceholder(scene.id);
+
+}
+
+
+/* LOWER 32% BLACK SAFE AREA */
+
+ctx.fillStyle="#000";
+
+ctx.fillRect(
+0,
+Math.floor(canvasHeight*0.68),
+canvasWidth,
+canvasHeight-Math.floor(canvasHeight*0.68)
+);
+
+
+/* SCENE LABEL */
+
+ctx.fillStyle="#fff";
+
+ctx.font="bold 22px Arial";
+
+ctx.textAlign="center";
+
+ctx.fillText(
+"SCENE "+scene.id,
+canvasWidth/2,
+canvasHeight-55
+);
+
+
+var total=getTotalDuration();
+
+var percent=total
+?Math.min(100,(time/total)*100)
+:0;
+
+byId("progressFill").style.width=percent+"%";
+
+byId("previewStatus").textContent=
+"Scene "+scene.id+
+" • "+
+info.localTime.toFixed(1)+
+"s / "+
+scene.duration.toFixed(1)+
+"s";
+
+}
+
+
+/* ==========================================
+   PLACEHOLDER
+========================================== */
+
+function drawPlaceholder(sceneNumber){
+
+ctx.fillStyle="#06152f";
+
+ctx.fillRect(
+0,
+0,
+canvasWidth,
+canvasHeight
+);
+
+ctx.fillStyle="#4fc3ff";
+
+ctx.font="bold 32px Arial";
+
+ctx.textAlign="center";
+
+ctx.fillText(
+"🏏 CRICKET REEL",
+canvasWidth/2,
+canvasHeight*0.35
+);
+
+ctx.fillStyle="#fff";
+
+ctx.font="bold 25px Arial";
+
+ctx.fillText(
+"Scene "+sceneNumber,
+canvasWidth/2,
+canvasHeight*0.43
+);
+
+ctx.font="18px Arial";
+
+ctx.fillStyle="#9fc9ef";
+
+ctx.fillText(
+"Upload an image",
+canvasWidth/2,
+canvasHeight*0.50
+);
+
+}
+
+
+/* ==========================================
+   PLAY PREVIEW
+========================================== */
+
+function playPreview(){
+
+if(previewPlaying){
+
+return;
+
+}
+
+previewPlaying=true;
+
+var startTime=currentPreviewTime;
+
+previewStartTimestamp=performance.now()-startTime*1000;
+
+
+function frame(now){
+
+if(!previewPlaying){
+
+return;
+
+}
+
+currentPreviewTime=(now-previewStartTimestamp)/1000;
+
+var total=getTotalDuration();
+
+if(currentPreviewTime>=total){
+
+currentPreviewTime=0;
+
+previewStartTimestamp=now;
+
+}
+
+drawPreviewAtTime(currentPreviewTime);
+
+previewAnimationFrame=requestAnimationFrame(frame);
+
+}
+
+previewAnimationFrame=requestAnimationFrame(frame);
+
+}
+
+
+/* ==========================================
+   PAUSE
+========================================== */
+
+function pausePreview(){
+
+previewPlaying=false;
+
+if(previewAnimationFrame){
+
+cancelAnimationFrame(previewAnimationFrame);
+
+}
+
+drawPreviewAtTime(currentPreviewTime);
+
+}
+
+
+/* ==========================================
+   RESTART
+========================================== */
+
+function restartPreview(){
+
+previewPlaying=false;
+
+if(previewAnimationFrame){
+
+cancelAnimationFrame(previewAnimationFrame);
+
+}
+
+currentPreviewTime=0;
+
+drawPreviewAtTime(0);
+
+}
+
+
+/* ==========================================
+   SAVE PROJECT
+========================================== */
+
+function saveProject(){
+
+try{
+
+var data={
+
+player:byId("player").value,
+
+opponent:byId("opponent").value,
+
+duration:byId("duration").value,
+
+style:byId("style").value,
+
+language:byId("language").value,
+
+news:byId("news").value,
+
+scenes:editorScenes
+
+};
+
+localStorage.setItem(
+"cricketReelMakerProject",
+JSON.stringify(data)
+);
+
+alert("✅ Project saved!");
+
+}catch(e){
+
+alert(
+"⚠️ Project save नहीं हो पाया। Images बहुत बड़ी हो सकती हैं।"
+);
+
+}
+
+}
+
+
+/* ==========================================
+   LOAD PROJECT
+========================================== */
+
+function loadProject(){
+
+var raw=localStorage.getItem(
+"cricketReelMakerProject"
+);
+
+if(!raw){
+
+alert("⚠️ कोई saved project नहीं मिला।");
+
+return;
+
+}
+
+try{
+
+var data=JSON.parse(raw);
+
+byId("player").value=data.player||"";
+
+byId("opponent").value=data.opponent||"";
+
+byId("duration").value=data.duration||"30";
+
+byId("style").value=data.style||"exciting";
+
+byId("language").value=data.language||"hindi";
+
+byId("news").value=data.news||"";
+
+editorScenes=data.scenes||[];
+
+renderTimeline();
+
+drawPreviewAtTime(0);
+
+alert("✅ Project loaded!");
+
+}catch(e){
+
+alert("⚠️ Project load नहीं हो पाया।");
+
+}
+
+}
+
+
+/* ==========================================
+   CLEAR IMAGES
+========================================== */
+
+function clearImages(){
+
+editorScenes.forEach(function(scene){
+
+scene.image="";
+
+});
+
+renderTimeline();
+
+drawPreviewAtTime(currentPreviewTime);
+
+}
+
+
+/* ==========================================
+   GENERATE BUTTON
+========================================== */
 
 byId("generate").onclick=function(){
 
-  var player=byId("player").value.trim();
+var player=byId("player").value.trim();
 
-  var opponent=byId("opponent").value.trim();
+var opponent=byId("opponent").value.trim();
 
-  var duration=byId("duration").value;
+var duration=byId("duration").value;
 
-  var style=byId("style").value;
+var style=byId("style").value;
 
-  var news=byId("news").value.trim();
+var language=byId("language").value;
 
+var news=byId("news").value.trim();
 
-  if(player===""){
-    player="Virat Kohli";
-  }
 
-  if(opponent===""){
-    opponent="West Indies";
-  }
+if(player===""){
 
+player="Virat Kohli";
 
-  if(news===""){
+}
 
-    alert("⚠️ पहले Cricket News / Match Information लिखें।");
+if(opponent===""){
 
-    return;
+opponent="West Indies";
 
-  }
+}
 
+if(news===""){
 
-  var hook="🔥 क्रिकेट के मैदान से आई है एक जबरदस्त और रोमांचक खबर!";
+alert("⚠️ पहले Cricket News / Match Information लिखें।");
 
+return;
 
-  if(style==="breaking"){
+}
 
-    hook="🚨 बड़ी खबर! क्रिकेट की दुनिया से इस वक्त की बड़ी अपडेट सामने आई है!";
 
-  }
+var lang=getLanguageTexts(
+language,
+style,
+player,
+opponent
+);
 
 
-  if(style==="news"){
+var hook=lang.hooks[style] || lang.hooks.exciting;
 
-    hook="📰 क्रिकेट से जुड़ी एक बड़ी खबर सामने आई है!";
 
-  }
+var script=
+hook+
+"\n\n"+
+lang.scriptMiddle+
+"\n\n"+
+news+
+"\n\n"+
+lang.turning+
+"\n\n"+
+lang.question+
+"\n\n"+
+lang.cta+
+"\n\n"+
+lang.follow;
 
 
-  if(style==="dramatic"){
+if(duration==="45"){
 
-    hook="🔥 ऐसा क्रिकेट ड्रामा शायद ही आपने पहले देखा होगा!";
+script+="\n\n"+lang.long45;
 
-  }
+}
 
+if(duration==="60"){
 
-  if(style==="emotional"){
+script+="\n\n"+lang.long60;
 
-    hook="❤️ क्रिकेट फैंस के लिए यह पल बेहद भावुक कर देने वाला है!";
+}
 
-  }
 
+byId("script").textContent=script;
 
-  var script=
-  hook+
-  "\n\n🏏 "+player+" और "+opponent+" के बीच मुकाबले ने क्रिकेट फैंस की धड़कनें बढ़ा दीं।"+
-  "\n\n"+news+
-  "\n\n😱 मुकाबले में कई ऐसे पल आए जिन्होंने मैच का रुख बदल दिया।"+
-  "\n\n🔥 अब सवाल है कि इस मुकाबले का सबसे बड़ा टर्निंग पॉइंट क्या रहा?"+
-  "\n\n❤️ अगर आप भी क्रिकेट के फैन हैं तो Reel को Like और Share जरूर करें!"+
-  "\n\n🏏 ऐसी ही क्रिकेट खबरों के लिए Follow करें।";
 
+/* ==========================================
+   SCENES
+========================================== */
 
-  if(duration==="45"){
+byId("scenes").textContent="";
 
-    script+="\n\n🎯 पूरी कहानी जानने के लिए Reel को आखिर तक जरूर देखें!";
 
-  }
+var imageBase=
+"Photorealistic cinematic cricket stadium, "+
+player+
+" playing international cricket against "+
+opponent+
+", realistic cricket uniforms, packed cheering crowd, dramatic stadium floodlights, intense sports-news atmosphere, ultra realistic, cinematic sports photography, vertical 9:16, subjects and stadium completely contained in upper 68% of frame, lower 32% pure solid black empty space, no text, no logo, no watermark.";
 
 
-  if(duration==="60"){
+var videoBase=
+"Dynamic cinematic vertical 9:16 cricket match sequence featuring "+
+player+
+" against "+
+opponent+
+", realistic cricket action, dramatic stadium floodlights, packed cheering crowd, realistic camera movement, intense sports broadcast atmosphere, upper 68% action area, lower 32% pure black empty space, no text, no logo, no watermark.";
 
-    script+="\n\n🎯 इस मैच की पूरी कहानी और सबसे बड़ा टर्निंग पॉइंट जानने के लिए Reel को अंत तक देखें!";
 
-  }
+addScene(
+1,
+"Breaking News",
+lang.scenes[0],
+imageBase,
+videoBase
+);
 
 
-  byId("script").textContent=script;
+addScene(
+2,
+"Main Match",
+lang.scenes[1],
+imageBase+
+" Powerful batting moment, player focused on the ball.",
+videoBase+
+" Fast batting action, camera follows the cricket shot."
+);
 
 
-  byId("scenes").textContent="";
+addScene(
+3,
+"Turning Point",
+lang.scenes[2],
+imageBase+
+" Dramatic turning point, intense player reactions.",
+videoBase+
+" Slow-motion crucial cricket moment, dramatic camera zoom."
+);
 
 
-  var imageBase=
-  "Photorealistic cinematic cricket stadium, "+player+
-  " playing international cricket against "+opponent+
-  ", realistic cricket uniforms, packed cheering crowd, dramatic stadium floodlights, intense sports-news atmosphere, ultra realistic, cinematic sports photography, vertical 9:16, subjects and stadium completely contained in upper 68% of frame, lower 32% pure solid black empty space, no text, no logo, no watermark.";
+addScene(
+4,
+"Reaction",
+lang.scenes[3],
+imageBase+
+" Emotional players and passionate fans reacting.",
+videoBase+
+" Emotional reaction shot, players and crowd reacting dramatically."
+);
 
 
-  var videoBase=
-  "Dynamic cinematic vertical 9:16 cricket match sequence featuring "+player+
-  " against "+opponent+
-  ", realistic cricket action, dramatic stadium floodlights, packed cheering crowd, realistic camera movement, intense sports broadcast atmosphere, upper 68% action area, lower 32% pure black empty space, no text, no logo, no watermark.";
+addScene(
+5,
+"Final CTA",
+lang.scenes[4],
+imageBase+
+" Heroic final stadium moment with player standing confidently.",
+videoBase+
+" Slow cinematic camera pull-back while the crowd celebrates."
+);
 
 
-  addScene(
-    1,
-    "Breaking News",
-    "🚨 बड़ी खबर! क्रिकेट के मैदान से आई है जबरदस्त खबर!",
-    imageBase,
-    videoBase
-  );
+/* ==========================================
+   MUSIC
+========================================== */
 
+var music=
+"🎵 High-energy cinematic cricket background music — powerful drums, stadium crowd ambience, suspense build-up and exciting sports atmosphere.";
 
-  addScene(
-    2,
-    "Main Match",
-    "🏏 अब जानते हैं इस मुकाबले में आखिर हुआ क्या!",
-    imageBase+
-    " Powerful batting moment, player focused on the ball.",
-    videoBase+
-    " Fast batting action, camera follows the cricket shot."
-  );
 
+if(style==="dramatic"){
 
-  addScene(
-    3,
-    "Turning Point",
-    "🔥 और यहीं से मुकाबले का पूरा रुख बदल गया!",
-    imageBase+
-    " Dramatic turning point, intense player reactions.",
-    videoBase+
-    " Slow-motion crucial cricket moment, dramatic camera zoom."
-  );
+music=
+"🎵 Epic cinematic sports trailer music — dramatic drums, tension and powerful stadium atmosphere.";
 
+}
 
-  addScene(
-    4,
-    "Emotional Reaction",
-    "😱 खिलाड़ियों और फैंस का रिएक्शन देखने लायक था!",
-    imageBase+
-    " Emotional players and passionate fans reacting.",
-    videoBase+
-    " Emotional reaction shot, players and crowd reacting dramatically."
-  );
+if(style==="breaking"){
 
+music=
+"🎵 Breaking News suspense beat — fast drums, tension build-up and urgent sports atmosphere.";
 
-  addScene(
-    5,
-    "Final CTA",
-    "❤️ ऐसी ही क्रिकेट खबरों के लिए Follow और Subscribe जरूर करें!",
-    imageBase+
-    " Heroic final stadium moment with player standing confidently.",
-    videoBase+
-    " Slow cinematic camera pull-back while the crowd celebrates."
-  );
+}
 
+if(style==="emotional"){
 
-  var music=
-  "🎵 High-energy cinematic cricket background music — powerful drums, stadium crowd ambience, suspense build-up and exciting sports atmosphere.";
+music=
+"🎵 Emotional cinematic sports music — soft piano, emotional rise and powerful ending.";
 
+}
 
-  if(style==="dramatic"){
+if(style==="news"){
 
-    music=
-    "🎵 Epic cinematic sports trailer music — dramatic drums, tension and powerful stadium atmosphere.";
+music=
+"🎵 Fast sports news background beat — energetic drums and newsroom-style tension.";
 
-  }
+}
 
 
-  if(style==="breaking"){
+byId("music").textContent=music;
 
-    music=
-    "🎵 Breaking News suspense beat — fast drums, tension build-up and urgent sports atmosphere.";
 
-  }
+/* ==========================================
+   TITLE
+========================================== */
 
+var title=lang.title;
 
-  if(style==="emotional"){
+if(style==="breaking"){
 
-    music=
-    "🎵 Emotional cinematic sports music — soft piano, emotional rise and powerful ending.";
+title=lang.breakingTitle;
 
-  }
+}
 
+byId("title").textContent=title;
 
-  if(style==="news"){
 
-    music=
-    "🎵 Fast sports news background beat — energetic drums and newsroom-style tension.";
+/* ==========================================
+   HASHTAGS
+========================================== */
 
-  }
+var cleanPlayer=
+player.replace(/\s+/g,"").replace(/[^a-zA-Z0-9]/g,"");
 
+var cleanOpponent=
+opponent.replace(/\s+/g,"").replace(/[^a-zA-Z0-9]/g,"");
 
-  byId("music").textContent=music;
 
+var tags=
+"#Cricket #CricketNews #"+
+cleanPlayer+
+" #"+
+cleanOpponent+
+" #TeamIndia #CricketReels #CricketShorts #SportsNews #CricketFans #Reels #Shorts";
 
-  var title=
-  "🔥 "+player+" और "+opponent+" के बीच हुआ बड़ा क्रिकेट ड्रामा! | पूरी खबर";
 
+byId("hashtags").textContent=tags;
 
-  if(style==="breaking"){
 
-    title=
-    "🚨 बड़ी खबर! "+player+" vs "+opponent+" का बड़ा क्रिकेट ड्रामा!";
+/* ==========================================
+   CAPTION
+========================================== */
 
-  }
+var caption="";
 
 
-  byId("title").textContent=title;
+if(language==="english"){
 
+caption=
+lang.captionStart+
+"\n\n"+
+news+
+"\n\n"+
+lang.captionMiddle+
+"\n\n"+
+"❤️ Like and Share this Reel if you love cricket!"+
+"\n\n"+
+"🏏 Follow for more cricket news."+
+"\n\n"+
+tags;
 
-  var cleanPlayer=player.replace(/\s+/g,"");
+}
 
-  var cleanOpponent=opponent.replace(/\s+/g,"");
+else if(language==="hinglish"){
 
+caption=
+lang.captionStart+
+"\n\n"+
+news+
+"\n\n"+
+lang.captionMiddle+
+"\n\n"+
+"❤️ Cricket pasand hai to Like aur Share zaroor karein!"+
+"\n\n"+
+"🏏 Aisi hi cricket news ke liye Follow karein."+
+"\n\n"+
+tags;
 
-  var tags=
-  "#Cricket #CricketNews #"+
-  cleanPlayer+
-  " #"+
-  cleanOpponent+
-  " #TeamIndia #CricketReels #CricketShorts #SportsNews #CricketFans #Reels #Shorts";
+}
 
+else{
 
-  byId("hashtags").textContent=tags;
+caption=
+lang.captionStart+
+"\n\n"+
+news+
+"\n\n"+
+lang.captionMiddle+
+"\n\n"+
+"❤️ क्रिकेट पसंद है तो Like और Share करें।"+
+"\n\n"+
+"🏏 ऐसी ही क्रिकेट खबरों के लिए Follow करें।"+
+"\n\n"+
+tags;
 
+}
 
-  var caption=
-  "🏏 क्रिकेट की बड़ी खबर!\n\n"+
-  news+
-  "\n\n🔥 "+player+" और "+opponent+
-  " से जुड़ी पूरी कहानी जानने के लिए Reel देखें।"+
-  "\n\n❤️ क्रिकेट पसंद है तो Like करें और Share करें।"+
-  "\n\n"+tags;
 
+byId("caption").textContent=caption;
 
-  byId("caption").textContent=caption;
 
+/* ==========================================
+   SHOW RESULT
+========================================== */
 
-  byId("result").classList.remove("hidden");
+byId("result").classList.remove("hidden");
 
 
-  /* Create editor scenes after generation */
+/* ==========================================
+   CREATE EDITOR
+========================================== */
 
-  createEditorScenes();
+createEditorScenes();
 
 
-  window.scrollTo({
+currentPreviewTime=0;
 
-    top:byId("result").offsetTop-10,
+drawPreviewAtTime(0);
 
-    behavior:"smooth"
 
-  });
+window.scrollTo({
+
+top:byId("result").offsetTop-10,
+
+behavior:"smooth"
+
+});
 
 };
 
 
-/* =========================================================
-   FREE REEL EDITOR DATA
-========================================================= */
+/* ==========================================
+   COPY BUTTONS
+========================================== */
 
-var editorScenes=[];
+var copyButtons=
+document.querySelectorAll("[data-copy]");
 
-var animationFrame=null;
 
-var playing=false;
+copyButtons.forEach(function(button){
 
-var previewStartTime=0;
+button.onclick=function(){
 
-var pausedElapsed=0;
+var id=
+button.getAttribute("data-copy");
 
-var totalDuration=30;
+copyText(
+byId(id).textContent
+);
 
-var currentSceneIndex=0;
+};
 
+});
 
-/* =========================================================
-   CREATE EDITOR SCENES
-========================================================= */
 
-function createEditorScenes(){
-
-  var duration=parseInt(byId("duration").value,10) || 30;
-
-  totalDuration=duration;
-
-  var sceneCount=5;
-
-  var each=duration/sceneCount;
-
-
-  editorScenes=[];
-
-
-  for(var i=0;i<sceneCount;i++){
-
-    editorScenes.push({
-
-      title:
-        "Scene "+(i+1),
-
-      image:null,
-
-      imageName:"",
-
-      duration:each,
-
-      animation:
-        i%5===0 ? "zoomIn" :
-        i%5===1 ? "zoomOut" :
-        i%5===2 ? "panLeft" :
-        i%5===3 ? "panRight" :
-        "kenBurns",
-
-      transition:
-        i===0 ? "cut" :
-        i%2===0 ? "fade" :
-        "slide"
-
-    });
-
-  }
-
-
-  renderTimeline();
-
-  restartPreview();
-
-}
-
-
-/* =========================================================
-   TIMELINE RENDER
-========================================================= */
-
-function renderTimeline(){
-
-  var timeline=byId("timeline");
-
-  timeline.innerHTML="";
-
-
-  editorScenes.forEach(function(scene,index){
-
-    var item=document.createElement("div");
-
-    item.className="timeline-item";
-
-
-    var head=document.createElement("div");
-
-    head.className="timeline-head";
-
-
-    var title=document.createElement("div");
-
-    title.className="timeline-title";
-
-    title.textContent=scene.title;
-
-
-    var number=document.createElement("div");
-
-    number.className="scene-number";
-
-    number.textContent=
-      Math.round(scene.duration)+" sec";
-
-
-    head.appendChild(title);
-
-    head.appendChild(number);
-
-    item.appendChild(head);
-
-
-    var img;
-
-    if(scene.image){
-
-      img=document.createElement("img");
-
-      img.className="image-preview";
-
-      img.src=scene.image;
-
-      img.alt="Scene "+(index+1);
-
-    }else{
-
-      img=document.createElement("div");
-
-      img.className="no-image";
-
-      img.innerHTML=
-        "🖼️<br>इस Scene के लिए<br>Image चुनें";
-
-    }
-
-
-    item.appendChild(img);
-
-
-    var uploadLabel=document.createElement("label");
-
-    uploadLabel.className="upload-label";
-
-    uploadLabel.textContent="🖼️ Choose Image";
-
-
-    var fileInput=document.createElement("input");
-
-    fileInput.type="file";
-
-    fileInput.accept="image/*";
-
-    fileInput.dataset.index=index;
-
-
-    fileInput.addEventListener("change",function(e){
-
-      var file=e.target.files[0];
-
-      if(!file){
-
-        return;
-
-      }
-
-
-      var reader=new FileReader();
-
-
-      reader.onload=function(event){
-
-        editorScenes[index].image=
-          event.target.result;
-
-        editorScenes[index].imageName=
-          file.name;
-
-        renderTimeline();
-
-        setEditorStatus(
-          "✅ Scene "+(index+1)+" की image लग गई।"
-        );
-
-        drawPreviewAtTime(
-          getCurrentElapsed()
-        );
-
-      };
-
-
-      reader.readAsDataURL(file);
-
-    });
-
-
-    uploadLabel.appendChild(fileInput);
-
-    item.appendChild(uploadLabel);
-
-
-    var grid=document.createElement("div");
-
-    grid.className="editor-grid";
-
-
-    /* Animation */
-
-    var c1=document.createElement("div");
-
-    c1.className="editor-control";
-
-
-    var l1=document.createElement("label");
-
-    l1.textContent="🎞️ Animation";
-
-    c1.appendChild(l1);
-
-
-    var s1=document.createElement("select");
-
-    var animations=[
-
-      ["zoomIn","🔍 Zoom In"],
-
-      ["zoomOut","🔎 Zoom Out"],
-
-      ["panLeft","⬅️ Pan Left"],
-
-      ["panRight","➡️ Pan Right"],
-
-      ["kenBurns","🎥 Ken Burns"],
-
-      ["static","⏸️ Static"]
-
-    ];
-
-
-    animations.forEach(function(option){
-
-      var op=document.createElement("option");
-
-      op.value=option[0];
-
-      op.textContent=option[1];
-
-      s1.appendChild(op);
-
-    });
-
-
-    s1.value=scene.animation;
-
-
-    s1.onchange=function(){
-
-      editorScenes[index].animation=this.value;
-
-      drawPreviewAtTime(getCurrentElapsed());
-
-    };
-
-
-    c1.appendChild(s1);
-
-    grid.appendChild(c1);
-
-
-    /* Transition */
-
-    var c2=document.createElement("div");
-
-    c2.className="editor-control";
-
-
-    var l2=document.createElement("label");
-
-    l2.textContent="🔄 Transition";
-
-    c2.appendChild(l2);
-
-
-    var s2=document.createElement("select");
-
-
-    var transitions=[
-
-      ["cut","✂️ Cut"],
-
-      ["fade","🌫️ Fade"],
-
-      ["slide","➡️ Slide"]
-
-    ];
-
-
-    transitions.forEach(function(option){
-
-      var op=document.createElement("option");
-
-      op.value=option[0];
-
-      op.textContent=option[1];
-
-      s2.appendChild(op);
-
-    });
-
-
-    s2.value=scene.transition;
-
-
-    s2.onchange=function(){
-
-      editorScenes[index].transition=this.value;
-
-    };
-
-
-    c2.appendChild(s2);
-
-    grid.appendChild(c2);
-
-
-    /* Duration */
-
-    var c3=document.createElement("div");
-
-    c3.className="editor-control";
-
-
-    var l3=document.createElement("label");
-
-    l3.textContent="⏱️ Duration (sec)";
-
-    c3.appendChild(l3);
-
-
-    var durationInput=document.createElement("input");
-
-    durationInput.type="number";
-
-    durationInput.min="1";
-
-    durationInput.max="30";
-
-    durationInput.step="0.5";
-
-    durationInput.value=scene.duration;
-
-
-    durationInput.onchange=function(){
-
-      var value=parseFloat(this.value);
-
-      if(!value || value<1){
-
-        value=1;
-
-      }
-
-
-      if(value>30){
-
-        value=30;
-
-      }
-
-
-      editorScenes[index].duration=value;
-
-      updateTotalDuration();
-
-      renderTimeline();
-
-      restartPreview();
-
-    };
-
-
-    c3.appendChild(durationInput);
-
-    grid.appendChild(c3);
-
-
-    item.appendChild(grid);
-
-
-    /* Remove image */
-
-    var remove=document.createElement("button");
-
-    remove.className="remove-image";
-
-    remove.textContent="🗑️ Remove Image";
-
-
-    remove.onclick=function(){
-
-      editorScenes[index].image=null;
-
-      editorScenes[index].imageName="";
-
-      renderTimeline();
-
-      drawPreviewAtTime(getCurrentElapsed());
-
-    };
-
-
-    item.appendChild(remove);
-
-
-    timeline.appendChild(item);
-
-  });
-
-}
-
-
-/* =========================================================
-   TOTAL DURATION
-========================================================= */
-
-function updateTotalDuration(){
-
-  totalDuration=
-    editorScenes.reduce(function(sum,scene){
-
-      return sum+Number(scene.duration||0);
-
-    },0);
-
-}
-
-
-/* =========================================================
-   EDITOR STATUS
-========================================================= */
-
-function setEditorStatus(text){
-
-  byId("editorStatus").textContent=text;
-
-  clearTimeout(window.editorStatusTimer);
-
-  window.editorStatusTimer=setTimeout(function(){
-
-    byId("editorStatus").textContent="";
-
-  },2500);
-
-}
-
-
-/* =========================================================
-   GET CURRENT ELAPSED
-========================================================= */
-
-function getCurrentElapsed(){
-
-  if(playing){
-
-    return Math.max(
-      0,
-      (performance.now()-previewStartTime)/1000
-    );
-
-  }
-
-  return pausedElapsed;
-
-}
-
-
-/* =========================================================
-   FIND SCENE BY TIME
-========================================================= */
-
-function getSceneAtTime(time){
-
-  var elapsed=0;
-
-  for(var i=0;i<editorScenes.length;i++){
-
-    var end=
-      elapsed+
-      Number(editorScenes[i].duration||1);
-
-
-    if(time<end){
-
-      return {
-
-        index:i,
-
-        localTime:time-elapsed,
-
-        start:elapsed,
-
-        end:end
-
-      };
-
-    }
-
-
-    elapsed=end;
-
-  }
-
-
-  return {
-
-    index:editorScenes.length-1,
-
-    localTime:
-      Number(
-        editorScenes[editorScenes.length-1]?.duration || 1
-      ),
-
-    start:Math.max(0,totalDuration-1),
-
-    end:totalDuration
-
-  };
-
-}
-
-
-/* =========================================================
-   LOAD IMAGE
-========================================================= */
-
-function loadImage(src){
-
-  return new Promise(function(resolve,reject){
-
-    if(!src){
-
-      reject();
-
-      return;
-
-    }
-
-
-    var img=new Image();
-
-
-    img.onload=function(){
-
-      resolve(img);
-
-    };
-
-
-    img.onerror=function(){
-
-      reject();
-
-    };
-
-
-    img.src=src;
-
-  });
-
-}
-
-
-/* =========================================================
-   DRAW IMAGE COVER
-========================================================= */
-
-function drawCoverImage(ctx,img,progress,animation){
-
-  var cw=ctx.canvas.width;
-
-  var ch=ctx.canvas.height;
-
-
-  var iw=img.width;
-
-  var ih=img.height;
-
-
-  var baseScale=Math.max(
-    cw/iw,
-    ch/ih
-  );
-
-
-  var scale=baseScale;
-
-
-  var x=(cw-iw*scale)/2;
-
-  var y=(ch-ih*scale)/2;
-
-
-  if(animation==="zoomIn"){
-
-    scale=baseScale*(1+0.13*progress);
-
-    x=(cw-iw*scale)/2;
-
-    y=(ch-ih*scale)/2;
-
-  }
-
-
-  else if(animation==="zoomOut"){
-
-    scale=baseScale*(1.13-0.13*progress);
-
-    x=(cw-iw*scale)/2;
-
-    y=(ch-ih*scale)/2;
-
-  }
-
-
-  else if(animation==="panLeft"){
-
-    scale=baseScale*1.13;
-
-    var maxMove=(iw*scale-cw);
-
-    x=-(maxMove*progress);
-
-    y=(ch-ih*scale)/2;
-
-  }
-
-
-  else if(animation==="panRight"){
-
-    scale=baseScale*1.13;
-
-    var maxMove2=(iw*scale-cw);
-
-    x=-(maxMove2*(1-progress));
-
-    y=(ch-ih*scale)/2;
-
-  }
-
-
-  else if(animation==="kenBurns"){
-
-    scale=baseScale*(1+0.08*progress);
-
-    var move=(iw*scale-cw)*0.35;
-
-    x=(cw-iw*scale)/2-move*progress;
-
-    y=(ch-ih*scale)/2;
-
-  }
-
-
-  ctx.drawImage(
-    img,
-    x,
-    y,
-    iw*scale,
-    ih*scale
-  );
-
-}
-
-
-/* =========================================================
-   DRAW PREVIEW
-========================================================= */
-
-async function drawPreviewAtTime(time){
-
-  var canvas=byId("reelCanvas");
-
-  var ctx=canvas.getContext("2d");
-
-
-  ctx.fillStyle="#000";
-
-  ctx.fillRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-
-  if(!editorScenes.length){
-
-    return;
-
-  }
-
-
-  var sceneData=getSceneAtTime(time);
-
-  var scene=editorScenes[sceneData.index];
-
-
-  byId("previewInfo").textContent=
-    "Scene "+(sceneData.index+1)+
-    " • "+time.toFixed(1)+"s / "+
-    totalDuration.toFixed(1)+"s";
-
-
-  var progress=
-    Math.max(
-      0,
-      Math.min(
-        1,
-        sceneData.localTime/
-        Math.max(0.01,Number(scene.duration))
-      )
-    );
-
-
-  if(scene.image){
-
-    try{
-
-      var img=await loadImage(scene.image);
-
-      drawCoverImage(
-        ctx,
-        img,
-        progress,
-        scene.animation
-      );
-
-    }catch(e){
-
-      drawPlaceholder(
-        ctx,
-        sceneData.index
-      );
-
-    }
-
-  }else{
-
-    drawPlaceholder(
-      ctx,
-      sceneData.index
-    );
-
-  }
-
-
-  /* Lower black safe area */
-
-  var safeY=
-    Math.floor(canvas.height*0.68);
-
-
-  ctx.fillStyle="#000";
-
-  ctx.fillRect(
-    0,
-    safeY,
-    canvas.width,
-    canvas.height-safeY
-  );
-
-
-  /* Scene label */
-
-  ctx.fillStyle="rgba(0,0,0,.45)";
-
-  ctx.fillRect(
-    12,
-    12,
-    145,
-    38
-  );
-
-
-  ctx.fillStyle="#fff";
-
-  ctx.font="bold 17px Arial";
-
-  ctx.fillText(
-    "SCENE "+(sceneData.index+1),
-    22,
-    37
-  );
-
-
-  var percent=
-    totalDuration>0
-    ?(time/totalDuration)*100
-    :0;
-
-
-  byId("progressBar").style.width=
-    Math.min(100,Math.max(0,percent))+"%";
-
-}
-
-
-/* =========================================================
-   PLACEHOLDER
-========================================================= */
-
-function drawPlaceholder(ctx,index){
-
-  var canvas=ctx.canvas;
-
-
-  var gradient=
-    ctx.createLinearGradient(
-      0,
-      0,
-      0,
-      canvas.height
-    );
-
-
-  gradient.addColorStop(0,"#082a55");
-
-  gradient.addColorStop(1,"#020914");
-
-
-  ctx.fillStyle=gradient;
-
-  ctx.fillRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-
-  ctx.fillStyle="#fff";
-
-  ctx.textAlign="center";
-
-  ctx.font="bold 28px Arial";
-
-  ctx.fillText(
-    "🏏 CRICKET REEL",
-    canvas.width/2,
-    canvas.height*0.42
-  );
-
-
-  ctx.font="20px Arial";
-
-  ctx.fillText(
-    "Scene "+(index+1),
-    canvas.width/2,
-    canvas.height*0.48
-  );
-
-
-  ctx.font="16px Arial";
-
-  ctx.fillStyle="#8fb5dd";
-
-  ctx.fillText(
-    "अपनी Image चुनें",
-    canvas.width/2,
-    canvas.height*0.54
-  );
-
-
-  ctx.textAlign="left";
-
-}
-
-
-/* =========================================================
-   ANIMATION LOOP
-========================================================= */
-
-function animationLoop(now){
-
-  if(!playing){
-
-    return;
-
-  }
-
-
-  var elapsed=
-    (now-previewStartTime)/1000;
-
-
-  if(elapsed>=totalDuration){
-
-    playing=false;
-
-    pausedElapsed=totalDuration;
-
-    drawPreviewAtTime(totalDuration);
-
-    setEditorStatus(
-      "✅ Reel Preview पूरा हुआ।"
-    );
-
-    return;
-
-  }
-
-
-  pausedElapsed=elapsed;
-
-  drawPreviewAtTime(elapsed);
-
-
-  animationFrame=
-    requestAnimationFrame(animationLoop);
-
-}
-
-
-/* =========================================================
-   PLAY
-========================================================= */
-
-function playPreview(){
-
-  if(!editorScenes.length){
-
-    alert("⚠️ पहले Generate Cricket Reel दबाएँ।");
-
-    return;
-
-  }
-
-
-  if(playing){
-
-    return;
-
-  }
-
-
-  if(pausedElapsed>=totalDuration){
-
-    pausedElapsed=0;
-
-  }
-
-
-  previewStartTime=
-    performance.now()-
-    pausedElapsed*1000;
-
-
-  playing=true;
-
-
-  setEditorStatus(
-    "▶️ Reel Preview चल रहा है..."
-  );
-
-
-  cancelAnimationFrame(animationFrame);
-
-  animationFrame=
-    requestAnimationFrame(animationLoop);
-
-}
-
-
-/* =========================================================
-   PAUSE
-========================================================= */
-
-function pausePreview(){
-
-  if(!playing){
-
-    return;
-
-  }
-
-
-  pausedElapsed=
-    (performance.now()-previewStartTime)/1000;
-
-
-  playing=false;
-
-
-  cancelAnimationFrame(animationFrame);
-
-
-  drawPreviewAtTime(pausedElapsed);
-
-
-  setEditorStatus(
-    "⏸️ Preview Pause हो गया।"
-  );
-
-}
-
-
-/* =========================================================
-   RESTART
-========================================================= */
-
-function restartPreview(){
-
-  playing=false;
-
-  cancelAnimationFrame(animationFrame);
-
-  pausedElapsed=0;
-
-  drawPreviewAtTime(0);
-
-}
-
+/* ==========================================
+   EDITOR BUTTON EVENTS
+========================================== */
 
 byId("playPreview").onclick=function(){
 
-  playPreview();
+playPreview();
 
 };
 
 
 byId("pausePreview").onclick=function(){
 
-  pausePreview();
+pausePreview();
 
 };
 
 
 byId("restartPreview").onclick=function(){
 
-  restartPreview();
+restartPreview();
 
 };
 
-
-byId("restartPreview2").onclick=function(){
-
-  restartPreview();
-
-};
-
-
-/* =========================================================
-   CLEAR IMAGES
-========================================================= */
-
-byId("clearImages").onclick=function(){
-
-  if(!editorScenes.length){
-
-    return;
-
-  }
-
-
-  var ok=confirm(
-    "क्या सभी Scene की images हटानी हैं?"
-  );
-
-
-  if(!ok){
-
-    return;
-
-  }
-
-
-  editorScenes.forEach(function(scene){
-
-    scene.image=null;
-
-    scene.imageName="";
-
-  });
-
-
-  renderTimeline();
-
-  restartPreview();
-
-
-  setEditorStatus(
-    "🗑️ सभी images हट गईं।"
-  );
-
-};
-
-
-/* =========================================================
-   SAVE PROJECT
-========================================================= */
 
 byId("saveProject").onclick=function(){
 
-  if(!editorScenes.length){
-
-    alert("⚠️ पहले Generate Cricket Reel दबाएँ।");
-
-    return;
-
-  }
-
-
-  var project={
-
-    version:1,
-
-    player:byId("player").value,
-
-    opponent:byId("opponent").value,
-
-    duration:byId("duration").value,
-
-    style:byId("style").value,
-
-    news:byId("news").value,
-
-    script:byId("script").textContent,
-
-    scenes:editorScenes,
-
-    music:byId("music").textContent,
-
-    title:byId("title").textContent,
-
-    hashtags:byId("hashtags").textContent,
-
-    caption:byId("caption").textContent,
-
-    savedAt:new Date().toISOString()
-
-  };
-
-
-  try{
-
-    localStorage.setItem(
-      "cricketReelMakerProject",
-      JSON.stringify(project)
-    );
-
-
-    setEditorStatus(
-      "💾 Project browser में save हो गया।"
-    );
-
-    alert("✅ Project Save हो गया!");
-
-  }catch(error){
-
-    alert(
-      "❌ Project save नहीं हो सका। Images बहुत बड़ी हो सकती हैं।"
-    );
-
-  }
+saveProject();
 
 };
 
-
-/* =========================================================
-   LOAD PROJECT
-========================================================= */
 
 byId("loadProject").onclick=function(){
 
-  try{
-
-    var raw=
-      localStorage.getItem(
-        "cricketReelMakerProject"
-      );
-
-
-    if(!raw){
-
-      alert(
-        "⚠️ कोई saved project नहीं मिला।"
-      );
-
-      return;
-
-    }
-
-
-    var project=
-      JSON.parse(raw);
-
-
-    byId("player").value=
-      project.player || "Virat Kohli";
-
-
-    byId("opponent").value=
-      project.opponent || "West Indies";
-
-
-    byId("duration").value=
-      project.duration || "30";
-
-
-    byId("style").value=
-      project.style || "exciting";
-
-
-    byId("news").value=
-      project.news || "";
-
-
-    byId("script").textContent=
-      project.script || "";
-
-
-    byId("music").textContent=
-      project.music || "";
-
-
-    byId("title").textContent=
-      project.title || "";
-
-
-    byId("hashtags").textContent=
-      project.hashtags || "";
-
-
-    byId("caption").textContent=
-      project.caption || "";
-
-
-    editorScenes=
-      Array.isArray(project.scenes)
-      ?project.scenes
-      :[];
-
-
-    updateTotalDuration();
-
-    renderTimeline();
-
-    restartPreview();
-
-
-    byId("result").classList.remove("hidden");
-
-
-    setEditorStatus(
-      "📂 Saved project load हो गया।"
-    );
-
-
-    alert("✅ Project Load हो गया!");
-
-  }catch(error){
-
-    alert(
-      "❌ Saved project पढ़ने में समस्या हुई।"
-    );
-
-  }
+loadProject();
 
 };
 
 
-/* =========================================================
-   COPY BUTTONS
-========================================================= */
+byId("clearImages").onclick=function(){
 
-var copyButtons=
-  document.querySelectorAll("[data-copy]");
+clearImages();
 
-
-copyButtons.forEach(function(button){
-
-  button.onclick=function(){
-
-    var id=
-      button.getAttribute("data-copy");
+};
 
 
-    copyText(
-      byId(id).textContent
-    );
-
-  };
-
-});
-
-
-/* =========================================================
+/* ==========================================
    INITIAL CANVAS
-========================================================= */
+========================================== */
 
-(function(){
+createEditorScenes();
 
-  var canvas=byId("reelCanvas");
+drawPreviewAtTime(0);
 
-  var ctx=canvas.getContext("2d");
-
-  ctx.fillStyle="#020914";
-
-  ctx.fillRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-
-  ctx.fillStyle="#fff";
-
-  ctx.textAlign="center";
-
-  ctx.font="bold 27px Arial";
-
-  ctx.fillText(
-    "🏏 Cricket Reel Maker",
-    canvas.width/2,
-    canvas.height*0.44
-  );
-
-
-  ctx.font="17px Arial";
-
-  ctx.fillStyle="#8fb5dd";
-
-  ctx.fillText(
-    "Generate Reel करके शुरू करें",
-    canvas.width/2,
-    canvas.height*0.50
-  );
-
-
-  ctx.textAlign="left";
-
-})();
-
-</script>
-
-</body>
+</script></body>
   </html>
