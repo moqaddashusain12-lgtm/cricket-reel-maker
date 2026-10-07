@@ -1,5 +1,6 @@
 {
-  "name": "cricket-reel-maker-v3",
+  "name": "cricket-reel-maker-v2",
+  "main": "worker.js",
   "compatibility_date": "2026-10-05",
 
   "ai": {
@@ -7,6 +8,9 @@
   },
 
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "run_worker_first": [
+      "/api/*"
+    ]
   }
 }
