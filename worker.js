@@ -1,11 +1,9 @@
 // ============================================================
 // 🏏 CRICKET REEL MAKER V3 - FINAL WORKER
-// AI REEL GENERATOR
-// ROBUST JSON + SMART SCENES + MANDATORY TEXT OVERLAY
+// AI REEL GENERATOR + ROBUST JSON + SMART SCENES
 // ============================================================
 
-const AI_MODEL =
-  "@cf/meta/llama-3.1-8b-instruct-fast";
+const AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast";
 
 
 // ============================================================
@@ -13,17 +11,12 @@ const AI_MODEL =
 // ============================================================
 
 function corsHeaders() {
-
   return {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods":
-      "GET,POST,OPTIONS",
-    "Access-Control-Allow-Headers":
-      "Content-Type, Authorization",
-    "Content-Type":
-      "application/json; charset=UTF-8"
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Content-Type": "application/json; charset=UTF-8"
   };
-
 }
 
 
@@ -31,65 +24,34 @@ function corsHeaders() {
 // JSON RESPONSE
 // ============================================================
 
-function jsonResponse(
-  data,
-  status = 200
-) {
-
+function jsonResponse(data, status = 200) {
   return new Response(
     JSON.stringify(data),
     {
       status,
-      headers:
-        corsHeaders()
+      headers: corsHeaders()
     }
   );
-
 }
 
 
 // ============================================================
-// CLEAN AI RESPONSE
+// CLEAN AI TEXT
 // ============================================================
 
 function cleanAIText(text) {
 
-  if (
-    typeof text !== "string"
-  ) {
-
+  if (typeof text !== "string") {
     return "";
-
   }
 
+  let s = text.trim();
 
-  let s =
-    text.trim();
-
-
-  s =
-    s.replace(
-      /^```json\s*/i,
-      ""
-    );
-
-
-  s =
-    s.replace(
-      /^```\s*/i,
-      ""
-    );
-
-
-  s =
-    s.replace(
-      /\s*```$/i,
-      ""
-    );
-
+  s = s.replace(/^```json\s*/i, "");
+  s = s.replace(/^```\s*/i, "");
+  s = s.replace(/\s*```$/i, "");
 
   return s.trim();
-
 }
 
 
@@ -100,38 +62,25 @@ function cleanAIText(text) {
 function extractJSON(text) {
 
   if (!text) {
-
     throw new Error(
       "AI ने कोई response नहीं दिया।"
     );
-
   }
-
 
   const cleaned =
     cleanAIText(text);
 
-
   // Direct JSON
-
   try {
-
-    return JSON.parse(
-      cleaned
-    );
-
+    return JSON.parse(cleaned);
   } catch (e) {}
 
-
-  // Object
-
+  // Object JSON
   const firstObject =
     cleaned.indexOf("{");
 
-
   const lastObject =
     cleaned.lastIndexOf("}");
-
 
   if (
     firstObject !== -1 &&
@@ -144,27 +93,17 @@ function extractJSON(text) {
         lastObject + 1
       );
 
-
     try {
-
-      return JSON.parse(
-        candidate
-      );
-
+      return JSON.parse(candidate);
     } catch (e) {}
-
   }
 
-
-  // Array
-
+  // Array JSON
   const firstArray =
     cleaned.indexOf("[");
 
-
   const lastArray =
     cleaned.lastIndexOf("]");
-
 
   if (
     firstArray !== -1 &&
@@ -177,22 +116,14 @@ function extractJSON(text) {
         lastArray + 1
       );
 
-
     try {
-
-      return JSON.parse(
-        candidate
-      );
-
+      return JSON.parse(candidate);
     } catch (e) {}
-
   }
-
 
   throw new Error(
     "AI response JSON में convert नहीं हो पाया।"
   );
-
 }
 
 
@@ -202,173 +133,257 @@ function extractJSON(text) {
 
 function getAIText(result) {
 
-  if (
-    typeof result === "string"
-  ) {
-
+  if (typeof result === "string") {
     return result;
-
   }
-
 
   if (!result) {
-
     return "";
-
   }
-
 
   if (
-    typeof result.response ===
-    "string"
+    typeof result.response === "string"
   ) {
-
     return result.response;
-
   }
-
 
   if (
     result.result &&
-    typeof result.result.response ===
-      "string"
+    typeof result.result.response === "string"
   ) {
-
     return result.result.response;
-
   }
-
 
   if (
     result.response &&
-    typeof result.response ===
-      "object"
+    typeof result.response === "object"
   ) {
-
     return JSON.stringify(
       result.response
     );
-
   }
 
-
   if (
-    typeof result.output ===
-      "string"
+    typeof result.output === "string"
   ) {
-
     return result.output;
-
   }
-
 
   if (
-    typeof result.text ===
-      "string"
+    typeof result.text === "string"
   ) {
-
     return result.text;
-
   }
-
 
   return "";
+}
+
+
+// ============================================================
+// WORD COUNT
+// ============================================================
+
+function wordCount(text) {
+
+  return String(text || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .length;
 
 }
 
 
 // ============================================================
-// SHORT OVERLAY FALLBACK
+// SCRIPT RANGE
 // ============================================================
 
-function makeShortOverlay(
-  text,
-  maxLength = 60
-) {
+function getScriptRange(duration) {
 
-  if (
-    !text ||
-    typeof text !== "string"
-  ) {
-
-    return "";
-
+  if (duration === 15) {
+    return {
+      min: 40,
+      max: 60,
+      target: "45-55"
+    };
   }
 
+  if (duration === 30) {
+    return {
+      min: 70,
+      max: 100,
+      target: "75-90"
+    };
+  }
 
-  let clean =
-    text
+  if (duration === 45) {
+    return {
+      min: 100,
+      max: 140,
+      target: "110-130"
+    };
+  }
+
+  return {
+    min: 140,
+    max: 185,
+    target: "150-175"
+  };
+
+}
+
+
+// ============================================================
+// SHORT TEXT CLEANER
+// ============================================================
+
+function cleanShortText(
+  text,
+  maxLength = 65
+) {
+
+  let s =
+    String(text || "")
       .replace(/\s+/g, " ")
       .trim();
 
-
-  if (!clean) {
-
+  if (!s) {
     return "";
-
   }
 
+  const firstSentence =
+    s.split(/[.!?।]+/)[0].trim();
 
-  /*
-    First sentence लेने की कोशिश।
-  */
-
-  const sentence =
-    clean.match(
-      /^(.+?[।.!?])(?:\s|$)/
-    );
-
-
-  if (sentence) {
-
-    clean =
-      sentence[1].trim();
-
+  if (firstSentence) {
+    s = firstSentence;
   }
-
-
-  /*
-    बहुत लंबा होने पर छोटा करें।
-  */
 
   if (
-    clean.length >
+    s.length >
     maxLength
   ) {
 
-    clean =
-      clean
-        .slice(
-          0,
-          maxLength
-        )
+    s =
+      s
+        .slice(0, maxLength)
+        .replace(/\s+\S*$/, "")
         .trim();
-
-
-    const lastSpace =
-      clean.lastIndexOf(" ");
-
-
-    if (
-      lastSpace > 20
-    ) {
-
-      clean =
-        clean.slice(
-          0,
-          lastSpace
-        );
-
-    }
-
-
-    clean +=
-      "…";
 
   }
 
+  return s;
 
-  return clean;
+}
+
+
+// ============================================================
+// FALLBACK OVERLAY
+// ============================================================
+
+function makeFallbackOverlay(
+  scene,
+  detected,
+  language
+) {
+
+  // 1. AI overlay
+  const direct =
+    cleanShortText(
+      scene.overlay,
+      65
+    );
+
+  if (direct) {
+    return direct;
+  }
+
+
+  // 2. Narration
+  const narration =
+    cleanShortText(
+      scene.narration,
+      65
+    );
+
+  if (narration) {
+    return narration;
+  }
+
+
+  // 3. Scene title
+  const title =
+    cleanShortText(
+      scene.title,
+      65
+    );
+
+  if (title) {
+    return title;
+  }
+
+
+  // 4. Topic
+  const topic =
+    cleanShortText(
+      detected.topic,
+      65
+    );
+
+  if (topic) {
+    return topic;
+  }
+
+
+  // 5. Player
+  const player =
+    cleanShortText(
+      detected.player,
+      50
+    );
+
+  if (player) {
+    return player;
+  }
+
+
+  if (language === "english") {
+    return "Cricket Update";
+  }
+
+  if (language === "hinglish") {
+    return "Cricket Update";
+  }
+
+  return "क्रिकेट अपडेट";
+
+}
+
+
+// ============================================================
+// SCENE VISUAL GUIDE
+// ============================================================
+
+function getSceneVisualGuide(index) {
+
+  const guides = [
+
+    "Scene 1: cinematic stadium wide shot, player entering or preparing for the cricket action, strong opening composition",
+
+    "Scene 2: dynamic batting action, realistic bat swing, ball contact, athletic body movement, energetic sports photography",
+
+    "Scene 3: two-player cricket interaction or partnership moment, teammates communicating or celebrating, medium cinematic composition",
+
+    "Scene 4: match-result atmosphere, players celebrating on the field, realistic crowd reaction, wide dynamic stadium composition",
+
+    "Scene 5: powerful final close-up of the main player, confident expression, emotional cricket moment, cinematic ending composition",
+
+    "Scene 6: dramatic cricket action from a different camera angle, realistic field movement and stadium atmosphere",
+
+    "Scene 7: final celebratory cricket moment, crowd excitement, cinematic hero composition"
+  ];
+
+  return guides[index] ||
+    "Different cinematic cricket action with realistic player movement and stadium atmosphere";
 
 }
 
@@ -393,74 +408,65 @@ function buildPrompt(input) {
 
   const languageInstruction =
     language === "english"
-
-      ? "Write all narration, overlay and social text in natural English."
-
+      ? "Write narration, overlay, title, caption and other social text in natural English."
       : language === "hinglish"
-
-      ? "Write all narration, overlay and social text in natural Hinglish using Roman Hindi and English."
-
-      : "Write all narration, overlay and social text in natural Hindi using Devanagari script.";
+      ? "Write narration, overlay, title, caption and other social text in natural Hinglish using Roman Hindi and English."
+      : "Write narration, overlay, title, caption and other social text in natural Hindi using Devanagari script.";
 
 
-  const durationWords =
-    duration === 15
+  const range =
+    getScriptRange(duration);
 
-      ? "40-50 words"
 
-      : duration === 30
+  let scenePlan = "";
 
-      ? "75-90 words"
+  for (
+    let i = 0;
+    i < scenes;
+    i++
+  ) {
 
-      : duration === 45
+    scenePlan +=
+      `Scene ${i + 1}: ${getSceneVisualGuide(i)}\n`;
 
-      ? "110-130 words"
-
-      : "150-175 words";
+  }
 
 
   return `You are an expert cricket short-video content creator.
 
-Create a HIGH-QUALITY cricket Reel using ONLY the supplied NEWS.
+Create a high-quality cricket Reel using ONLY the supplied NEWS.
 
 ============================================================
 ABSOLUTE FACT RULE
 ============================================================
 
-Use ONLY information contained in NEWS.
+Use ONLY facts present in NEWS.
 
-NEVER invent or assume:
-
+NEVER invent:
 - statistics
 - dates
 - venues
-- opponents
+- records
 - quotes
 - match results
-- records
 - player achievements
 - teams
 - tournaments
-- batting positions
-- bowling figures
-- rankings
-- awards
+- scores
+- opponents
 
-If a fact is not present in NEWS, do not mention it.
+Do not add information from your own knowledge.
 
-Do not use outside cricket knowledge.
-
-If opponent is not mentioned in NEWS,
-keep opponent empty.
-
-If team is directly identified from
-"भारतीय खिलाड़ी" or equivalent wording,
-team may be "भारत".
+If a fact is not in NEWS, do not mention it.
 
 AUTO means detect automatically.
 
+If opponent is not present in NEWS, keep opponent empty.
+
+If a team is directly identifiable from NEWS, detect it.
+
 ============================================================
-REEL SETTINGS
+SETTINGS
 ============================================================
 
 Player / Team:
@@ -472,7 +478,7 @@ ${opponent}
 Duration:
 ${duration} seconds
 
-Number of Scenes:
+Scenes:
 ${scenes}
 
 Style:
@@ -487,50 +493,57 @@ ${platform}
 ${languageInstruction}
 
 ============================================================
-SCRIPT LENGTH - VERY IMPORTANT
+SCRIPT
 ============================================================
 
-The complete narration script MUST be approximately:
+The complete narration script must be approximately:
 
-${durationWords}
+${range.target} words.
 
-For 30 seconds:
-TARGET 75-90 WORDS.
+For 30 seconds specifically:
+75-90 words.
 
-Do NOT make a 30-second script only 40-60 words.
+Do NOT produce a 30-40 word script.
 
-The script should have:
+The script must contain:
 
 1. Strong opening hook
-2. Main news/record
-3. Important supporting facts from NEWS
-4. Strong ending
+2. Main cricket news
+3. Important facts from NEWS
+4. Strong natural ending
 
-Do not repeat the same sentence.
+Do not repeat sentences.
 
-Do not add facts that are not in NEWS.
+Do not add unsupported claims.
 
 ============================================================
-SCENE NARRATION
+SCENE COUNT
 ============================================================
 
 Create EXACTLY ${scenes} scenes.
 
-The scene narrations together must cover the
-complete story.
+Every scene must have:
+- number
+- title
+- timing
+- narration
+- overlay
+- imagePrompt
+- videoPrompt
+- camera
+- mood
 
-Each scene must contain a DIFFERENT part
-of the supplied NEWS.
+Combined scene narration should cover the complete story.
 
-Do not repeat identical narration.
+Each scene narration must communicate a different part of the NEWS.
 
 ============================================================
 SCENE TIMING
 ============================================================
 
-Divide the complete ${duration}-second duration evenly.
+Divide ${duration} seconds evenly.
 
-Examples:
+For example:
 
 30 sec / 5 scenes:
 
@@ -540,72 +553,53 @@ Scene 3 = 12-18
 Scene 4 = 18-24
 Scene 5 = 24-30
 
-The final scene MUST end exactly at
-${duration} seconds.
+Final scene MUST end exactly at ${duration} seconds.
 
 ============================================================
-DIFFERENT VISUALS - MANDATORY
+IMPORTANT: DIFFERENT VISUALS
 ============================================================
 
-Every scene MUST have a substantially
-different visual concept.
+Every scene MUST have a substantially different visual concept.
 
-Do NOT use the same portrait or same
-batting pose for every scene.
+Do NOT use the same portrait for every scene.
 
-Change:
+Do NOT use the same camera composition repeatedly.
 
-- action
-- camera angle
-- composition
-- distance
-- body position
-- cricket moment
-- stadium perspective
+Use different:
+- cricket actions
+- camera angles
+- player positions
+- compositions
+- movements
+- emotional moments
 
-Example visual progression:
+Visual plan:
 
-Scene 1:
-Player introduction / intense cricket moment
+${scenePlan}
 
-Scene 2:
-Powerful batting action
+The visual plan is only guidance.
 
-Scene 3:
-Record or achievement celebration
+The actual visual must match the NEWS.
 
-Scene 4:
-Specific cricket action connected to another
-fact in NEWS
-
-Scene 5:
-Emotional celebration / confident close-up /
-final ending
-
-These are examples only.
-
-Use only visuals appropriate to NEWS.
+Do not invent factual events.
 
 ============================================================
-IMAGE PROMPT - MANDATORY
+IMAGE PROMPT
 ============================================================
 
-Create ONE detailed imagePrompt for EACH scene.
+Each scene needs a detailed image-generation prompt.
 
-Every imagePrompt must be substantially
-different from the other scenes.
+Required style:
 
-Use:
-
-Photorealistic cinematic cricket photography,
-realistic player appearance,
-realistic cricket stadium,
-natural human anatomy,
-professional sports photography,
-dramatic stadium lighting,
-realistic crowd,
-high detail,
-vertical 9:16.
+- photorealistic
+- cinematic cricket photography
+- realistic human anatomy
+- realistic cricket equipment
+- professional sports photography
+- realistic stadium
+- realistic crowd
+- dramatic stadium lighting
+- vertical 9:16
 
 LAYOUT:
 
@@ -616,153 +610,94 @@ Lower 32%:
 Completely empty solid black area.
 
 ABSOLUTELY NO:
+- text
+- written words
+- numbers
+- scoreboard
+- statistics
+- captions
+- logos
+- watermark
+- banners with readable text
+- graphic overlays
+- jersey text
 
-text
-written words
-numbers
-scoreboard
-statistics
-captions
-logos
-watermark
-graphic overlays
-readable banners
-jersey text
+IMPORTANT:
 
-Do NOT ask the image generator to render
-any text or numbers.
+Numbers may appear ONLY in Text Overlay.
 
-Statistics will be added later by the editor.
-
-============================================================
-VISUAL VARIETY
-============================================================
-
-Use different visual concepts.
-
-For example:
-
-Scene 1:
-dramatic player introduction with stadium wide angle
-
-Scene 2:
-dynamic batting action from side angle
-
-Scene 3:
-celebration after achievement with crowd reaction
-
-Scene 4:
-different cricket action related to NEWS
-
-Scene 5:
-cinematic close-up / celebration / final moment
-
-Do NOT repeat the same portrait.
+Never request numbers or statistics inside IMAGE PROMPT.
 
 ============================================================
-VIDEO PROMPT - MANDATORY MOTION
+VIDEO PROMPT
 ============================================================
 
-Every videoPrompt MUST describe motion.
+Every videoPrompt MUST describe actual motion.
 
-Do NOT simply copy imagePrompt.
+Do not simply copy imagePrompt.
 
 Describe:
-
 - player movement
 - bat movement
 - body movement
 - natural cricket action
 - crowd movement
 - camera movement
-- stadium atmosphere
+- realistic stadium atmosphere
 - cinematic motion
 
-Use a DIFFERENT camera movement
-for different scenes.
+Use different camera movements in different scenes.
+
+Examples:
+- slow push-in
+- tracking shot
+- side tracking
+- orbit movement
+- slow-motion celebration
+- cinematic pull-back
+
+Do not use the same camera movement for every scene.
+
+Video:
+- realistic
+- cinematic
+- vertical 9:16
+- natural movement
+- no text
+- no numbers
+- no scoreboard
+- no logo
+- no watermark
+
+============================================================
+TEXT OVERLAY
+============================================================
+
+Every scene MUST have a short Text Overlay.
+
+It must be based ONLY on NEWS or the scene narration.
+
+Keep it short and powerful.
 
 Examples:
 
-Scene 1:
-slow cinematic push-in
+"37 रन, 27 गेंदों में"
 
-Scene 2:
-tracking camera following batting movement
+"137 रन की साझेदारी"
 
-Scene 3:
-slow-motion celebration
+"8 विकेट से जीत"
 
-Scene 4:
-dynamic side tracking
+Do NOT invent statistics.
 
-Scene 5:
-smooth close-up pull-back
+Numbers ARE allowed in Text Overlay.
 
-These are examples only.
+Numbers are NOT allowed in Image Prompt.
 
-Video must be:
-
-realistic
-cinematic
-vertical 9:16
-natural motion
-no text
-no numbers
-no scoreboard
-no logo
-no watermark
-
-============================================================
-TEXT OVERLAY - EXTREMELY IMPORTANT
-============================================================
-
-EVERY SINGLE SCENE MUST HAVE A TEXT OVERLAY.
-
-The "overlay" field MUST NEVER be empty.
-
-Create a short, powerful overlay
-for EVERY scene.
-
-Overlay must use ONLY facts or wording
-supported by NEWS.
-
-Maximum approximately 3-8 words.
-
-Good examples:
-
-"ईशान किशन का बड़ा कारनामा"
-
-"विराट कोहली का रिकॉर्ड टूटा"
-
-"1644 टी20 रन"
-
-"IPL 2026 में 602 रन"
-
-Do NOT invent numbers.
-
-Numbers are allowed in overlay.
-
-Numbers are NOT allowed in imagePrompt.
-
-IMPORTANT:
-
-If a scene does not have a suitable
-statistic, use a short fact-based phrase
-from NEWS.
-
-NEVER leave overlay blank.
-
-============================================================
-SCENE 5 CTA
-============================================================
-
-Scene 5 overlay may include:
+If Scene 5 is appropriate, a CTA may be:
 
 "ऐसी क्रिकेट खबरों के लिए फॉलो करें"
 
-Only use CTA if appropriate.
-
-CTA is not a cricket fact.
+CTA is not a factual claim.
 
 ============================================================
 TITLE
@@ -770,15 +705,15 @@ TITLE
 
 Create an exciting short Reel title.
 
-Use ONLY NEWS facts.
+Only use facts from NEWS.
 
 ============================================================
 CAPTION
 ============================================================
 
-Create a short social-media caption.
+Create a short social media caption.
 
-Use ONLY NEWS facts.
+Only use facts from NEWS.
 
 ============================================================
 HASHTAGS
@@ -795,7 +730,7 @@ Suggest a royalty-free background music STYLE.
 No copyrighted lyrics.
 
 ============================================================
-JSON OUTPUT
+JSON
 ============================================================
 
 Return ONLY valid JSON.
@@ -806,7 +741,7 @@ No Markdown.
 
 No code fences.
 
-Use exactly:
+Use EXACTLY this structure:
 
 {
   "detected": {
@@ -839,21 +774,78 @@ Use exactly:
   "music": ""
 }
 
-FINAL CHECK BEFORE ANSWERING:
-
-- Exactly ${scenes} scenes
-- Script approximately ${durationWords}
-- Every scene has different visual
-- Every scene has different video motion
-- Every scene has non-empty overlay
-- Image prompts contain no text/numbers
-- No invented facts
-- Final timing ends at ${duration}
-- Valid JSON only
-
 NEWS:
 ${news}
 `;
+
+}
+
+
+// ============================================================
+// FALLBACK SCENE
+// ============================================================
+
+function createFallbackScene(
+  index,
+  duration,
+  sceneCount,
+  detected,
+  language
+) {
+
+  const start =
+    Math.round(
+      duration *
+      index /
+      sceneCount
+    );
+
+  const end =
+    Math.round(
+      duration *
+      (index + 1) /
+      sceneCount
+    );
+
+
+  const guide =
+    getSceneVisualGuide(index);
+
+
+  return {
+
+    number:
+      index + 1,
+
+    title:
+      `Scene ${index + 1}`,
+
+    timing:
+      `${start}-${end}`,
+
+    narration:
+      "",
+
+    overlay:
+      makeFallbackOverlay(
+        {},
+        detected,
+        language
+      ),
+
+    imagePrompt:
+      `Photorealistic cinematic cricket scene. ${guide}. Professional sports photography, realistic stadium, realistic crowd, dramatic stadium lighting, natural human anatomy, vertical 9:16. Upper 68% visual area. Lower 32% completely empty solid black area. No text, no written words, no numbers, no scoreboard, no statistics, no captions, no logo, no watermark, no graphic overlays.`,
+
+    videoPrompt:
+      `Realistic cinematic cricket movement. ${guide}. Natural player movement, realistic body motion, crowd movement, cinematic camera movement, vertical 9:16, no text, no numbers, no scoreboard, no logo, no watermark.`,
+
+    camera:
+      "Cinematic",
+
+    mood:
+      "Exciting"
+
+  };
 
 }
 
@@ -865,12 +857,12 @@ ${news}
 function normalizeResult(
   data,
   sceneCount,
-  duration
+  duration,
+  language
 ) {
 
   const result =
     data || {};
-
 
   const detected =
     result.detected || {};
@@ -884,24 +876,107 @@ function normalizeResult(
       : [];
 
 
-  scenes =
-    scenes.slice(
-      0,
-      sceneCount
-    );
+  const normalizedScenes = [];
 
 
-  /*
-    अगर AI ने कम scenes दिए,
-    तो missing scenes भी बनाएं।
-  */
-
-  while (
-    scenes.length <
-    sceneCount
+  for (
+    let index = 0;
+    index < sceneCount;
+    index++
   ) {
 
-    scenes.push({});
+    const scene =
+      scenes[index] || {};
+
+
+    const start =
+      Math.round(
+        duration *
+        index /
+        sceneCount
+      );
+
+    const end =
+      Math.round(
+        duration *
+        (index + 1) /
+        sceneCount
+      );
+
+
+    let imagePrompt =
+      scene.imagePrompt ||
+      `Photorealistic cinematic cricket action. ${getSceneVisualGuide(index)}`;
+
+
+    let videoPrompt =
+      scene.videoPrompt ||
+      `Realistic cinematic cricket movement. ${getSceneVisualGuide(index)}`;
+
+
+    // --------------------------------------------------------
+    // IMAGE SAFETY
+    // --------------------------------------------------------
+
+    imagePrompt =
+      imagePrompt +
+      " Vertical 9:16. Upper 68% visual area. Lower 32% completely empty solid black area. No text, no written words, no numbers, no scoreboard, no statistics, no captions, no logo, no watermark, no graphic overlays.";
+
+
+    // --------------------------------------------------------
+    // VIDEO SAFETY
+    // --------------------------------------------------------
+
+    videoPrompt =
+      videoPrompt +
+      " Realistic natural movement, cinematic camera movement, vertical 9:16, no text, no numbers, no scoreboard, no logo, no watermark.";
+
+
+    // --------------------------------------------------------
+    // OVERLAY FALLBACK
+    // --------------------------------------------------------
+
+    const overlay =
+      makeFallbackOverlay(
+        scene,
+        detected,
+        language
+      );
+
+
+    normalizedScenes.push({
+
+      number:
+        index + 1,
+
+      title:
+        scene.title ||
+        `Scene ${index + 1}`,
+
+      timing:
+        `${start}-${end}`,
+
+      narration:
+        scene.narration || "",
+
+      overlay:
+        overlay,
+
+      imagePrompt:
+        imagePrompt,
+
+      videoPrompt:
+        videoPrompt,
+
+      camera:
+        scene.camera ||
+        "Cinematic",
+
+      mood:
+        scene.mood ||
+        "Exciting"
+
+    });
 
   }
 
@@ -927,167 +1002,11 @@ function normalizeResult(
 
     },
 
-
     script:
       result.script || "",
 
-
     scenes:
-      scenes.map(
-        (scene,index)=>{
-
-          const start =
-            Math.round(
-              duration *
-              index /
-              sceneCount
-            );
-
-
-          const end =
-            Math.round(
-              duration *
-              (index+1) /
-              sceneCount
-            );
-
-
-          const narration =
-            String(
-              scene.narration ||
-              ""
-            ).trim();
-
-
-          /*
-            IMPORTANT OVERLAY FIX
-
-            Priority:
-            1. AI overlay
-            2. Narration का short version
-            3. Scene 5 CTA
-          */
-
-          let overlay =
-            String(
-              scene.overlay ||
-              ""
-            ).trim();
-
-
-          if (!overlay) {
-
-            overlay =
-              makeShortOverlay(
-                narration
-              );
-
-          }
-
-
-          if (
-            !overlay &&
-            index ===
-              sceneCount-1
-          ) {
-
-            overlay =
-              "ऐसी क्रिकेट खबरों के लिए फॉलो करें";
-
-          }
-
-
-          /*
-            Image prompt
-          */
-
-          let imagePrompt =
-            String(
-              scene.imagePrompt ||
-              ""
-            ).trim();
-
-
-          if (!imagePrompt) {
-
-            imagePrompt =
-              "Photorealistic cinematic cricket scene with a realistic cricket player performing a natural cricket action in a professional stadium, dramatic stadium lighting, realistic crowd";
-
-          }
-
-
-          /*
-            Video prompt
-          */
-
-          let videoPrompt =
-            String(
-              scene.videoPrompt ||
-              ""
-            ).trim();
-
-
-          if (!videoPrompt) {
-
-            videoPrompt =
-              "Natural realistic cricket movement with player body movement, realistic bat movement, moving crowd and cinematic camera motion";
-
-          }
-
-
-          /*
-            Force image safety.
-          */
-
-          imagePrompt +=
-            " Vertical 9:16. Upper 68% visual area. Lower 32% completely empty solid black area. No text, no written words, no numbers, no scoreboard, no statistics, no captions, no logo, no watermark, no graphic overlays.";
-
-
-          /*
-            Force video safety.
-          */
-
-          videoPrompt +=
-            " Realistic natural movement, cinematic camera movement, vertical 9:16, no text, no numbers, no scoreboard, no logo, no watermark.";
-
-
-          return {
-
-            number:
-              index+1,
-
-            title:
-              scene.title ||
-              `Scene ${index+1}`,
-
-            timing:
-              `${start}-${end}`,
-
-            narration:
-              narration,
-
-            overlay:
-              overlay,
-
-            imagePrompt:
-              imagePrompt,
-
-            videoPrompt:
-              videoPrompt,
-
-            camera:
-              scene.camera ||
-              "Cinematic",
-
-            mood:
-              scene.mood ||
-              "Exciting"
-
-          };
-
-        }
-      ),
-
+      normalizedScenes,
 
     title:
       result.title || "",
@@ -1111,6 +1030,129 @@ function normalizeResult(
 
 
 // ============================================================
+// SCRIPT REPAIR
+// ============================================================
+
+async function repairScript(
+  env,
+  currentScript,
+  news,
+  duration,
+  language
+) {
+
+  const range =
+    getScriptRange(duration);
+
+
+  const languageInstruction =
+    language === "english"
+      ? "Write natural English."
+      : language === "hinglish"
+      ? "Write natural Hinglish using Roman Hindi and English."
+      : "Write natural Hindi using Devanagari script.";
+
+
+  const prompt =
+`Rewrite and expand this cricket Reel script.
+
+IMPORTANT:
+Use ONLY facts contained in NEWS.
+
+Do not add:
+- new statistics
+- new dates
+- new venues
+- new records
+- new quotes
+- new match facts
+- new achievements
+
+Target length:
+${range.target} words.
+
+For 30 seconds target 75-90 words.
+
+${languageInstruction}
+
+Make it natural for spoken short-video narration.
+
+Keep:
+- strong hook
+- main news
+- important supplied facts
+- strong ending
+
+Return ONLY the final script.
+Do not return JSON.
+Do not explain anything.
+
+NEWS:
+${news}
+
+CURRENT SCRIPT:
+${currentScript}
+`;
+
+
+  try {
+
+    const result =
+      await env.AI.run(
+        AI_MODEL,
+        {
+
+          messages: [
+
+            {
+              role: "system",
+
+              content:
+                "You are a professional cricket script editor. Use only the supplied NEWS."
+            },
+
+            {
+              role: "user",
+
+              content:
+                prompt
+            }
+
+          ],
+
+          max_tokens:
+            1800,
+
+          temperature:
+            0.1
+
+        }
+      );
+
+
+    const text =
+      cleanAIText(
+        getAIText(result)
+      );
+
+
+    if (!text) {
+      return currentScript;
+    }
+
+
+    return text;
+
+  } catch (error) {
+
+    return currentScript;
+
+  }
+
+}
+
+
+// ============================================================
 // HEALTH
 // ============================================================
 
@@ -1118,7 +1160,8 @@ async function handleHealth(env) {
 
   return jsonResponse({
 
-    success:true,
+    success:
+      true,
 
     app:
       "Cricket Reel Maker V3",
@@ -1135,7 +1178,7 @@ async function handleHealth(env) {
 
 
 // ============================================================
-// HANDLE REEL
+// REEL GENERATOR
 // ============================================================
 
 async function handleReel(
@@ -1147,7 +1190,7 @@ async function handleReel(
 
     return jsonResponse(
       {
-        success:false,
+        success: false,
         error:
           "Workers AI binding 'AI' नहीं मिला।"
       },
@@ -1160,16 +1203,20 @@ async function handleReel(
   let input;
 
 
+  // ----------------------------------------------------------
+  // READ REQUEST
+  // ----------------------------------------------------------
+
   try {
 
     input =
       await request.json();
 
-  } catch(error) {
+  } catch (error) {
 
     return jsonResponse(
       {
-        success:false,
+        success: false,
         error:
           "Invalid JSON request."
       },
@@ -1179,9 +1226,12 @@ async function handleReel(
   }
 
 
+  // ----------------------------------------------------------
+  // NEWS
+  // ----------------------------------------------------------
+
   const news =
-    typeof input.news ===
-      "string"
+    typeof input.news === "string"
       ? input.news.trim()
       : "";
 
@@ -1190,7 +1240,7 @@ async function handleReel(
 
     return jsonResponse(
       {
-        success:false,
+        success: false,
         error:
           "Cricket news खाली है।"
       },
@@ -1200,12 +1250,15 @@ async function handleReel(
   }
 
 
-  const durationOptions =
-    [15,30,45,60];
+  // ----------------------------------------------------------
+  // SETTINGS
+  // ----------------------------------------------------------
 
+  const durationOptions =
+    [15, 30, 45, 60];
 
   const sceneOptions =
-    [3,5,7];
+    [3, 5, 7];
 
 
   const duration =
@@ -1226,38 +1279,37 @@ async function handleReel(
 
   const player =
     String(
-      input.player ||
-      "AUTO"
+      input.player || "AUTO"
     );
 
 
   const opponent =
     String(
-      input.opponent ||
-      "AUTO"
+      input.opponent || "AUTO"
     );
 
 
   const style =
     String(
-      input.style ||
-      "exciting"
+      input.style || "exciting"
     );
 
 
   const language =
     String(
-      input.language ||
-      "hindi"
+      input.language || "hindi"
     );
 
 
   const platform =
     String(
-      input.platform ||
-      "facebook"
+      input.platform || "facebook"
     );
 
+
+  // ----------------------------------------------------------
+  // PROMPT
+  // ----------------------------------------------------------
 
   const prompt =
     buildPrompt({
@@ -1285,17 +1337,17 @@ async function handleReel(
         AI_MODEL,
         {
 
-          messages:[
+          messages: [
 
             {
-              role:"system",
+              role: "system",
 
               content:
-                "You are a professional cricket Reel generator. Follow the supplied NEWS strictly. Never invent facts. Return valid JSON only. Every scene MUST have a non-empty overlay. Every scene MUST have a different visual concept and different motion."
+                "You are a professional cricket Reel generator. Follow NEWS strictly. Return valid JSON only. Create exactly the requested number of scenes. Every scene must have different visual concepts."
             },
 
             {
-              role:"user",
+              role: "user",
 
               content:
                 prompt
@@ -1323,7 +1375,7 @@ async function handleReel(
 
       return jsonResponse(
         {
-          success:false,
+          success: false,
           error:
             "AI ने खाली response दिया।"
         },
@@ -1337,7 +1389,7 @@ async function handleReel(
 
 
     // ========================================================
-    // JSON PARSE
+    // PARSE JSON
     // ========================================================
 
     try {
@@ -1347,7 +1399,7 @@ async function handleReel(
           aiText
         );
 
-    } catch(error) {
+    } catch (error) {
 
       // ======================================================
       // JSON REPAIR
@@ -1360,24 +1412,24 @@ async function handleReel(
             AI_MODEL,
             {
 
-              messages:[
+              messages: [
 
                 {
-                  role:"system",
+                  role: "system",
 
                   content:
-                    "Convert the supplied AI output into valid JSON only. Do not add facts. Preserve supplied information. Every scene must have a non-empty overlay. Do not invent facts."
+                    "Convert the supplied cricket Reel output into valid JSON only. Do not add facts. Preserve the supplied information."
                 },
 
                 {
-                  role:"user",
+                  role: "user",
 
                   content:
 `Convert this AI output into valid JSON.
 
 Return ONLY valid JSON.
 
-Do not add any new facts.
+Do not add new facts.
 
 Required structure:
 
@@ -1389,38 +1441,13 @@ Required structure:
     "topic": "",
     "matchType": ""
   },
-
   "script": "",
-
   "scenes": [],
-
   "title": "",
-
   "caption": "",
-
   "hashtags": [],
-
   "music": ""
 }
-
-IMPORTANT:
-
-Keep exactly ${scenes} scenes.
-
-Every scene must have:
-- number
-- title
-- timing
-- narration
-- overlay
-- imagePrompt
-- videoPrompt
-- camera
-- mood
-
-Every scene overlay must NOT be empty.
-
-Do not add facts.
 
 AI OUTPUT:
 
@@ -1451,11 +1478,11 @@ ${aiText}`
           );
 
 
-      } catch(repairError) {
+      } catch (repairError) {
 
         return jsonResponse(
           {
-            success:false,
+            success: false,
             error:
               "AI response JSON में convert नहीं हो पाया।"
           },
@@ -1468,20 +1495,70 @@ ${aiText}`
 
 
     // ========================================================
-    // FINAL NORMALIZED RESULT
+    // NORMALIZE
     // ========================================================
 
-    const finalResult =
+    let finalResult =
       normalizeResult(
         parsed,
         scenes,
+        duration,
+        language
+      );
+
+
+    // ========================================================
+    // SCRIPT LENGTH CHECK
+    // ========================================================
+
+    const range =
+      getScriptRange(
         duration
       );
 
 
+    const currentWords =
+      wordCount(
+        finalResult.script
+      );
+
+
+    if (
+      currentWords < range.min ||
+      currentWords > range.max
+    ) {
+
+      const repairedScript =
+        await repairScript(
+          env,
+          finalResult.script,
+          news,
+          duration,
+          language
+        );
+
+
+      if (
+        repairedScript &&
+        wordCount(repairedScript) > 0
+      ) {
+
+        finalResult.script =
+          repairedScript;
+
+      }
+
+    }
+
+
+    // ========================================================
+    // FINAL RESPONSE
+    // ========================================================
+
     return jsonResponse({
 
-      success:true,
+      success:
+        true,
 
       result:
         finalResult
@@ -1489,19 +1566,18 @@ ${aiText}`
     });
 
 
-  } catch(error) {
+  } catch (error) {
 
     return jsonResponse(
       {
-        success:false,
+        success: false,
 
         error:
-          "AI generation failed: "+
+          "AI generation failed: " +
           (
             error?.message ||
             "Unknown error"
           )
-
       },
       500
     );
@@ -1540,7 +1616,7 @@ export default {
       return new Response(
         null,
         {
-          status:204,
+          status: 204,
           headers:
             corsHeaders()
         }
@@ -1554,8 +1630,7 @@ export default {
     // ========================================================
 
     if (
-      request.method ===
-        "GET" &&
+      request.method === "GET" &&
       url.pathname ===
         "/api/health"
     ) {
@@ -1568,12 +1643,11 @@ export default {
 
 
     // ========================================================
-    // REEL
+    // REEL API
     // ========================================================
 
     if (
-      request.method ===
-        "POST" &&
+      request.method === "POST" &&
       url.pathname ===
         "/api/reel"
     ) {
@@ -1598,7 +1672,7 @@ export default {
 
       return jsonResponse(
         {
-          success:false,
+          success: false,
           error:
             "API endpoint not found."
         },
