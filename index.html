@@ -440,7 +440,11 @@ button:disabled{
     </select>
 
     <label>📰 Cricket News / Match Information</label>
-    <textarea id="news" placeholder="यहाँ क्रिकेट न्यूज़ या मैच की जानकारी paste करें..."></textarea>
+
+    <textarea
+      id="news"
+      placeholder="यहाँ क्रिकेट न्यूज़ या मैच की जानकारी paste करें..."
+    ></textarea>
 
     <button id="generateBtn" class="generate">
       🤖 Generate AI Cricket Reel
@@ -497,7 +501,10 @@ button:disabled{
 
       <div id="scriptOutput" class="output"></div>
 
-      <button class="copy" onclick="copyElementText('scriptOutput')">
+      <button
+        class="copy"
+        onclick="copyElementText('scriptOutput')"
+      >
         📋 Copy Script
       </button>
 
@@ -519,7 +526,10 @@ button:disabled{
 
       <div id="musicOutput" class="output"></div>
 
-      <button class="copy" onclick="copyElementText('musicOutput')">
+      <button
+        class="copy"
+        onclick="copyElementText('musicOutput')"
+      >
         📋 Copy Music
       </button>
 
@@ -532,7 +542,10 @@ button:disabled{
 
       <div id="titleOutput" class="output"></div>
 
-      <button class="copy" onclick="copyElementText('titleOutput')">
+      <button
+        class="copy"
+        onclick="copyElementText('titleOutput')"
+      >
         📋 Copy Title
       </button>
 
@@ -545,7 +558,10 @@ button:disabled{
 
       <div id="hashtagsOutput" class="output"></div>
 
-      <button class="copy" onclick="copyElementText('hashtagsOutput')">
+      <button
+        class="copy"
+        onclick="copyElementText('hashtagsOutput')"
+      >
         📋 Copy Hashtags
       </button>
 
@@ -558,7 +574,10 @@ button:disabled{
 
       <div id="captionOutput" class="output"></div>
 
-      <button class="copy" onclick="copyElementText('captionOutput')">
+      <button
+        class="copy"
+        onclick="copyElementText('captionOutput')"
+      >
         📋 Copy Caption
       </button>
 
@@ -582,6 +601,7 @@ button:disabled{
       <div class="editor-intro">
         अपनी Scene Images upload करें। हर scene का duration, animation,
         transition और नीचे दिखने वाला text overlay बदल सकते हैं।
+        AI का Text Overlay अपने आप यहाँ आएगा।
       </div>
 
       <div id="timeline" class="timeline"></div>
@@ -604,7 +624,11 @@ button:disabled{
       <div class="preview-wrap">
 
         <div class="reel-stage">
-          <canvas id="reelCanvas" width="540" height="960"></canvas>
+          <canvas
+            id="reelCanvas"
+            width="540"
+            height="960"
+          ></canvas>
         </div>
 
       </div>
@@ -616,7 +640,10 @@ button:disabled{
       </div>
 
       <div class="progress-bar">
-        <div id="progressFill" class="progress-fill"></div>
+        <div
+          id="progressFill"
+          class="progress-fill"
+        ></div>
       </div>
 
       <div id="previewStatus" class="status">
@@ -656,6 +683,7 @@ function escapeHTML(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
 
 
@@ -672,6 +700,7 @@ function copyText(text){
     fallbackCopy(text);
 
   }
+
 }
 
 
@@ -684,16 +713,22 @@ function fallbackCopy(text){
   ta.style.left="-9999px";
 
   document.body.appendChild(ta);
+
   ta.select();
 
   try{
+
     document.execCommand("copy");
     alert("✅ Copied!");
+
   }catch(e){
+
     alert("❌ Copy नहीं हो पाया");
+
   }
 
   ta.remove();
+
 }
 
 
@@ -703,7 +738,11 @@ function copyElementText(id){
 
   if(!el) return;
 
-  copyText(el.innerText || el.textContent || "");
+  copyText(
+    el.innerText ||
+    el.textContent ||
+    ""
+  );
 
 }
 
@@ -721,19 +760,34 @@ function renderAIResult(data){
 
   const detected=data.detected || {};
 
-  $("detPlayer").innerText=detected.player || "-";
-  $("detTeam").innerText=detected.team || "-";
-  $("detOpponent").innerText=detected.opponent || "-";
-  $("detTopic").innerText=detected.topic || "-";
-  $("detMatchType").innerText=detected.matchType || "-";
+  $("detPlayer").innerText=
+    detected.player || "-";
+
+  $("detTeam").innerText=
+    detected.team || "-";
+
+  $("detOpponent").innerText=
+    detected.opponent || "-";
+
+  $("detTopic").innerText=
+    detected.topic || "-";
+
+  $("detMatchType").innerText=
+    detected.matchType || "-";
 
 
-  $("scriptOutput").innerText=data.script || "";
+  $("scriptOutput").innerText=
+    data.script || "";
 
 
-  const scenes=data.scenes || [];
+  const scenes=
+    Array.isArray(data.scenes)
+      ? data.scenes
+      : [];
+
 
   let html="";
+
 
   scenes.forEach((scene,index)=>{
 
@@ -757,25 +811,55 @@ function renderAIResult(data){
           🎭 Mood: ${escapeHTML(scene.mood || "")}
         </div>
 
-        <div class="small">🎙️ Narration</div>
-        <div class="output">${escapeHTML(scene.narration || "")}</div>
 
-        <div class="small">📝 Text Overlay</div>
-        <div class="output">${escapeHTML(scene.overlay || "")}</div>
+        <div class="small">
+          🎙️ Narration
+        </div>
 
-        <div class="small">🖼️ Image Prompt</div>
-        <div class="output">${escapeHTML(scene.imagePrompt || "")}</div>
+        <div class="output">
+          ${escapeHTML(scene.narration || "")}
+        </div>
 
-        <button class="copy"
-          onclick="copyText(${JSON.stringify(scene.imagePrompt || "")})">
+
+        <div class="small">
+          📝 Text Overlay
+        </div>
+
+        <div class="output">
+          ${escapeHTML(scene.overlay || "")}
+        </div>
+
+
+        <div class="small">
+          🖼️ Image Prompt
+        </div>
+
+        <div class="output">
+          ${escapeHTML(scene.imagePrompt || "")}
+        </div>
+
+
+        <button
+          class="copy"
+          onclick="copyText(${JSON.stringify(scene.imagePrompt || "")})"
+        >
           📋 Copy Image Prompt
         </button>
 
-        <div class="small">🎥 Video Prompt</div>
-        <div class="output">${escapeHTML(scene.videoPrompt || "")}</div>
 
-        <button class="copy"
-          onclick="copyText(${JSON.stringify(scene.videoPrompt || "")})">
+        <div class="small">
+          🎥 Video Prompt
+        </div>
+
+        <div class="output">
+          ${escapeHTML(scene.videoPrompt || "")}
+        </div>
+
+
+        <button
+          class="copy"
+          onclick="copyText(${JSON.stringify(scene.videoPrompt || "")})"
+        >
           📋 Copy Video Prompt
         </button>
 
@@ -788,20 +872,38 @@ function renderAIResult(data){
 
   $("scenesOutput").innerHTML=html;
 
-  $("musicOutput").innerText=data.music || "";
-  $("titleOutput").innerText=data.title || "";
+
+  $("musicOutput").innerText=
+    data.music || "";
+
+
+  $("titleOutput").innerText=
+    data.title || "";
+
+
   $("hashtagsOutput").innerText=
     Array.isArray(data.hashtags)
       ? data.hashtags.join(" ")
       : (data.hashtags || "");
 
-  $("captionOutput").innerText=data.caption || "";
 
-  $("resultSection").classList.remove("hidden");
+  $("captionOutput").innerText=
+    data.caption || "";
 
+
+  $("resultSection")
+    .classList
+    .remove("hidden");
+
+
+  /* ========================================================
+     IMPORTANT:
+     AI SCENES -> EDITOR
+  ======================================================== */
 
   createEditorScenes(
-    scenes.length || Number($("sceneCount").value),
+    scenes.length ||
+      Number($("sceneCount").value),
     Number($("duration").value),
     scenes
   );
@@ -813,183 +915,317 @@ function renderAIResult(data){
    GENERATE AI REEL
 ============================================================ */
 
-$("generateBtn").addEventListener("click",async()=>{
+$("generateBtn").addEventListener(
+  "click",
+  async()=>{
 
-  const btn=$("generateBtn");
-  const errorBox=$("errorBox");
-
-  errorBox.className="hidden";
-  errorBox.innerHTML="";
-
-
-  const news=$("news").value.trim();
-
-  if(!news){
-
-    errorBox.className="error";
-    errorBox.innerText="❌ पहले क्रिकेट न्यूज़ या मैच की जानकारी लिखें।";
-    return;
-
-  }
+    const btn=$("generateBtn");
+    const errorBox=$("errorBox");
 
 
-  const duration=Number($("duration").value);
-  const scenes=Number($("sceneCount").value);
-
-  const player=$("player").value.trim() || "AUTO";
-  const opponent=$("opponent").value.trim() || "AUTO";
-  const style=$("style").value;
-  const language=$("language").value;
-  const platform=$("platform").value;
+    errorBox.className="hidden";
+    errorBox.innerHTML="";
 
 
-  btn.disabled=true;
-  btn.innerText="⏳ AI Reel बना रहा है...";
+    const news=
+      $("news").value.trim();
 
 
-  try{
+    if(!news){
 
-    const response=await fetch("/api/reel",{
+      errorBox.className="error";
 
-      method:"POST",
+      errorBox.innerText=
+        "❌ पहले क्रिकेट न्यूज़ या मैच की जानकारी लिखें।";
 
-      headers:{
-        "Content-Type":"application/json"
-      },
+      return;
 
-      body:JSON.stringify({
-
-        news,
-        player,
-        opponent,
-        duration,
-        scenes,
-        style,
-        language,
-        platform
-
-      })
-
-    });
+    }
 
 
-    const raw=await response.text();
+    const duration=
+      Number($("duration").value);
 
-    let data;
+    const scenes=
+      Number($("sceneCount").value);
+
+
+    const player=
+      $("player").value.trim() ||
+      "AUTO";
+
+
+    const opponent=
+      $("opponent").value.trim() ||
+      "AUTO";
+
+
+    const style=
+      $("style").value;
+
+    const language=
+      $("language").value;
+
+    const platform=
+      $("platform").value;
+
+
+    btn.disabled=true;
+
+    btn.innerText=
+      "⏳ AI Reel बना रहा है...";
+
 
     try{
 
-      data=JSON.parse(raw);
+      const response=
+        await fetch(
+          "/api/reel",
+          {
+            method:"POST",
 
-    }catch(parseError){
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
 
-      throw new Error(
-        "Server ने valid JSON नहीं भेजा। Response: "+
-        raw.slice(0,300)
+            body:JSON.stringify({
+
+              news,
+              player,
+              opponent,
+              duration,
+              scenes,
+              style,
+              language,
+              platform
+
+            })
+
+          }
+        );
+
+
+      const raw=
+        await response.text();
+
+
+      let data;
+
+
+      try{
+
+        data=
+          JSON.parse(raw);
+
+      }catch(parseError){
+
+        throw new Error(
+          "Server ने valid JSON नहीं भेजा। Response: "+
+          raw.slice(0,300)
+        );
+
+      }
+
+
+      if(
+        !response.ok ||
+        !data.success
+      ){
+
+        throw new Error(
+          data.error ||
+          "AI Reel generate नहीं हो पाई।"
+        );
+
+      }
+
+
+      renderAIResult(
+        data.result
       );
 
+
+      window.scrollTo({
+
+        top:
+          $("resultSection").offsetTop-10,
+
+        behavior:"smooth"
+
+      });
+
+
+    }catch(error){
+
+      errorBox.className="error";
+
+      errorBox.innerText=
+        "❌ "+error.message;
+
+    }finally{
+
+      btn.disabled=false;
+
+      btn.innerText=
+        "🤖 Generate AI Cricket Reel";
+
     }
-
-
-    if(!response.ok || !data.success){
-
-      throw new Error(
-        data.error ||
-        "AI Reel generate नहीं हो पाई।"
-      );
-
-    }
-
-
-    renderAIResult(data.result);
-
-
-    window.scrollTo({
-      top:$("resultSection").offsetTop-10,
-      behavior:"smooth"
-    });
-
-
-  }catch(error){
-
-    errorBox.className="error";
-    errorBox.innerText="❌ "+error.message;
-
-  }finally{
-
-    btn.disabled=false;
-    btn.innerText="🤖 Generate AI Cricket Reel";
 
   }
-
-});
+);
 
 
 /* ============================================================
    COPY EVERYTHING
 ============================================================ */
 
-$("copyAllBtn").addEventListener("click",()=>{
+$("copyAllBtn").addEventListener(
+  "click",
+  ()=>{
 
-  if(!latestAIResult){
+    if(!latestAIResult){
 
-    alert("पहले Reel Generate करें।");
-    return;
+      alert(
+        "पहले Reel Generate करें।"
+      );
+
+      return;
+
+    }
+
+
+    const d=
+      latestAIResult;
+
+
+    let text=
+      "🏏 CRICKET REEL MAKER V3\n\n";
+
+
+    text+=
+      "PLAYER: "+
+      (d.detected?.player || "")+
+      "\n";
+
+    text+=
+      "TEAM: "+
+      (d.detected?.team || "")+
+      "\n";
+
+    text+=
+      "OPPONENT: "+
+      (d.detected?.opponent || "")+
+      "\n";
+
+    text+=
+      "TOPIC: "+
+      (d.detected?.topic || "")+
+      "\n";
+
+    text+=
+      "MATCH TYPE: "+
+      (d.detected?.matchType || "")+
+      "\n\n";
+
+
+    text+=
+      "📝 SCRIPT\n";
+
+    text+=
+      (d.script || "")+
+      "\n\n";
+
+
+    (d.scenes || [])
+      .forEach((s,i)=>{
+
+        text+=
+          "🎬 SCENE "+
+          (s.number || i+1)+
+          "\n";
+
+        text+=
+          "Timing: "+
+          (s.timing || "")+
+          "\n";
+
+        text+=
+          "Narration: "+
+          (s.narration || "")+
+          "\n";
+
+        text+=
+          "Overlay: "+
+          (s.overlay || "")+
+          "\n";
+
+        text+=
+          "Image Prompt: "+
+          (s.imagePrompt || "")+
+          "\n";
+
+        text+=
+          "Video Prompt: "+
+          (s.videoPrompt || "")+
+          "\n";
+
+        text+=
+          "Camera: "+
+          (s.camera || "")+
+          "\n";
+
+        text+=
+          "Mood: "+
+          (s.mood || "")+
+          "\n\n";
+
+      });
+
+
+    text+=
+      "🎵 MUSIC\n"+
+      (d.music || "")+
+      "\n\n";
+
+
+    text+=
+      "🏷️ TITLE\n"+
+      (d.title || "")+
+      "\n\n";
+
+
+    text+=
+      "#️⃣ HASHTAGS\n";
+
+
+    if(
+      Array.isArray(d.hashtags)
+    ){
+
+      text+=
+        d.hashtags.join(" ");
+
+    }else{
+
+      text+=
+        d.hashtags || "";
+
+    }
+
+
+    text+="\n\n";
+
+
+    text+=
+      "📄 CAPTION\n"+
+      (d.caption || "");
+
+
+    copyText(text);
 
   }
-
-
-  const d=latestAIResult;
-
-  let text="🏏 CRICKET REEL MAKER V3\n\n";
-
-
-  text+="PLAYER: "+(d.detected?.player || "")+"\n";
-  text+="TEAM: "+(d.detected?.team || "")+"\n";
-  text+="OPPONENT: "+(d.detected?.opponent || "")+"\n";
-  text+="TOPIC: "+(d.detected?.topic || "")+"\n";
-  text+="MATCH TYPE: "+(d.detected?.matchType || "")+"\n\n";
-
-
-  text+="📝 SCRIPT\n";
-  text+=(d.script || "")+"\n\n";
-
-
-  (d.scenes || []).forEach((s,i)=>{
-
-    text+="🎬 SCENE "+(s.number || i+1)+"\n";
-
-    text+="Timing: "+(s.timing || "")+"\n";
-    text+="Narration: "+(s.narration || "")+"\n";
-    text+="Overlay: "+(s.overlay || "")+"\n";
-    text+="Image Prompt: "+(s.imagePrompt || "")+"\n";
-    text+="Video Prompt: "+(s.videoPrompt || "")+"\n";
-    text+="Camera: "+(s.camera || "")+"\n";
-    text+="Mood: "+(s.mood || "")+"\n\n";
-
-  });
-
-
-  text+="🎵 MUSIC\n"+(d.music || "")+"\n\n";
-
-  text+="🏷️ TITLE\n"+(d.title || "")+"\n\n";
-
-  text+="#️⃣ HASHTAGS\n";
-
-  if(Array.isArray(d.hashtags)){
-    text+=d.hashtags.join(" ");
-  }else{
-    text+=d.hashtags || "";
-  }
-
-  text+="\n\n";
-
-  text+="📄 CAPTION\n"+(d.caption || "");
-
-
-  copyText(text);
-
-});
+);
 
 
 /* ============================================================
@@ -999,43 +1235,102 @@ $("copyAllBtn").addEventListener("click",()=>{
 let editorScenes=[];
 
 let currentPreviewTime=0;
+
 let previewPlaying=false;
+
 let previewAnimationFrame=null;
 
-const canvas=$("reelCanvas");
-const ctx=canvas.getContext("2d");
+
+const canvas=
+  $("reelCanvas");
+
+const ctx=
+  canvas.getContext("2d");
 
 
-function createEditorScenes(count,totalDuration,aiScenes=[]){
+/* ============================================================
+   CREATE EDITOR SCENES
+============================================================ */
+
+function createEditorScenes(
+  count,
+  totalDuration,
+  aiScenes=[]
+){
 
   editorScenes=[];
 
-  const perScene=totalDuration/count;
+
+  const perScene=
+    totalDuration/count;
 
 
-  for(let i=0;i<count;i++){
+  for(
+    let i=0;
+    i<count;
+    i++
+  ){
 
-    const ai=aiScenes[i] || {};
+    const ai=
+      aiScenes[i] || {};
+
+
+    /*
+      IMPORTANT FIX:
+
+      1. पहले AI overlay लें
+      2. अगर खाली हो तो narration लें
+      3. दोनों खाली हों तो blank रखें
+    */
+
+    const aiOverlay=
+      String(
+        ai.overlay || ""
+      ).trim();
+
+
+    const aiNarration=
+      String(
+        ai.narration || ""
+      ).trim();
+
+
+    const finalOverlay=
+      aiOverlay ||
+      aiNarration ||
+      "";
+
 
     editorScenes.push({
 
       number:i+1,
 
-      duration:perScene,
+      duration:
+        Number(
+          ai.duration ||
+          perScene
+        ),
 
       image:null,
 
       imageUrl:"",
 
-      animation:"zoomIn",
+      animation:
+        ai.animation ||
+        "zoomIn",
 
-      transition:"cut",
+      transition:
+        ai.transition ||
+        "cut",
 
-      overlay:ai.overlay || "",
+      overlay:
+        finalOverlay,
 
-      narration:ai.narration || "",
+      narration:
+        aiNarration,
 
-      title:ai.title || ""
+      title:
+        ai.title || ""
 
     });
 
@@ -1044,353 +1339,683 @@ function createEditorScenes(count,totalDuration,aiScenes=[]){
 
   currentPreviewTime=0;
 
+
   renderTimeline();
+
   drawPreviewAtTime(0);
 
 }
 
 
+/* ============================================================
+   RENDER TIMELINE
+============================================================ */
+
 function renderTimeline(){
 
-  const timeline=$("timeline");
+  const timeline=
+    $("timeline");
+
 
   timeline.innerHTML="";
 
 
-  editorScenes.forEach((scene,index)=>{
+  editorScenes.forEach(
+    (scene,index)=>{
 
-    const item=document.createElement("div");
-
-    item.className="timeline-item";
-
-
-    const imagePreview=document.createElement("div");
-
-    imagePreview.className="image-preview";
+      const item=
+        document.createElement("div");
 
 
-    if(scene.imageUrl){
-
-      const img=document.createElement("img");
-
-      img.src=scene.imageUrl;
-
-      imagePreview.appendChild(img);
-
-    }else{
-
-      imagePreview.innerHTML=
-        `<div class="no-image">📷<br>Scene Image नहीं है</div>`;
-
-    }
+      item.className=
+        "timeline-item";
 
 
-    const title=document.createElement("h3");
+      /* IMAGE PREVIEW */
 
-    title.innerText="🎬 Scene "+scene.number;
-
-
-    const grid=document.createElement("div");
-
-    grid.className="editor-grid";
+      const imagePreview=
+        document.createElement("div");
 
 
-    const durationWrap=document.createElement("div");
-
-    durationWrap.innerHTML=`
-
-      <label>Duration (sec)</label>
-
-      <input
-        type="number"
-        min="1"
-        max="30"
-        step="0.5"
-        value="${scene.duration}"
-      >
-
-    `;
+      imagePreview.className=
+        "image-preview";
 
 
-    const animationWrap=document.createElement("div");
+      if(scene.imageUrl){
 
-    animationWrap.innerHTML=`
-
-      <label>Animation</label>
-
-      <select>
-
-        <option value="zoomIn">Zoom In</option>
-        <option value="zoomOut">Zoom Out</option>
-        <option value="panLeft">Pan Left</option>
-        <option value="panRight">Pan Right</option>
-        <option value="kenBurns">Ken Burns</option>
-        <option value="static">Static</option>
-
-      </select>
-
-    `;
+        const img=
+          document.createElement("img");
 
 
-    const transitionWrap=document.createElement("div");
-
-    transitionWrap.innerHTML=`
-
-      <label>Transition</label>
-
-      <select>
-
-        <option value="cut">Cut</option>
-        <option value="fade">Fade</option>
-        <option value="slide">Slide</option>
-
-      </select>
-
-    `;
+        img.src=
+          scene.imageUrl;
 
 
-    const overlayWrap=document.createElement("div");
+        imagePreview.appendChild(
+          img
+        );
 
-    overlayWrap.innerHTML=`
+      }else{
 
-      <label>Text Overlay</label>
+        imagePreview.innerHTML=
+          `<div class="no-image">
+             📷<br>
+             Scene Image नहीं है
+           </div>`;
 
-      <textarea
-        class="overlay-input"
-        placeholder="नीचे black area में दिखने वाला text..."
-      ></textarea>
-
-    `;
-
-
-    const durationInput=durationWrap.querySelector("input");
-
-    const animationSelect=animationWrap.querySelector("select");
-
-    const transitionSelect=transitionWrap.querySelector("select");
-
-    const overlayInput=overlayWrap.querySelector("textarea");
-
-
-    durationInput.value=scene.duration;
-
-    animationSelect.value=scene.animation;
-
-    transitionSelect.value=scene.transition;
-
-    overlayInput.value=scene.overlay;
-
-
-    durationInput.addEventListener("input",()=>{
-
-      const value=Number(durationInput.value);
-
-      if(value>0){
-        scene.duration=value;
-        drawPreviewAtTime(currentPreviewTime);
       }
 
-    });
+
+      /* TITLE */
+
+      const title=
+        document.createElement("h3");
 
 
-    animationSelect.addEventListener("change",()=>{
-
-      scene.animation=animationSelect.value;
-
-      drawPreviewAtTime(currentPreviewTime);
-
-    });
+      title.innerText=
+        "🎬 Scene "+
+        scene.number;
 
 
-    transitionSelect.addEventListener("change",()=>{
+      /* GRID */
 
-      scene.transition=transitionSelect.value;
-
-      drawPreviewAtTime(currentPreviewTime);
-
-    });
+      const grid=
+        document.createElement("div");
 
 
-    overlayInput.addEventListener("input",()=>{
-
-      scene.overlay=overlayInput.value;
-
-      drawPreviewAtTime(currentPreviewTime);
-
-    });
+      grid.className=
+        "editor-grid";
 
 
-    const uploadLabel=document.createElement("label");
+      /* DURATION */
 
-    uploadLabel.className="upload-label";
-
-    uploadLabel.innerHTML="📷 Upload Scene Image";
-
-
-    const fileInput=document.createElement("input");
-
-    fileInput.type="file";
-    fileInput.accept="image/*";
+      const durationWrap=
+        document.createElement("div");
 
 
-    fileInput.addEventListener("change",event=>{
+      durationWrap.innerHTML=`
 
-      const file=event.target.files[0];
+        <label>Duration (sec)</label>
 
-      if(!file) return;
+        <input
+          type="number"
+          min="1"
+          max="30"
+          step="0.5"
+          value="${scene.duration}"
+        >
+
+      `;
 
 
-      const reader=new FileReader();
+      /* ANIMATION */
+
+      const animationWrap=
+        document.createElement("div");
 
 
-      reader.onload=e=>{
+      animationWrap.innerHTML=`
 
-        scene.imageUrl=e.target.result;
+        <label>Animation</label>
 
-        loadImage(scene.imageUrl).then(img=>{
+        <select>
 
-          scene.image=img;
+          <option value="zoomIn">
+            Zoom In
+          </option>
+
+          <option value="zoomOut">
+            Zoom Out
+          </option>
+
+          <option value="panLeft">
+            Pan Left
+          </option>
+
+          <option value="panRight">
+            Pan Right
+          </option>
+
+          <option value="kenBurns">
+            Ken Burns
+          </option>
+
+          <option value="static">
+            Static
+          </option>
+
+        </select>
+
+      `;
+
+
+      /* TRANSITION */
+
+      const transitionWrap=
+        document.createElement("div");
+
+
+      transitionWrap.innerHTML=`
+
+        <label>Transition</label>
+
+        <select>
+
+          <option value="cut">
+            Cut
+          </option>
+
+          <option value="fade">
+            Fade
+          </option>
+
+          <option value="slide">
+            Slide
+          </option>
+
+        </select>
+
+      `;
+
+
+      /* TEXT OVERLAY */
+
+      const overlayWrap=
+        document.createElement("div");
+
+
+      overlayWrap.innerHTML=`
+
+        <label>
+          📝 Text Overlay
+        </label>
+
+        <textarea
+          class="overlay-input"
+          placeholder="AI Text Overlay यहाँ आएगा..."
+        ></textarea>
+
+      `;
+
+
+      const durationInput=
+        durationWrap.querySelector(
+          "input"
+        );
+
+
+      const animationSelect=
+        animationWrap.querySelector(
+          "select"
+        );
+
+
+      const transitionSelect=
+        transitionWrap.querySelector(
+          "select"
+        );
+
+
+      const overlayInput=
+        overlayWrap.querySelector(
+          "textarea"
+        );
+
+
+      durationInput.value=
+        scene.duration;
+
+
+      animationSelect.value=
+        scene.animation;
+
+
+      transitionSelect.value=
+        scene.transition;
+
+
+      /*
+        IMPORTANT FIX:
+
+        AI overlay मौजूद है तो वही दिखेगा।
+        अगर overlay खाली है तो narration fallback होगा।
+      */
+
+      overlayInput.value=
+        scene.overlay ||
+        scene.narration ||
+        "";
+
+
+      /* DURATION CHANGE */
+
+      durationInput.addEventListener(
+        "input",
+        ()=>{
+
+          const value=
+            Number(
+              durationInput.value
+            );
+
+
+          if(value>0){
+
+            scene.duration=
+              value;
+
+            drawPreviewAtTime(
+              currentPreviewTime
+            );
+
+          }
+
+        }
+      );
+
+
+      /* ANIMATION CHANGE */
+
+      animationSelect.addEventListener(
+        "change",
+        ()=>{
+
+          scene.animation=
+            animationSelect.value;
+
+          drawPreviewAtTime(
+            currentPreviewTime
+          );
+
+        }
+      );
+
+
+      /* TRANSITION CHANGE */
+
+      transitionSelect.addEventListener(
+        "change",
+        ()=>{
+
+          scene.transition=
+            transitionSelect.value;
+
+          drawPreviewAtTime(
+            currentPreviewTime
+          );
+
+        }
+      );
+
+
+      /* OVERLAY CHANGE */
+
+      overlayInput.addEventListener(
+        "input",
+        ()=>{
+
+          scene.overlay=
+            overlayInput.value;
+
+
+          drawPreviewAtTime(
+            currentPreviewTime
+          );
+
+        }
+      );
+
+
+      /* UPLOAD */
+
+      const uploadLabel=
+        document.createElement(
+          "label"
+        );
+
+
+      uploadLabel.className=
+        "upload-label";
+
+
+      uploadLabel.innerHTML=
+        "📷 Upload Scene Image";
+
+
+      const fileInput=
+        document.createElement(
+          "input"
+        );
+
+
+      fileInput.type="file";
+
+      fileInput.accept=
+        "image/*";
+
+
+      fileInput.addEventListener(
+        "change",
+        event=>{
+
+          const file=
+            event.target.files[0];
+
+
+          if(!file) return;
+
+
+          const reader=
+            new FileReader();
+
+
+          reader.onload=
+            e=>{
+
+              scene.imageUrl=
+                e.target.result;
+
+
+              loadImage(
+                scene.imageUrl
+              )
+              .then(img=>{
+
+                scene.image=
+                  img;
+
+
+                renderTimeline();
+
+
+                drawPreviewAtTime(
+                  currentPreviewTime
+                );
+
+              })
+              .catch(()=>{
+
+                alert(
+                  "❌ Image load नहीं हुई।"
+                );
+
+              });
+
+            };
+
+
+          reader.readAsDataURL(file);
+
+        }
+      );
+
+
+      uploadLabel.appendChild(
+        fileInput
+      );
+
+
+      /* REMOVE IMAGE */
+
+      const removeBtn=
+        document.createElement(
+          "button"
+        );
+
+
+      removeBtn.className=
+        "remove-image";
+
+
+      removeBtn.innerText=
+        "🗑️ Remove Image";
+
+
+      removeBtn.addEventListener(
+        "click",
+        ()=>{
+
+          scene.image=null;
+
+          scene.imageUrl="";
+
 
           renderTimeline();
-          drawPreviewAtTime(currentPreviewTime);
-
-        });
-
-      };
 
 
-      reader.readAsDataURL(file);
+          drawPreviewAtTime(
+            currentPreviewTime
+          );
 
-    });
-
-
-    uploadLabel.appendChild(fileInput);
-
-
-    const removeBtn=document.createElement("button");
-
-    removeBtn.className="remove-image";
-
-    removeBtn.innerText="🗑️ Remove Image";
+        }
+      );
 
 
-    removeBtn.addEventListener("click",()=>{
+      /* ADD */
 
-      scene.image=null;
-      scene.imageUrl="";
+      grid.appendChild(
+        durationWrap
+      );
 
-      renderTimeline();
-      drawPreviewAtTime(currentPreviewTime);
+      grid.appendChild(
+        animationWrap
+      );
 
-    });
+      grid.appendChild(
+        transitionWrap
+      );
 
-
-    grid.appendChild(durationWrap);
-    grid.appendChild(animationWrap);
-    grid.appendChild(transitionWrap);
-    grid.appendChild(overlayWrap);
-
-
-    item.appendChild(title);
-    item.appendChild(imagePreview);
-    item.appendChild(grid);
-    item.appendChild(uploadLabel);
-    item.appendChild(removeBtn);
+      grid.appendChild(
+        overlayWrap
+      );
 
 
-    timeline.appendChild(item);
+      item.appendChild(
+        title
+      );
 
-  });
+      item.appendChild(
+        imagePreview
+      );
+
+      item.appendChild(
+        grid
+      );
+
+      item.appendChild(
+        uploadLabel
+      );
+
+      item.appendChild(
+        removeBtn
+      );
+
+
+      timeline.appendChild(
+        item
+      );
+
+    }
+  );
 
 }
 
+
+/* ============================================================
+   LOAD IMAGE
+============================================================ */
 
 function loadImage(url){
 
-  return new Promise((resolve,reject)=>{
+  return new Promise(
+    (resolve,reject)=>{
 
-    const img=new Image();
+      const img=
+        new Image();
 
-    img.onload=()=>resolve(img);
 
-    img.onerror=reject;
+      img.onload=
+        ()=>resolve(img);
 
-    img.src=url;
 
-  });
+      img.onerror=
+        reject;
+
+
+      img.src=url;
+
+    }
+  );
 
 }
 
 
-function drawCoverImage(img,x,y,w,h,scale=1,offsetX=0,offsetY=0){
+/* ============================================================
+   DRAW COVER IMAGE
+============================================================ */
+
+function drawCoverImage(
+  img,
+  x,
+  y,
+  w,
+  h,
+  scale=1,
+  offsetX=0,
+  offsetY=0
+){
 
   if(!img) return;
 
 
-  const iw=img.width;
-  const ih=img.height;
+  const iw=
+    img.width;
+
+  const ih=
+    img.height;
 
 
-  const imageRatio=iw/ih;
-  const boxRatio=w/h;
+  const imageRatio=
+    iw/ih;
+
+
+  const boxRatio=
+    w/h;
 
 
   let dw;
+
   let dh;
 
 
-  if(imageRatio>boxRatio){
+  if(
+    imageRatio >
+    boxRatio
+  ){
 
-    dh=h*scale;
-    dw=dh*imageRatio;
+    dh=
+      h*scale;
+
+    dw=
+      dh*imageRatio;
 
   }else{
 
-    dw=w*scale;
-    dh=dw/imageRatio;
+    dw=
+      w*scale;
+
+    dh=
+      dw/imageRatio;
 
   }
 
 
-  const dx=x+(w-dw)/2+offsetX;
-  const dy=y+(h-dh)/2+offsetY;
+  const dx=
+    x+
+    (w-dw)/2+
+    offsetX;
 
 
-  ctx.drawImage(img,dx,dy,dw,dh);
+  const dy=
+    y+
+    (h-dh)/2+
+    offsetY;
+
+
+  ctx.drawImage(
+    img,
+    dx,
+    dy,
+    dw,
+    dh
+  );
 
 }
 
+
+/* ============================================================
+   GET SCENE AT TIME
+============================================================ */
 
 function getSceneAtTime(time){
 
   let elapsed=0;
 
 
-  for(let i=0;i<editorScenes.length;i++){
+  for(
+    let i=0;
+    i<editorScenes.length;
+    i++
+  ){
 
-    const scene=editorScenes[i];
+    const scene=
+      editorScenes[i];
 
-    if(time < elapsed+scene.duration){
+
+    if(
+      time <
+      elapsed+
+      scene.duration
+    ){
 
       return {
+
         scene,
+
         index:i,
-        localTime:time-elapsed
+
+        localTime:
+          time-elapsed
+
       };
 
     }
 
-    elapsed+=scene.duration;
+
+    elapsed+=
+      scene.duration;
 
   }
 
 
   if(editorScenes.length){
 
+    const last=
+      editorScenes[
+        editorScenes.length-1
+      ];
+
+
     return {
-      scene:editorScenes[editorScenes.length-1],
-      index:editorScenes.length-1,
-      localTime:editorScenes[editorScenes.length-1].duration
+
+      scene:last,
+
+      index:
+        editorScenes.length-1,
+
+      localTime:
+        last.duration
+
     };
 
   }
@@ -1401,24 +2026,53 @@ function getSceneAtTime(time){
 }
 
 
+/* ============================================================
+   TOTAL DURATION
+============================================================ */
+
 function getTotalDuration(){
 
   return editorScenes.reduce(
-    (sum,s)=>sum+Number(s.duration || 0),
+    (sum,s)=>
+      sum+
+      Number(
+        s.duration || 0
+      ),
     0
   );
 
 }
 
 
+/* ============================================================
+   PLACEHOLDER
+============================================================ */
+
 function drawPlaceholder(){
 
-  ctx.fillStyle="#071b38";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle=
+    "#071b38";
 
-  ctx.fillStyle="#4fc3ff";
-  ctx.font="bold 42px Arial";
-  ctx.textAlign="center";
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  ctx.fillStyle=
+    "#4fc3ff";
+
+
+  ctx.font=
+    "bold 42px Arial";
+
+
+  ctx.textAlign=
+    "center";
+
 
   ctx.fillText(
     "🏏 CRICKET",
@@ -1426,8 +2080,14 @@ function drawPlaceholder(){
     canvas.height*0.35
   );
 
-  ctx.fillStyle="#9fc9ef";
-  ctx.font="bold 26px Arial";
+
+  ctx.fillStyle=
+    "#9fc9ef";
+
+
+  ctx.font=
+    "bold 26px Arial";
+
 
   ctx.fillText(
     "REEL MAKER",
@@ -1438,124 +2098,225 @@ function drawPlaceholder(){
 }
 
 
-function wrapCanvasText(text,maxWidth){
+/* ============================================================
+   WRAP CANVAS TEXT
+============================================================ */
 
-  const words=String(text || "").split(/\s+/);
+function wrapCanvasText(
+  text,
+  maxWidth
+){
+
+  const words=
+    String(text || "")
+      .split(/\s+/);
+
 
   const lines=[];
 
   let line="";
 
 
-  for(const word of words){
+  for(
+    const word of words
+  ){
 
-    const test=line ? line+" "+word : word;
+    const test=
+      line
+        ? line+" "+word
+        : word;
 
-    if(ctx.measureText(test).width>maxWidth && line){
 
-      lines.push(line);
-      line=word;
+    if(
+      ctx.measureText(test)
+        .width >
+        maxWidth &&
+      line
+    ){
+
+      lines.push(
+        line
+      );
+
+      line=
+        word;
 
     }else{
 
-      line=test;
+      line=
+        test;
 
     }
 
   }
 
 
-  if(line) lines.push(line);
+  if(line){
+
+    lines.push(
+      line
+    );
+
+  }
+
 
   return lines;
 
 }
 
 
+/* ============================================================
+   DRAW TEXT OVERLAY
+============================================================ */
+
 function drawTextOverlay(text){
 
-  if(!text) return;
-
-
-  const areaY=canvas.height*0.68;
-  const areaH=canvas.height*0.32;
-
-
-  ctx.fillStyle="#000";
-  ctx.fillRect(0,areaY,canvas.width,areaH);
-
-
-  ctx.fillStyle="#fff";
-  ctx.textAlign="center";
-  ctx.textBaseline="middle";
-
-
-  ctx.font="bold 28px Arial";
-
-
-  const lines=wrapCanvasText(
-    text,
-    canvas.width-70
-  );
-
-
-  const lineHeight=40;
-
-  const totalHeight=lines.length*lineHeight;
-
-  let y=areaY+(areaH-totalHeight)/2+lineHeight/2;
-
-
-  lines.forEach(line=>{
-
-    ctx.fillText(
-      line,
-      canvas.width/2,
-      y
-    );
-
-    y+=lineHeight;
-
-  });
-
-}
-
-
-function drawPreviewAtTime(time){
-
-  currentPreviewTime=time;
-
-
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-
-  const info=getSceneAtTime(time);
-
-
-  if(!info){
-
-    drawPlaceholder();
-
-    $("previewStatus").innerText="No scenes";
-
-    $("progressFill").style.width="0%";
+  if(!text){
 
     return;
 
   }
 
 
-  const scene=info.scene;
-  const local=info.localTime;
+  const areaY=
+    canvas.height*0.68;
+
+
+  const areaH=
+    canvas.height*0.32;
+
+
+  ctx.fillStyle=
+    "#000";
+
+
+  ctx.fillRect(
+    0,
+    areaY,
+    canvas.width,
+    areaH
+  );
+
+
+  ctx.fillStyle=
+    "#fff";
+
+
+  ctx.textAlign=
+    "center";
+
+
+  ctx.textBaseline=
+    "middle";
+
+
+  ctx.font=
+    "bold 28px Arial";
+
+
+  const lines=
+    wrapCanvasText(
+      text,
+      canvas.width-70
+    );
+
+
+  const lineHeight=40;
+
+
+  const totalHeight=
+    lines.length*
+    lineHeight;
+
+
+  let y=
+    areaY+
+    (areaH-totalHeight)/2+
+    lineHeight/2;
+
+
+  lines.forEach(
+    line=>{
+
+      ctx.fillText(
+        line,
+        canvas.width/2,
+        y
+      );
+
+
+      y+=
+        lineHeight;
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   DRAW PREVIEW
+============================================================ */
+
+function drawPreviewAtTime(
+  time
+){
+
+  currentPreviewTime=
+    time;
+
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  const info=
+    getSceneAtTime(time);
+
+
+  if(!info){
+
+    drawPlaceholder();
+
+
+    $("previewStatus")
+      .innerText=
+      "No scenes";
+
+
+    $("progressFill")
+      .style.width=
+      "0%";
+
+
+    return;
+
+  }
+
+
+  const scene=
+    info.scene;
+
+
+  const local=
+    info.localTime;
 
 
   const visualY=0;
-  const visualH=canvas.height*0.68;
+
+  const visualH=
+    canvas.height*0.68;
 
 
   ctx.save();
 
+
   ctx.beginPath();
+
 
   ctx.rect(
     0,
@@ -1563,6 +2324,7 @@ function drawPreviewAtTime(time){
     canvas.width,
     visualH
   );
+
 
   ctx.clip();
 
@@ -1574,33 +2336,73 @@ function drawPreviewAtTime(time){
         ? local/scene.duration
         : 0;
 
-    progress=Math.max(0,Math.min(1,progress));
+
+    progress=
+      Math.max(
+        0,
+        Math.min(
+          1,
+          progress
+        )
+      );
 
 
     let scale=1;
+
     let offsetX=0;
 
 
-    if(scene.animation==="zoomIn"){
+    if(
+      scene.animation===
+      "zoomIn"
+    ){
 
-      scale=1+0.12*progress;
+      scale=
+        1+
+        0.12*
+        progress;
 
-    }else if(scene.animation==="zoomOut"){
+    }else if(
+      scene.animation===
+      "zoomOut"
+    ){
 
-      scale=1.12-0.12*progress;
+      scale=
+        1.12-
+        0.12*
+        progress;
 
-    }else if(scene.animation==="panLeft"){
+    }else if(
+      scene.animation===
+      "panLeft"
+    ){
 
-      offsetX=-50*progress;
+      offsetX=
+        -50*
+        progress;
 
-    }else if(scene.animation==="panRight"){
+    }else if(
+      scene.animation===
+      "panRight"
+    ){
 
-      offsetX=50*progress;
+      offsetX=
+        50*
+        progress;
 
-    }else if(scene.animation==="kenBurns"){
+    }else if(
+      scene.animation===
+      "kenBurns"
+    ){
 
-      scale=1+0.10*progress;
-      offsetX=-25*progress;
+      scale=
+        1+
+        0.10*
+        progress;
+
+      offsetX=
+        -25*
+        progress;
 
     }
 
@@ -1626,9 +2428,11 @@ function drawPreviewAtTime(time){
   ctx.restore();
 
 
-  /* Always reserve lower 32% for text */
+  /* LOWER 32% BLACK AREA */
 
-  ctx.fillStyle="#000";
+  ctx.fillStyle=
+    "#000";
+
 
   ctx.fillRect(
     0,
@@ -1638,99 +2442,162 @@ function drawPreviewAtTime(time){
   );
 
 
-  drawTextOverlay(scene.overlay);
+  /*
+    IMPORTANT:
+    Text Overlay is always drawn
+    inside lower black area.
+  */
+
+  drawTextOverlay(
+    scene.overlay ||
+    scene.narration ||
+    ""
+  );
 
 
-  const total=getTotalDuration();
-
-  const percent=total>0
-    ? Math.min(100,(time/total)*100)
-    : 0;
+  const total=
+    getTotalDuration();
 
 
-  $("progressFill").style.width=percent+"%";
+  const percent=
+    total>0
+      ? Math.min(
+          100,
+          (time/total)*100
+        )
+      : 0;
 
 
-  $("previewStatus").innerText=
-    "Scene "+
-    (info.index+1)+
-    " / "+
-    editorScenes.length+
-    " • "+
-    Math.floor(time)+
-    "s / "+
-    Math.floor(total)+
-    "s";
+  $("progressFill")
+    .style.width=
+    percent+"%";
+
+
+  $("previewStatus")
+    .innerText=
+      "Scene "+
+      (info.index+1)+
+      " / "+
+      editorScenes.length+
+      " • "+
+      Math.floor(time)+
+      "s / "+
+      Math.floor(total)+
+      "s";
 
 }
 
 
+/* ============================================================
+   PLAY PREVIEW
+============================================================ */
+
 function playPreview(){
 
-  if(previewPlaying) return;
+  if(previewPlaying)
+    return;
 
-  const total=getTotalDuration();
 
-  if(total<=0) return;
+  const total=
+    getTotalDuration();
+
+
+  if(total<=0)
+    return;
 
 
   previewPlaying=true;
 
-  let last=performance.now();
+
+  let last=
+    performance.now();
 
 
   function frame(now){
 
-    if(!previewPlaying) return;
+    if(!previewPlaying)
+      return;
 
 
-    const delta=(now-last)/1000;
+    const delta=
+      (now-last)/1000;
+
 
     last=now;
 
-    currentPreviewTime+=delta;
+
+    currentPreviewTime+=
+      delta;
 
 
-    if(currentPreviewTime>=total){
+    if(
+      currentPreviewTime>=
+      total
+    ){
 
       currentPreviewTime=0;
 
     }
 
 
-    drawPreviewAtTime(currentPreviewTime);
+    drawPreviewAtTime(
+      currentPreviewTime
+    );
 
-    previewAnimationFrame=requestAnimationFrame(frame);
+
+    previewAnimationFrame=
+      requestAnimationFrame(
+        frame
+      );
 
   }
 
 
-  previewAnimationFrame=requestAnimationFrame(frame);
+  previewAnimationFrame=
+    requestAnimationFrame(
+      frame
+    );
 
 }
 
+
+/* ============================================================
+   PAUSE
+============================================================ */
 
 function pausePreview(){
 
   previewPlaying=false;
 
 
-  if(previewAnimationFrame){
+  if(
+    previewAnimationFrame
+  ){
 
-    cancelAnimationFrame(previewAnimationFrame);
+    cancelAnimationFrame(
+      previewAnimationFrame
+    );
 
-    previewAnimationFrame=null;
+
+    previewAnimationFrame=
+      null;
 
   }
 
 }
 
 
+/* ============================================================
+   RESTART
+============================================================ */
+
 function restartPreview(){
 
   pausePreview();
 
+
   currentPreviewTime=0;
+
 
   drawPreviewAtTime(0);
 
@@ -1738,187 +2605,318 @@ function restartPreview(){
 
 
 /* ============================================================
-   SAVE / LOAD
+   SAVE PROJECT
 ============================================================ */
 
-$("saveProjectBtn").addEventListener("click",()=>{
+$("saveProjectBtn")
+  .addEventListener(
+    "click",
+    ()=>{
 
-  const project={
+      const project={
 
-    version:3,
+        version:3,
 
-    duration:Number($("duration").value),
+        duration:
+          Number(
+            $("duration").value
+          ),
 
-    sceneCount:Number($("sceneCount").value),
+        sceneCount:
+          Number(
+            $("sceneCount").value
+          ),
 
-    platform:$("platform").value,
+        platform:
+          $("platform").value,
 
-    scenes:editorScenes.map(scene=>({
+        scenes:
+          editorScenes.map(
+            scene=>({
 
-      number:scene.number,
-      duration:scene.duration,
-      imageUrl:scene.imageUrl,
-      animation:scene.animation,
-      transition:scene.transition,
-      overlay:scene.overlay,
-      narration:scene.narration
+              number:
+                scene.number,
 
-    }))
+              duration:
+                scene.duration,
 
-  };
+              imageUrl:
+                scene.imageUrl,
 
+              animation:
+                scene.animation,
 
-  try{
+              transition:
+                scene.transition,
 
-    localStorage.setItem(
-      "cricketReelMakerProjectV3",
-      JSON.stringify(project)
-    );
+              overlay:
+                scene.overlay,
 
-    alert("✅ Project Saved!");
+              narration:
+                scene.narration,
 
-  }catch(error){
+              title:
+                scene.title
 
-    alert(
-      "❌ Save नहीं हुआ। Images बहुत बड़ी हो सकती हैं।"
-    );
+            })
+          )
 
-  }
-
-});
-
-
-$("loadProjectBtn").addEventListener("click",async()=>{
-
-  try{
-
-    const raw=localStorage.getItem(
-      "cricketReelMakerProjectV3"
-    );
-
-
-    if(!raw){
-
-      alert("❌ कोई saved project नहीं मिला।");
-      return;
-
-    }
+      };
 
 
-    const project=JSON.parse(raw);
+      try{
+
+        localStorage.setItem(
+          "cricketReelMakerProjectV3",
+          JSON.stringify(project)
+        );
 
 
-    $("duration").value=project.duration || 30;
+        alert(
+          "✅ Project Saved!"
+        );
 
-    $("sceneCount").value=project.sceneCount || 5;
+      }catch(error){
 
-    if(project.platform){
-      $("platform").value=project.platform;
-    }
-
-
-    editorScenes=(project.scenes || []).map((s,i)=>({
-
-      number:s.number || i+1,
-
-      duration:Number(s.duration || 5),
-
-      image:null,
-
-      imageUrl:s.imageUrl || "",
-
-      animation:s.animation || "zoomIn",
-
-      transition:s.transition || "cut",
-
-      overlay:s.overlay || "",
-
-      narration:s.narration || ""
-
-    }));
-
-
-    for(const scene of editorScenes){
-
-      if(scene.imageUrl){
-
-        try{
-
-          scene.image=await loadImage(scene.imageUrl);
-
-        }catch(e){
-
-          scene.image=null;
-
-        }
+        alert(
+          "❌ Save नहीं हुआ। Images बहुत बड़ी हो सकती हैं।"
+        );
 
       }
 
     }
-
-
-    renderTimeline();
-
-    drawPreviewAtTime(0);
-
-    alert("✅ Project Loaded!");
-
-  }catch(error){
-
-    alert("❌ Project Load नहीं हुआ।");
-
-  }
-
-});
-
-
-$("clearImagesBtn").addEventListener("click",()=>{
-
-  if(!editorScenes.length) return;
-
-
-  const ok=confirm(
-    "क्या सभी Scene Images हटानी हैं?"
   );
 
 
-  if(!ok) return;
+/* ============================================================
+   LOAD PROJECT
+============================================================ */
+
+$("loadProjectBtn")
+  .addEventListener(
+    "click",
+    async()=>{
+
+      try{
+
+        const raw=
+          localStorage.getItem(
+            "cricketReelMakerProjectV3"
+          );
 
 
-  editorScenes.forEach(scene=>{
+        if(!raw){
 
-    scene.image=null;
-    scene.imageUrl="";
+          alert(
+            "❌ कोई saved project नहीं मिला।"
+          );
 
-  });
+          return;
+
+        }
 
 
-  renderTimeline();
-  drawPreviewAtTime(currentPreviewTime);
+        const project=
+          JSON.parse(raw);
 
-});
+
+        $("duration").value=
+          project.duration ||
+          30;
+
+
+        $("sceneCount").value=
+          project.sceneCount ||
+          5;
+
+
+        if(project.platform){
+
+          $("platform").value=
+            project.platform;
+
+        }
+
+
+        editorScenes=
+          (project.scenes || [])
+          .map(
+            (s,i)=>({
+
+              number:
+                s.number ||
+                i+1,
+
+              duration:
+                Number(
+                  s.duration ||
+                  5
+                ),
+
+              image:null,
+
+              imageUrl:
+                s.imageUrl ||
+                "",
+
+              animation:
+                s.animation ||
+                "zoomIn",
+
+              transition:
+                s.transition ||
+                "cut",
+
+              overlay:
+                s.overlay ||
+                s.narration ||
+                "",
+
+              narration:
+                s.narration ||
+                "",
+
+              title:
+                s.title ||
+                ""
+
+            })
+          );
+
+
+        for(
+          const scene of editorScenes
+        ){
+
+          if(scene.imageUrl){
+
+            try{
+
+              scene.image=
+                await loadImage(
+                  scene.imageUrl
+                );
+
+            }catch(e){
+
+              scene.image=null;
+
+            }
+
+          }
+
+        }
+
+
+        renderTimeline();
+
+
+        drawPreviewAtTime(0);
+
+
+        alert(
+          "✅ Project Loaded!"
+        );
+
+
+      }catch(error){
+
+        alert(
+          "❌ Project Load नहीं हुआ।"
+        );
+
+      }
+
+    }
+  );
+
+
+/* ============================================================
+   CLEAR IMAGES
+============================================================ */
+
+$("clearImagesBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(
+        !editorScenes.length
+      )
+        return;
+
+
+      const ok=
+        confirm(
+          "क्या सभी Scene Images हटानी हैं?"
+        );
+
+
+      if(!ok)
+        return;
+
+
+      editorScenes.forEach(
+        scene=>{
+
+          scene.image=null;
+
+          scene.imageUrl="";
+
+        }
+      );
+
+
+      renderTimeline();
+
+
+      drawPreviewAtTime(
+        currentPreviewTime
+      );
+
+    }
+  );
 
 
 /* ============================================================
    PREVIEW BUTTONS
 ============================================================ */
 
-$("playBtn").addEventListener("click",playPreview);
+$("playBtn")
+  .addEventListener(
+    "click",
+    playPreview
+  );
 
-$("pauseBtn").addEventListener("click",pausePreview);
 
-$("restartBtn").addEventListener("click",restartPreview);
+$("pauseBtn")
+  .addEventListener(
+    "click",
+    pausePreview
+  );
+
+
+$("restartBtn")
+  .addEventListener(
+    "click",
+    restartPreview
+  );
 
 
 /* ============================================================
    INITIAL
 ============================================================ */
 
-createEditorScenes(5,30,[]);
+createEditorScenes(
+  5,
+  30,
+  []
+);
+
 
 drawPreviewAtTime(0);
 
 </script>
 
 </body>
-   </html>
+      </html>
