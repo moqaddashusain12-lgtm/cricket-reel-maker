@@ -1,6 +1,11 @@
 {
-  "name": "cricket-reel-maker-v2",
+  "name": "cricket-reel-maker-v3",
   "compatibility_date": "2026-10-05",
+
+  "ai": {
+    "binding": "AI"
+  },
+
   "assets": {
     "directory": "."
   }
