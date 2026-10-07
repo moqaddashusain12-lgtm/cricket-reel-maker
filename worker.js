@@ -1,124 +1,314 @@
 // ============================================================
-// 🏏 CRICKET REEL MAKER V3
-// AI Cricket Reel Generator
-// Script + Scenes + Image Prompt + Video Prompt
+// 🏏 CRICKET REEL MAKER V3 - AI WORKER
+// Auto Detect + AI Script + Scenes + Title + Caption
 // ============================================================
 
-const AI_MODEL = "@cf/meta/llama-3.1-8b-instruct";
+const AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast";
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization"
+};
+
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      ...CORS_HEADERS,
+      "Content-Type": "application/json; charset=utf-8"
+    }
+  });
+}
+
+function cleanAIResponse(text) {
+  if (!text) return "";
+
+  text = String(text).trim();
+
+  // Remove markdown code fences
+  text = text.replace(/^```json\s*/i, "");
+  text = text.replace(/^```\s*/i, "");
+  text = text.replace(/\s*```$/i, "");
+
+  return text.trim();
+}
+
+function extractJSON(text) {
+  const cleaned = cleanAIResponse(text);
+
+  // First direct parse
+  try {
+    return JSON.parse(cleaned);
+  } catch (_) {}
+
+  // Find first { and last }
+  const start = cleaned.indexOf("{");
+  const end = cleaned.lastIndexOf("}");
+
+  if (start !== -1 && end !== -1 && end > start) {
+    const possible = cleaned.slice(start, end + 1);
+
+    try {
+      return JSON.parse(possible);
+    } catch (_) {}
+  }
+
+  return null;
+}
+
+function normalizeData(data, sceneCount) {
+  if (!data || typeof data !== "object") {
+    throw new Error("AI ने सही JSON response नहीं दिया।");
+  }
+
+  if (!data.detected) {
+    data.detected = {
+      player: "",
+      team: "",
+      opponent: "",
+      topic: "",
+      matchType: ""
+    };
+  }
+
+  if (!Array.isArray(data.scenes)) {
+    data.scenes = [];
+  }
+
+  data.scenes = data.scenes.slice(0, sceneCount);
+
+  while (data.scenes.length < sceneCount) {
+    const n = data.scenes.length + 1;
+
+    data.scenes.push({
+      number: n,
+      title: `Scene ${n}`,
+      timing: "",
+      narration: "",
+      overlay: "",
+      imagePrompt: "",
+      videoPrompt: "",
+      camera: "",
+      mood: ""
+    });
+  }
+
+  data.scenes = data.scenes.map((scene, index) => ({
+    number: index + 1,
+    title: scene.title || `Scene ${index + 1}`,
+    timing: scene.timing || "",
+    narration: scene.narration || "",
+    overlay: scene.overlay || "",
+    imagePrompt: scene.imagePrompt || "",
+    videoPrompt: scene.videoPrompt || "",
+    camera: scene.camera || "",
+    mood: scene.mood || ""
+  }));
+
+  data.script = data.script || "";
+  data.title = data.title || "";
+  data.caption = data.caption || "";
+  data.music = data.music || "";
+
+  if (!Array.isArray(data.hashtags)) {
+    data.hashtags = [];
+  }
+
+  return data;
+}
 
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
+    try {
+      // --------------------------------------------------------
+      // OPTIONS / CORS
+      // --------------------------------------------------------
+      if (request.method === "OPTIONS") {
+        return new Response(null, {
+          status: 204,
+          headers: CORS_HEADERS
+        });
+      }
 
-    // ----------------------------------------------------------
-    // CORS
-    // ----------------------------------------------------------
-    if (request.method === "OPTIONS") {
-      return new Response(null, {
-        headers: corsHeaders()
-      });
-    }
+      const url = new URL(request.url);
 
-    // ----------------------------------------------------------
-    // HOME / HEALTH
-    // ----------------------------------------------------------
-    if (url.pathname === "/api/health") {
-      return json({
-        success: true,
-        app: "Cricket Reel Maker V3",
-        workersAI: !!env.AI
-      });
-    }
+      // --------------------------------------------------------
+      // HEALTH
+      // --------------------------------------------------------
+      if (url.pathname === "/api/health") {
+        return json({
+          success: true,
+          app: "Cricket Reel Maker V3",
+          workersAI: !!env.AI,
+          model: AI_MODEL
+        });
+      }
 
-    // ----------------------------------------------------------
-    // AI REEL GENERATOR
-    // ----------------------------------------------------------
-    if (url.pathname === "/api/reel" && request.method === "POST") {
-      try {
-        const body = await request.json();
-
-        const news = String(body.news || "").trim();
-        const language = body.language || "Hindi";
-        const duration = Number(body.duration || 30);
-        const scenes = Number(body.scenes || 5);
-        const style = body.style || "Exciting";
-        const platform = body.platform || "Facebook Reel";
-
-        if (!news) {
-          return json(
-            {
-              success: false,
-              error: "कृपया क्रिकेट न्यूज़ डालें।"
-            },
-            400
-          );
-        }
+      // --------------------------------------------------------
+      // AI REEL GENERATOR
+      // --------------------------------------------------------
+      if (url.pathname === "/api/reel" && request.method === "POST") {
 
         if (!env.AI) {
-          return json(
-            {
-              success: false,
-              error: "Workers AI binding नहीं मिली।"
-            },
-            500
-          );
+          return json({
+            success: false,
+            error: "Workers AI binding नहीं मिला। wrangler.jsonc में AI binding जोड़ें।"
+          }, 500);
         }
 
-        // ------------------------------------------------------
-        // WORD TARGET
-        // ------------------------------------------------------
+        let body;
+
+        try {
+          body = await request.json();
+        } catch (_) {
+          return json({
+            success: false,
+            error: "Invalid JSON request."
+          }, 400);
+        }
+
+        const news = String(body.news || "").trim();
+
+        if (!news) {
+          return json({
+            success: false,
+            error: "कृपया क्रिकेट न्यूज़ या मैच की जानकारी डालें।"
+          }, 400);
+        }
+
+        const playerInput = String(body.player || "AUTO").trim();
+        const opponentInput = String(body.opponent || "AUTO").trim();
+
+        const durationValues = [15, 30, 45, 60];
+        const sceneValues = [3, 5, 7];
+
+        const duration = durationValues.includes(Number(body.duration))
+          ? Number(body.duration)
+          : 30;
+
+        const sceneCount = sceneValues.includes(Number(body.scenes))
+          ? Number(body.scenes)
+          : 5;
+
+        const language = String(body.language || "Hindi");
+        const style = String(body.style || "Exciting");
+        const platform = String(body.platform || "Facebook Reel");
+
         let wordTarget = "75-90";
 
         if (duration === 15) wordTarget = "40-50";
         if (duration === 45) wordTarget = "110-125";
         if (duration === 60) wordTarget = "145-165";
 
+        const playerInstruction =
+          playerInput &&
+          playerInput.toLowerCase() !== "auto" &&
+          playerInput.toLowerCase() !== "auto detect"
+            ? playerInput
+            : "AUTO-DETECT FROM NEWS";
+
+        const opponentInstruction =
+          opponentInput &&
+          opponentInput.toLowerCase() !== "auto" &&
+          opponentInput.toLowerCase() !== "auto detect"
+            ? opponentInput
+            : "AUTO-DETECT FROM NEWS";
+
         // ------------------------------------------------------
         // AI PROMPT
         // ------------------------------------------------------
-        const prompt = `
-You are an expert cricket social-media reel writer.
 
-Create a complete cricket reel from the NEWS supplied below.
+        const prompt = `
+You are an expert Indian cricket news Reel writer and social-media content creator.
+
+Create a ${duration}-second cricket Reel for ${platform}.
 
 IMPORTANT:
-- Use ONLY facts present in the supplied news.
-- Do NOT invent scores, records, dates, players, venues or statistics.
-- Detect the main player, teams, opponent and topic automatically.
-- Make the opening extremely strong.
-- The first line must work as a social-media hook.
-- Keep the narration suitable for approximately ${duration} seconds.
-- Target approximately ${wordTarget} words.
-- Language: ${language}
-- Style: ${style}
-- Platform: ${platform}
-- Number of scenes: ${scenes}
+Use ONLY information contained in the supplied NEWS.
+DO NOT invent:
+- scores
+- statistics
+- records
+- dates
+- venues
+- match results
+- player names
+- teams
+- quotes
+- tournament details
+- facts not present in the news
 
-IMAGE STYLE:
-- Photorealistic cricket photography
-- Cinematic stadium
-- Dramatic floodlights
-- Realistic player action
+Automatically identify the MAIN PLAYER, TEAM, OPPONENT, TOPIC and MATCH TYPE from the news.
+
+Player instruction:
+${playerInstruction}
+
+Opponent instruction:
+${opponentInstruction}
+
+Language:
+${language}
+
+Style:
+${style}
+
+Duration:
+${duration} seconds
+
+Target narration length:
+${wordTarget} words
+
+Number of scenes:
+${sceneCount}
+
+NEWS:
+----------------
+${news}
+----------------
+
+Create:
+1. A powerful hook in the first 1-2 seconds.
+2. A natural Hindi/English/Hinglish narration depending on selected language.
+3. Scene-by-scene content.
+4. Short text overlays suitable for mobile Reel.
+5. Photorealistic cricket image prompts.
+6. Dynamic video prompts.
+7. Camera movement.
+8. Mood.
+9. Reel title.
+10. Caption.
+11. Hashtags.
+12. Background music suggestion.
+
+IMAGE PROMPT RULES:
+- Photorealistic
+- Cinematic cricket photography
+- Realistic stadium
+- Dramatic professional sports lighting
 - Vertical 9:16
-- Upper 68% visual area
-- Lower 32% pure black empty area for Hindi text
-- No text inside generated image
+- Subject mainly in upper 68% of frame
+- Lower 32% must be completely solid black and empty
+- No text
+- No logo
+- No watermark
+- No unnecessary graphics
+
+VIDEO PROMPT RULES:
+- Realistic cricket motion
+- Natural player movement
+- Stadium crowd movement
+- Cinematic camera movement
+- Suitable for short-form vertical video
+- No text
 - No logo
 - No watermark
 
-VIDEO PROMPT:
-- Describe realistic cricket movement.
-- Include camera movement.
-- Include crowd/stadium atmosphere when useful.
-- Vertical 9:16.
-- No text.
-- No watermark.
-
 Return ONLY valid JSON.
 Do not use markdown.
-Do not use \`\`\`json.
+Do not put the JSON inside code fences.
 
-JSON structure:
+Required JSON format:
 
 {
   "detected": {
@@ -147,112 +337,65 @@ JSON structure:
   "hashtags": [],
   "music": ""
 }
-
-NEWS:
-${news}
 `;
 
-        const result = await env.AI.run(AI_MODEL, {
+        // ------------------------------------------------------
+        // RUN WORKERS AI
+        // ------------------------------------------------------
+
+        const aiResponse = await env.AI.run(AI_MODEL, {
           prompt
         });
 
-        let raw = "";
+        let aiText = "";
 
-        if (typeof result === "string") {
-          raw = result;
-        } else if (result && typeof result.response === "string") {
-          raw = result.response;
+        if (typeof aiResponse === "string") {
+          aiText = aiResponse;
+        } else if (aiResponse && typeof aiResponse.response === "string") {
+          aiText = aiResponse.response;
         } else {
-          raw = JSON.stringify(result);
+          aiText = JSON.stringify(aiResponse);
         }
 
-        const data = parseAIJSON(raw);
+        const parsed = extractJSON(aiText);
+
+        if (!parsed) {
+          return json({
+            success: false,
+            error: "AI response JSON में convert नहीं हो पाया।",
+            raw: aiText
+          }, 500);
+        }
+
+        const data = normalizeData(parsed, sceneCount);
 
         return json({
           success: true,
           data
         });
-
-      } catch (error) {
-        return json(
-          {
-            success: false,
-            error: error?.message || "AI reel generation failed."
-          },
-          500
-        );
       }
-    }
 
-    return json(
-      {
+      // --------------------------------------------------------
+      // UNKNOWN API
+      // --------------------------------------------------------
+
+      if (url.pathname.startsWith("/api/")) {
+        return json({
+          success: false,
+          error: "API endpoint not found."
+        }, 404);
+      }
+
+      return new Response("Cricket Reel Maker V3", {
+        status: 200,
+        headers: CORS_HEADERS
+      });
+
+    } catch (error) {
+      return json({
         success: false,
-        error: "Endpoint not found"
-      },
-      404
-    );
+        error: error?.message || "Server error"
+      }, 500);
+    }
   }
 };
-
-
-// ============================================================
-// JSON RESPONSE
-// ============================================================
-
-function json(data, status = 200) {
-  return new Response(JSON.stringify(data, null, 2), {
-    status,
-    headers: {
-      ...corsHeaders(),
-      "Content-Type": "application/json; charset=UTF-8"
-    }
-  });
-}
-
-
-// ============================================================
-// CORS
-// ============================================================
-
-function corsHeaders() {
-  return {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type"
-  };
-}
-
-
-// ============================================================
-// AI JSON PARSER
-// ============================================================
-
-function parseAIJSON(text) {
-  let cleaned = String(text || "").trim();
-
-  // Remove markdown code fences
-  cleaned = cleaned
-    .replace(/^```json\s*/i, "")
-    .replace(/^```\s*/i, "")
-    .replace(/\s*```$/i, "")
-    .trim();
-
-  // First attempt
-  try {
-    return JSON.parse(cleaned);
-  } catch (_) {}
-
-  // Find JSON object if AI added extra text
-  const first = cleaned.indexOf("{");
-  const last = cleaned.lastIndexOf("}");
-
-  if (first !== -1 && last !== -1 && last > first) {
-    const possibleJSON = cleaned.slice(first, last + 1);
-
-    try {
-      return JSON.parse(possibleJSON);
-    } catch (_) {}
-  }
-
-  throw new Error("AI ने valid JSON नहीं लौटाया।");
-                   }
